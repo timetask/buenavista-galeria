@@ -7,7 +7,24 @@ defmodule Galeria.MixProject do
       version: "0.1.0",
       elixir: "~> 1.14",
       start_permanent: Mix.env() == :prod,
+      package: package(),
+      description: description(),
       deps: deps()
+    ]
+  end
+
+  defp description do
+    """
+    In browser component gallery and editor for BuenaVista.
+    """
+  end
+
+  defp package do
+    [
+      files: ["lib", "mix.exs", "README*", "LICENSE*"],
+      maintainers: ["Francisco Ceruti"],
+      licenses: ["MIT"],
+      links: %{"GitHub" => "https://github.com/timetask/buenavista-galeria"}
     ]
   end
 
