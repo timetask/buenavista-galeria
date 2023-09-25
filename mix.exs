@@ -15,7 +15,7 @@ defmodule Galeria.MixProject do
 
   defp description do
     """
-    In browser component gallery and editor for BuenaVista.
+    Browser based gallery and theme editor for BuenaVista component library.
     """
   end
 
