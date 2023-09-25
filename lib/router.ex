@@ -7,13 +7,13 @@ defmodule Galeria.Router do
 
         live_session :galeria, root_layout: {Galeria.HTML.Layout, :root} do
           # LiveDashboard assets
-          get "/css-:md5", Galeria.Assets, :css, as: :galeria_asset
-          get "/js-:md5", Galeria.Assets, :js, as: :galeria_asset
+          get "/css-:md5", Galeria.AssetsController, :css, as: :galeria_asset
+          get "/js-:md5", Galeria.AssetsController, :js, as: :galeria_asset
 
           # All helpers are public contracts and cannot be changed
-          live "/", Galeria.Live, :index
-          live "/ensambles/:ensamble_name", Galeria.Live, :ensamble
-          live "/component/:component_name", Galeria.Live, :component
+          live "/", Galeria.GaleriaLive, :index
+          live "/ensambles/:ensamble_name", Galeria.GaleriaLive, :ensamble
+          live "/component/:component_name", Galeria.GaleriaLive, :component
         end
       end
     end
