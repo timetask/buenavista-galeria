@@ -29,7 +29,7 @@ config :buenavista,
           # BuenaVista.Constants.DefaultSizes
         ]
       ],
-      css: [out_dir: "priv/static/themes"]
+      css: [out_dir: "lib/assets/themes"]
     ],
     [
       name: "dark",
@@ -43,6 +43,6 @@ config :buenavista,
           # BuenaVista.Constants.DefaultSizes
         ]
       ],
-      css: [out_dir: "priv/static/themes"]
+      css: [out_dir: "lib/assets/themes"]
     ]
   ]
