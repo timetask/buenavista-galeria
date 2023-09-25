@@ -45,5 +45,5 @@ defmodule Galeria.AssetsController do
   Returns the current hash for the given `asset`.
   """
   def current_hash(:css), do: @hashes.css
-  def current_hash(:js), do: @hashes.js1
+  def current_hash(:js), do: @hashes.js
 end
