@@ -17,7 +17,7 @@ $watcher --watch=$components_dir -e ex 'mix galeria.gen.config; mix format' &
 pids+=("$!")
 
 # Listen to hydrator & nomenclator changes
-$watcher --watch=$config_dir -e ex 'mix bv.gen.css --theme light --theme dark; mix format' &
+$watcher --watch=$config_dir -e ex 'mix galeria.gen.css; mix format' &
 pids+=("$!")
 
 # Listen to css changes
