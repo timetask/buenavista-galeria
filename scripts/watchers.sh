@@ -13,7 +13,7 @@ esbuild_config="--bundle --loader:.woff2=file --loader:.woff=file --asset-names=
 pids=()
 
 # Listen to component changes
-$watcher --watch=$components_dir -e ex 'mix bv.gen.config; mix format' &
+$watcher --watch=$components_dir -e ex 'mix galeria.gen.config; mix format' &
 pids+=("$!")
 
 # Listen to hydrator & nomenclator changes
