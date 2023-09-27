@@ -8,13 +8,11 @@ defmodule Galeria.HTML.Layout do
 
   def galeria_css_url(conn) do
     prefix = conn.private.phoenix_router.__galeria_url_prefix__()
-    Path.join(prefix, "/css/galeria.css") |> dbg()
+    Path.join(prefix, "/css/galeria.css")
   end
 
   def current_theme_url(conn) do
     prefix = conn.private.phoenix_router.__galeria_url_prefix__()
-    dbg(prefix)
-    dbg(conn)
-    "TODO"
+    Path.join(prefix, "/themes/#{conn.assigns.theme.name}.css")
   end
 end

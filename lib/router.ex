@@ -6,7 +6,7 @@ defmodule Galeria.Router do
         import Phoenix.LiveView.Router, only: [live: 3, live_session: 3]
         import Phoenix.Router, only: [get: 3, pipe_through: 1, scope: 2, scope: 3]
 
-        pipe_through BuenaVista.CurrentThemePlug
+        pipe_through Galeria.CurrentThemePlug
 
         live_session :galeria, root_layout: {Galeria.HTML.Layout, :root} do
           live "/", Galeria.GaleriaLive, :index
