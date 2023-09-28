@@ -4,11 +4,11 @@
   align-items: center;
   display: flex;
   .title {
-    line-height: var(--font-lg);
     font-weight: 800;
     font-size: var(--font-lg);
     color: var(--color-title);
     text-transform: uppercase;
+    margin: 0;
   }
   .actions {
     gap: 0.25rem;
@@ -39,7 +39,26 @@
 
 /* lib/assets/themes/light/button.css */
 .button {
+  line-height: 1;
   cursor: pointer;
+  &:hover {
+    .icon {
+      fill: var(--app-bg);
+    }
+  }
+  .icon {
+    fill: var(--color-text);
+    aspect-ratio: 1 / 1;
+    .button-lg & {
+      height: var(--icon-lg);
+    }
+    .button-md & {
+      height: var(--icon-md);
+    }
+    .button-sm & {
+      height: var(--icon-sm);
+    }
+  }
   &.button-sm {
     font-size: var(--font-sm);
     border-radius: var(--padding-sm);
@@ -170,6 +189,9 @@
   --color-border: #e4e4e7;
   --color-text: #52525b;
   --color-title: #27272a;
+  --icon-lg: 1.75rem;
+  --icon-md: 1.5rem;
+  --icon-sm: 1.25rem;
   --font-lg: 1.25rem;
   --font-md: 1rem;
   --font-sm: 0.75rem;

@@ -17,6 +17,11 @@ defmodule Galeria.Config.LightHydrator do
   # var :font_md, ~VAR[size(4)]
   # var :font_lg, ~VAR[size(5)]
 
+  # icon
+  # var :icon_sm, ~VAR[size(5)]
+  # var :icon_md, ~VAR[size(6)]
+  # var :icon_lg, ~VAR[size(7)]
+
   # color
   var :color_title, ~VAR[color(:gray, 800)]
   var :color_text, ~VAR[color(:gray, 600)]
@@ -60,11 +65,11 @@ defmodule Galeria.Config.LightHydrator do
   #   display: flex;
   #   """
   # style [:sidebar_title, :classes, :title_class], ~CSS""" 
-  #   line-height: <%= @font_lg %>;
   #   font-weight: 800;
   #   font-size: <%= @font_lg %>;
   #   color: <%= @color_title %>;
   #   text-transform: uppercase;
+  #   margin: 0;
   #   """
   # style [:sidebar_title, :classes, :actions_class], ~CSS""" 
   #   gap: 0.25rem;
@@ -100,7 +105,31 @@ defmodule Galeria.Config.LightHydrator do
   # ---------------------------------------------------------------------
 
   # style [:button, :classes, :base_class], ~CSS""" 
+  #   line-height: 1;
   #   cursor: pointer;
+  # 
+  #   &:hover {
+  # 
+  #     .<%= class_name(:button, :classes, :icon_class) %> {
+  #       fill: <%= @app_bg %>;
+  #     }
+  #   }
+  #   """
+  # style [:button, :classes, :icon_class], ~CSS""" 
+  #   fill: <%= @color_text %>;
+  #   aspect-ratio: 1 / 1;
+  # 
+  #   .<%= class_name(:button, :size, :lg) %> & {
+  #     height: <%= @icon_lg %>;
+  #   }
+  # 
+  #   .<%= class_name(:button, :size, :md) %> & {
+  #     height: <%= @icon_md %>;
+  #   }
+  # 
+  #   .<%= class_name(:button, :size, :sm) %> & {
+  #     height: <%= @icon_sm %>;
+  #   }
   #   """
 
   # style [:button, :size, :sm], ~CSS""" 
