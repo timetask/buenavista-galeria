@@ -103,4 +103,9 @@ defmodule Galeria.GaleriaLive do
   def component_url(%Component{} = component) do
     Path.join(@base_url, Atom.to_string(component.name))
   end
+
+  def icon_url(socket, icon) do
+    prefix = socket.private.connect_info.private.phoenix_router.__galeria_url_prefix__()
+    Path.join(prefix, "/svg/#{icon}")
+  end
 end

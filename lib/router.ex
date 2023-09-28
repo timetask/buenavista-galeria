@@ -18,6 +18,7 @@ defmodule Galeria.Router do
           get "/css/:path", Galeria.AssetsController, :css
           get "/js/:path", Galeria.AssetsController, :js
           get "/themes/:path", Galeria.AssetsController, :themes
+          get "/svg/:path", Galeria.AssetsController, :svg
         end
 
         unless Module.get_attribute(__MODULE__, :galeria_url_prefix) do

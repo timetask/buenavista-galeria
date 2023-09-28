@@ -1,7 +1,7 @@
 defmodule Galeria.AssetsController do
   import Plug.Conn
 
-  def init(asset) when asset in [:css, :js, :themes], do: asset
+  def init(asset) when asset in [:css, :js, :themes, :svg], do: asset
 
   def call(conn, asset) do
     filename = conn.path_params["path"]
@@ -19,4 +19,5 @@ defmodule Galeria.AssetsController do
   defp content_type(:css), do: "text/css"
   defp content_type(:js), do: "text/javascript"
   defp content_type(:themes), do: "text/css"
+  defp content_type(:svg), do: "image/svg+xml"
 end
