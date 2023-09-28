@@ -42,6 +42,11 @@ $watcher -p -w $assets_dir/js/ -e js \
   esbuild $assets_dir/js/galeria.js --outdir=$static_dir/js $esbuild_config &
 pids+=("$!")
 
+# Listen to icon changes
+$watcher -w $assets_dir/svg/ -e svg \
+  cp -R $assets_dir/svg/ $static_dir/svg/ &
+pids+=("$!")
+
 echo "Press Ctrl-C to stop all watchers"
 
 function kill_all() {
