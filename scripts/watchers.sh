@@ -12,37 +12,33 @@ esbuild_config="--bundle"
 pids=()
 
 # Listen to component changes
-$watcher --watch=$components_dir/ -r -e ex "mix galeria.gen.config; mix format" &
+$watcher -w $components_dir/ -e ex "mix galeria.gen.config --theme base" &
 pids+=("$!")
 
 # Listen to base hydrator changes
-$watcher --watch=$config_dir/base_hydrator.ex \
-  "mix galeria.gen.config --theme light --theme dark;
-  mix format" \
-  &
+$watcher -p -w $config_dir/base_hydrator.ex \
+  mix galeria.gen.config --theme light --theme dark &
     
 # Listen to theme hydrators changes
-$watcher --watch=$config_dir/light_hydrator.ex \
+$watcher -p -w $config_dir/light_hydrator.ex \
   "mix galeria.gen.css --theme light;
-  mix format;
   esbuild $assets_dir/themes/light.css --outdir=$static_dir/themes $esbuild_config" \
   &
 pids+=("$!")
 
-$watcher --watch=$config_dir/dark_hydrator.ex \
+$watcher -p -w $config_dir/dark_hydrator.ex \
   "mix galeria.gen.css --theme dark; 
-  mix format; 
   esbuild $assets_dir/themes/dark.css --outdir=$static_dir/themes $esbuild_config" \
   &
 pids+=("$!")
 
 # Listen to css changes
-$watcher --watch=$assets_dir/css/ -r -e css \
+$watcher -p -w $assets_dir/css/ -e css \
   esbuild $assets_dir/css/galeria.css --outdir=$static_dir/css $esbuild_config &
 pids+=("$!")
 
 # Listen to js changes
-$watcher --watch=$assets_dir/js/ -r -e js \
+$watcher -p -w $assets_dir/js/ -e js \
   esbuild $assets_dir/js/galeria.js --outdir=$static_dir/js $esbuild_config &
 pids+=("$!")
 
