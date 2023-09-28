@@ -3,7 +3,7 @@ defmodule Galeria.Components.Button do
 
   variant :size, [:sm, :md, :lg], :md
   variant :color, [:ctrl, :primary, :success, :danger], :ctrl
-  variant :background, [:solid, :soft, :link, :transparent], :solid
+  variant :style, [:solid, :soft, :link, :transparent], :solid
   variant :border, [:none, :thin, :thick], :none
 
   attr :type, :string, default: "button", values: ["button", "submit"]

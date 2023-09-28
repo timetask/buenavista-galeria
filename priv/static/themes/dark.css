@@ -6,7 +6,7 @@
   .title {
     line-height: var(--font-lg);
     font-weight: 800;
-    font-size:;
+    font-size: var(--font-lg);
     color: var(--color-title);
     text-transform: uppercase;
   }
@@ -23,7 +23,7 @@
   flex-wrap: wrap;
   display: flex;
   .sidebar {
-    background: var(--sidebar-bg);
+    background: var(--color-light);
     border-right: 1px solid var(--color-border);
     padding: var(--padding-lg);
     min-height: 100vh;
@@ -71,20 +71,72 @@
     color: var(--danger-dark);
   }
   &.button-solid {
+    &.button-ctrl {
+      background: var(--color-text);
+      color: white;
+    }
+    &.button-danger {
+      background: var(--danger-regular);
+      color: white;
+    }
+    &.button-primary {
+      background: var(--brand-regular);
+      color: white;
+    }
+    &.button-success {
+      background: var(--success-regular);
+      color: white;
+    }
   }
   &.button-soft {
+    &.button-ctrl {
+      background: var(--color-light);
+      color: var(--color-text);
+    }
+    &.button-danger {
+      background: var(--danger-light);
+      color: var(--danger-regular);
+    }
+    &.button-primary {
+      background: var(--brand-light);
+      color: var(--brand-regular);
+    }
+    &.button-success {
+      background: var(--success-light);
+      color: var(--success-regular);
+    }
   }
   &.button-link {
+    text-decoration: underline;
+    &.button-ctrl {
+      color: var(--color-text);
+    }
+    &.button-danger {
+      color: var(--danger-regular);
+    }
+    &.button-primary {
+      color: var(--brand-regular);
+    }
+    &.button-success {
+      color: var(--success-regular);
+    }
   }
   &.button-transparent {
-    background: transparent!;
-    .button-danger {
+    background: transparent;
+    &.button-ctrl {
+      color: var(--color-text);
+      &:hover {
+        background: var(--color-text);
+      }
     }
-    .button-success {
+    &.button-danger {
+      color: var(--danger-regular);
     }
-    .button-primary {
+    &.button-primary {
+      color: var(--brand-regular);
     }
-    .button-ctrl {
+    &.button-success {
+      color: var(--success-regular);
     }
   }
   &.button-border-thin {
@@ -99,8 +151,8 @@
 
 /* lib/assets/themes/dark.css */
 :root {
-  --main-padding: 1rem;
   --sidebar-bg: #3f3f46;
+  --main-padding: 1rem;
   --sidebar-width: 20rem;
   --sidebar-padding: 1rem;
   --brand-light: #f3e8ff;
@@ -115,6 +167,7 @@
   --padding-lg: 1rem;
   --padding-md: 0.5rem;
   --padding-sm: 0.25rem;
+  --color-light: ;
   --color-border: ;
   --color-text: ;
   --color-title: ;

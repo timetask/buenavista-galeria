@@ -53,10 +53,10 @@ defmodule Galeria.GaleriaLive do
         <.sidebar_title>
           Galeria
           <:actions>
-            <.button size={:md} border={:thin} background={:transparent} color={:ctrl}>
+            <.button size={:md} border={:thin} style={:transparent} color={:ctrl}>
               light / dark
             </.button>
-            <.button size={:md} border={:thin} background={:transparent} color={:ctrl}>
+            <.button size={:md} border={:thin} style={:transparent} color={:ctrl}>
               Collapse
             </.button>
           </:actions>

@@ -21,6 +21,7 @@ defmodule Galeria.Config.DarkHydrator do
   # var :color_title, ""
   # var :color_text, ""
   # var :color_border, ""
+  # var :color_light, ""
 
   # padding
   # var :padding_sm, ~VAR[size(1)]
@@ -42,13 +43,13 @@ defmodule Galeria.Config.DarkHydrator do
   # var :brand_regular, ~VAR[color(:purple, 500)]
   # var :brand_light, ~VAR[color(:purple, 100)]
 
+  # main
+  # var :main_padding, ~VAR[size(4)]
+
   # sidebar
   # var :sidebar_padding, ~VAR[size(4)]
   # var :sidebar_width, ~VAR[size(80)]
   var :sidebar_bg, ~VAR[color(:gray, 700)]
-
-  # main
-  # var :main_padding, ~VAR[size(4)]
 
   # ---------------------------------------------------------------------
   # Galeria.Components.Typography                          sidebar_title
@@ -62,7 +63,7 @@ defmodule Galeria.Config.DarkHydrator do
   # style [:sidebar_title, :classes, :title_class], ~CSS""" 
   #   line-height: <%= @font_lg %>;
   #   font-weight: 800;
-  #   font-size: <%= @sidebar_title_size %>;
+  #   font-size: <%= @font_lg %>;
   #   color: <%= @color_title %>;
   #   text-transform: uppercase;
   #   """
@@ -82,7 +83,7 @@ defmodule Galeria.Config.DarkHydrator do
   #   display: flex;
   #   """
   # style [:sidebar_layout, :classes, :sidebar_class], ~CSS""" 
-  #   background: <%= @sidebar_bg %>;
+  #   background: <%= @color_light %>;
   #   border-right: 1px solid <%= @color_border %>;
   #   padding: <%= @padding_lg %>;
   #   min-height: 100vh;
@@ -135,25 +136,90 @@ defmodule Galeria.Config.DarkHydrator do
   #   color: <%= @danger_dark %>;
   #   """
 
-  # style [:button, :background, :solid], ~CSS"""
-  # """
-  # style [:button, :background, :soft], ~CSS"""
-  # """
-  # style [:button, :background, :link], ~CSS"""
-  # """
-  # style [:button, :background, :transparent], ~CSS""" 
-  #   background: transparent!;
+  # style [:button, :style, :solid], ~CSS""" 
   # 
-  #   .<%= class_name(:button, :color, :danger) %> {
+  #   &.<%= class_name(:button, :color, :ctrl) %> {
+  #     background: <%= @color_text %>;
+  #     color: white;
   #   }
   # 
-  #   .<%= class_name(:button, :color, :success) %> {
+  #   &.<%= class_name(:button, :color, :danger) %> {
+  #     background: <%= @danger_regular %>;
+  #     color: white;
   #   }
   # 
-  #   .<%= class_name(:button, :color, :primary) %> {
+  #   &.<%= class_name(:button, :color, :primary) %> {
+  #     background: <%= @brand_regular %>;
+  #     color: white;
   #   }
   # 
-  #   .<%= class_name(:button, :color, :ctrl) %> {
+  #   &.<%= class_name(:button, :color, :success) %> {
+  #     background: <%= @success_regular %>;
+  #     color: white;
+  #   }
+  #   """
+  # style [:button, :style, :soft], ~CSS""" 
+  # 
+  #   &.<%= class_name(:button, :color, :ctrl) %> {
+  #     background: <%= @color_light %>;
+  #     color: <%= @color_text %>;
+  #   }
+  # 
+  #   &.<%= class_name(:button, :color, :danger) %> {
+  #     background: <%= @danger_light %>;
+  #     color: <%= @danger_regular %>;
+  #   }
+  # 
+  #   &.<%= class_name(:button, :color, :primary) %> {
+  #     background: <%= @brand_light %>;
+  #     color: <%= @brand_regular %>;
+  #   }
+  # 
+  #   &.<%= class_name(:button, :color, :success) %> {
+  #     background: <%= @success_light %>;
+  #     color: <%= @success_regular %>;
+  #   }
+  #   """
+  # style [:button, :style, :link], ~CSS""" 
+  #   text-decoration: underline;
+  # 
+  #   &.<%= class_name(:button, :color, :ctrl) %> {
+  #     color: <%= @color_text %>;
+  #   }
+  # 
+  #   &.<%= class_name(:button, :color, :danger) %> {
+  #     color: <%= @danger_regular %>;
+  #   }
+  # 
+  #   &.<%= class_name(:button, :color, :primary) %> {
+  #     color: <%= @brand_regular %>;
+  #   }
+  # 
+  #   &.<%= class_name(:button, :color, :success) %> {
+  #     color: <%= @success_regular %>;
+  #   }
+  #   """
+  # style [:button, :style, :transparent], ~CSS""" 
+  #   background: transparent;
+  # 
+  #   &.<%= class_name(:button, :color, :ctrl) %> {
+  #     color: <%= @color_text %>;
+  # 
+  #     &:hover {
+  #       background: <%= @color_text %>;
+  #     }
+  #   }
+  # 
+  #   &.<%= class_name(:button, :color, :danger) %> {
+  #     color: <%= @danger_regular %>;
+  #   }
+  # 
+  #   &.<%= class_name(:button, :color, :primary) %> {
+  #     color: <%= @brand_regular %>;
+  #   }
+  # 
+  #   &.<%= class_name(:button, :color, :success) %> {
+  #     color: <%= @success_regular %>;
   #   }
   #   """
 
