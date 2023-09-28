@@ -8,8 +8,8 @@ defmodule Galeria.Config do
         base_module_name: Galeria.Config,
         out_dir: "lib/config",
         imports: [
-          BuenaVista.Constants.DefaultColors,
-          BuenaVista.Constants.DefaultSizes
+          BuenaVista.Constants.DefaultSizes,
+          BuenaVista.Constants.DefaultColors
         ]
       ],
       css: nil
@@ -22,8 +22,7 @@ defmodule Galeria.Config do
         base_module_name: Galeria.Config,
         out_dir: "lib/config",
         imports: [
-          BuenaVista.Constants.DefaultColors,
-          BuenaVista.Constants.DefaultSizes
+          BuenaVista.Constants.DefaultColors
         ]
       ],
       css: [out_dir: "lib/assets/themes"]
@@ -36,8 +35,7 @@ defmodule Galeria.Config do
         base_module_name: Galeria.Config,
         out_dir: "lib/config",
         imports: [
-          BuenaVista.Constants.DefaultColors,
-          BuenaVista.Constants.DefaultSizes
+          BuenaVista.Constants.DefaultColors
         ]
       ],
       css: [out_dir: "lib/assets/themes"]

@@ -2,23 +2,23 @@ defmodule Galeria.GaleriaLive do
   use Phoenix.LiveView,
     layout: {Galeria.HTML.Layout, :base}
 
-  import BuenaVista
-
   alias BuenaVista.Component
-  alias BuenaVista.Gallery.URL
   alias BuenaVista.Helpers
-  alias BuenaVista.Theme
+  # alias BuenaVista.Theme
+  import Galeria.Components.Layout
+  import Galeria.Components.Typography
+  import Galeria.Components.Button
 
   @base_url Application.compile_env(:galeria, :base_url)
   @apps Application.compile_env(:buenavista, :apps)
 
   @impl true
-  def mount(params, _session, socket) do
+  def mount(_params, _session, socket) do
     modules = Helpers.find_component_modules(@apps)
 
     {:ok,
      socket
-     |> assign(:page_title, "Gallery")
+     |> assign(:page_title, "Component System")
      |> assign(:modules, modules)}
   end
 
@@ -50,27 +50,22 @@ defmodule Galeria.GaleriaLive do
     ~H"""
     <.sidebar_layout>
       <:sidebar>
-        <.heading tag={:h1} size={:lg}>
-          <.link patch={index_url()}>Galeria</.link>
-        </.heading>
-        <section :for={{module, components} <- @modules}>
-          <.heading tag={:h3} size={:md} decoration={:spaced_uppcase}>
-            <%= Helpers.pretty_module(module) %>
-          </.heading>
-          <.navigation orientation={:vertical} items={build_component_items(components)}>
-            <.navigation_item
-              :for={{_, component} <- components}
-              url={component_url(component)}
-              nav={:patch}
-              state={nav_item_state(@current_component, component)}
-            >
-              <%= component.name %>
-            </.navigation_item>
-          </.navigation>
-        </section>
+        <.sidebar_title>
+          Galeria
+          <:actions>
+            <.button size={:md} border={:thin} background={:transparent} color={:ctrl}>
+              light / dark
+            </.button>
+            <.button size={:md} border={:thin} background={:transparent} color={:ctrl}>
+              Collapse
+            </.button>
+          </:actions>
+        </.sidebar_title>
       </:sidebar>
-      <:main><%= @live_action %>
-        <%= inspect(@current_component) %></:main>
+      <:main>
+        <%= @live_action %>
+        <%= inspect(@current_component) %>
+      </:main>
     </.sidebar_layout>
     """
   end
@@ -78,8 +73,8 @@ defmodule Galeria.GaleriaLive do
   # ----------------------------------------
   # helpers
   # ----------------------------------------
-  defp nav_item_state(%Component{name: :name}, %Component{name: :name}), do: :selected
-  defp nav_item_state(_component_1, _component_2), do: :default
+  # defp nav_item_state(%Component{name: :name}, %Component{name: :name}), do: :selected
+  # defp nav_item_state(_component_1, _component_2), do: :default
 
   defp find_component(_components, _component_name, %Component{} = component), do: component
 
@@ -92,11 +87,11 @@ defmodule Galeria.GaleriaLive do
     end
   end
 
-  defp build_component_items(components) do
-    for {_, component} <- components do
-      %{url: component_url(component), nav: :patch, item: component}
-    end
-  end
+  # defp build_component_items(components) do
+  #   for {_, component} <- components do
+  #     %{url: component_url(component), nav: :patch, item: component}
+  #   end
+  # end
 
   # ----------------------------------------
   # urls
