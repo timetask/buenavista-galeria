@@ -10,6 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap" rel="stylesheet">
     <link phx-track-static rel="stylesheet" href={galeria_css_url(@conn)} />
     <link phx-track-static rel="stylesheet" href={current_theme_url(@conn)} />
+     <script defer phx-track-static type="text/javascript" src={js_url(@conn)}>
+    </script>
+
   </head>
   <body>
     <%= @inner_content %>

@@ -1452,18 +1452,18 @@
     canPushState() {
       return typeof history.pushState !== "undefined";
     },
-    dropLocal(localStorage2, namespace, subkey) {
-      return localStorage2.removeItem(this.localKey(namespace, subkey));
+    dropLocal(localStorage, namespace, subkey) {
+      return localStorage.removeItem(this.localKey(namespace, subkey));
     },
-    updateLocal(localStorage2, namespace, subkey, initial, func) {
-      let current = this.getLocal(localStorage2, namespace, subkey);
+    updateLocal(localStorage, namespace, subkey, initial, func) {
+      let current = this.getLocal(localStorage, namespace, subkey);
       let key = this.localKey(namespace, subkey);
       let newVal = current === null ? initial : func(current);
-      localStorage2.setItem(key, JSON.stringify(newVal));
+      localStorage.setItem(key, JSON.stringify(newVal));
       return newVal;
     },
-    getLocal(localStorage2, namespace, subkey) {
-      return JSON.parse(localStorage2.getItem(this.localKey(namespace, subkey)));
+    getLocal(localStorage, namespace, subkey) {
+      return JSON.parse(localStorage.getItem(this.localKey(namespace, subkey)));
     },
     updateCurrentState(callback) {
       if (!this.canPushState()) {
@@ -5736,21 +5736,13 @@ within:
   var import_topbar = __toESM(require_topbar());
   var csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content");
   var liveSocket = new LiveSocket("/live", Socket, {
-    params: {
-      _csrf_token: csrfToken,
-      theme_name: localStorage.getItem("theme_name")
-    }
+    params: { _csrf_token: csrfToken }
   });
   import_topbar.default.config({ barColors: { 0: "#29d" }, shadowColor: "rgba(0, 0, 0, .3)" });
   window.addEventListener("phx:page-loading-start", (_info) => import_topbar.default.show(300));
   window.addEventListener("phx:page-loading-stop", (_info) => import_topbar.default.hide());
   liveSocket.connect();
   window.liveSocket = liveSocket;
-  window.addEventListener("phx:set-theme", (e) => {
-    let themeName = e.detail.theme_name;
-    console.log(`settings theme_name: ${themeName}`);
-    localStorage.setItem("theme_name", themeName);
-  });
 })();
 /**
  * @license MIT
