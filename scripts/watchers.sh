@@ -38,7 +38,7 @@ $watcher -p -w $assets_dir/css/ -e css \
 pids+=("$!")
 
 # Listen to js changes
-$watcher -p -w $assets_dir/js/ -e js \
+$watcher -w $assets_dir/js/ -e js \
   esbuild $assets_dir/js/galeria.js --outdir=$static_dir/js $esbuild_config &
 pids+=("$!")
 
