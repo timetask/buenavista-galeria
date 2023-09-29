@@ -6,7 +6,7 @@ defmodule Galeria.Router do
         import Phoenix.LiveView.Router, only: [live: 3, live_session: 3]
         import Phoenix.Router, only: [get: 3, pipe_through: 1, scope: 2, scope: 3]
 
-        pipe_through Galeria.CurrentThemePlug
+        pipe_through Galeria.Plugs.CurrentThemePlug
 
         live_session :galeria, root_layout: {Galeria.HTML.Layout, :root} do
           live "/", Galeria.GaleriaLive, :index
@@ -14,11 +14,13 @@ defmodule Galeria.Router do
           live "/component/:component_name", Galeria.GaleriaLive, :component
         end
 
+        get "/change-theme/:theme_name", Galeria.Plugs.ChangeThemePlug, :change_theme
+
         scope "/static" do
-          get "/css/:path", Galeria.AssetsController, :css
-          get "/js/:path", Galeria.AssetsController, :js
-          get "/themes/:path", Galeria.AssetsController, :themes
-          get "/svg/:path", Galeria.AssetsController, :svg
+          get "/css/:path", Galeria.Plugs.ServeAssetsPlug, :css
+          get "/js/:path", Galeria.Plugs.ServeAssetsPlug, :js
+          get "/themes/:path", Galeria.Plugs.ServeAssetsPlug, :themes
+          get "/svg/:path", Galeria.Plugs.ServeAssetsPlug, :svg
         end
 
         unless Module.get_attribute(__MODULE__, :galeria_url_prefix) do

@@ -1,4 +1,4 @@
-defmodule Galeria.CurrentThemePlug do
+defmodule Galeria.Plugs.CurrentThemePlug do
   def init(opts), do: opts
 
   def call(conn, _opts) do

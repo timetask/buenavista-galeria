@@ -55,7 +55,6 @@ defmodule Galeria.Config do
   end
 
   def get_default_theme() do
-    {:ok, theme} = find_theme(@default_theme_name)
-    theme
+    find_theme(@default_theme_name)
   end
 end

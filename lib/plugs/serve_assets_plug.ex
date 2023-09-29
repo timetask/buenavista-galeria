@@ -1,4 +1,4 @@
-defmodule Galeria.AssetsController do
+defmodule Galeria.Plugs.ServeAssetsPlug do
   import Plug.Conn
 
   def init(asset) when asset in [:css, :js, :themes, :svg], do: asset
@@ -6,7 +6,7 @@ defmodule Galeria.AssetsController do
   def call(conn, asset) do
     filename = conn.path_params["path"]
     current_dir = Path.dirname(__ENV__.file)
-    file_path = Path.expand(current_dir <> "/../priv/static/#{asset}/" <> filename)
+    file_path = Path.expand(current_dir <> "/../../priv/static/#{asset}/" <> filename)
     content = File.read!(file_path)
 
     conn
