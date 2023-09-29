@@ -1,6 +1,7 @@
 defmodule Galeria.Components.Layout do
   use BuenaVista.Component
 
+  variant :status, [:open, :closed], :open
   classes [:sidebar_class, :main_class]
 
   slot :sidebar
