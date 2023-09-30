@@ -15,7 +15,7 @@ defmodule Galeria.Config.LightHydrator do
   # font
   # var :font_sm, ~VAR[size(3)]
   # var :font_md, ~VAR[size(4)]
-  # var :font_lg, ~VAR[size(5)]
+  # var :font_lg, ~VAR[size(6)]
 
   # icon
   # var :icon_sm, ~VAR[size(5)]
@@ -51,6 +51,7 @@ defmodule Galeria.Config.LightHydrator do
   # sidebar
   # var :sidebar_padding, ~VAR[size(4)]
   # var :sidebar_width, ~VAR[size(80)]
+  # var :sidebar_width_collapsed, ~VAR[size(4)]
 
   # main
   # var :main_padding, ~VAR[size(4)]
@@ -70,6 +71,12 @@ defmodule Galeria.Config.LightHydrator do
   #   color: <%= @color_title %>;
   #   text-transform: uppercase;
   #   margin: 0;
+  #   """
+  # style [:sidebar_title, :classes, :subtitle_class], ~CSS""" 
+  #   font-weight: 400;
+  #   font-size: <%= @font_md %>;
+  #   color: <%= @color_regular %>;
+  #   display: block;
   #   """
   # style [:sidebar_title, :classes, :actions_class], ~CSS""" 
   #   gap: 0.25rem;
@@ -91,7 +98,6 @@ defmodule Galeria.Config.LightHydrator do
   #   border-right: 1px solid <%= @color_border %>;
   #   padding: <%= @padding_lg %>;
   #   min-height: 100vh;
-  #   width: <%= @sidebar_width %>;
   #   flex-grow: 1;
   #   """
   # style [:sidebar_layout, :classes, :main_class], ~CSS""" 
@@ -100,12 +106,40 @@ defmodule Galeria.Config.LightHydrator do
   #   flex-basis: 0;
   #   """
 
+  # style [:sidebar_layout, :status, :open], ~CSS""" 
+  # 
+  #   .<%= class_name(:sidebar_layout, :classes, :sidebar_class) %> {
+  #     width: <%= @sidebar_width %>;
+  #   }
+  #   """
+  # style [:sidebar_layout, :status, :closed], ~CSS""" 
+  # 
+  #   &:hover {
+  # 
+  #     .<%= class_name(:sidebar_layout, :classes, :sidebar_class) %> {
+  #       background: <%= @color_border %>;
+  #     }
+  #   }
+  # 
+  #   .<%= class_name(:sidebar_layout, :classes, :sidebar_class) %> {
+  #     cursor: pointer;
+  #     padding: 0;
+  #     width: <%= @sidebar_width_collapsed %>;
+  #     width: <%= @sidebar_width_collapsed %>;
+  # 
+  #     * {
+  #       display: none;
+  #     }
+  #   }
+  #   """
+
   # ---------------------------------------------------------------------
   # Galeria.Components.Button                                     button
   # ---------------------------------------------------------------------
 
   # style [:button, :classes, :base_class], ~CSS""" 
   #   line-height: 1;
+  #   border: none;
   #   cursor: pointer;
   # 
   #   &:hover {
@@ -119,16 +153,16 @@ defmodule Galeria.Config.LightHydrator do
   #   fill: <%= @color_text %>;
   #   aspect-ratio: 1 / 1;
   # 
-  #   .<%= class_name(:button, :size, :lg) %> & {
-  #     height: <%= @icon_lg %>;
+  #   .<%= class_name(:button, :size, :sm) %> & {
+  #     height: <%= @icon_sm %>;
   #   }
   # 
   #   .<%= class_name(:button, :size, :md) %> & {
   #     height: <%= @icon_md %>;
   #   }
   # 
-  #   .<%= class_name(:button, :size, :sm) %> & {
-  #     height: <%= @icon_sm %>;
+  #   .<%= class_name(:button, :size, :lg) %> & {
+  #     height: <%= @icon_lg %>;
   #   }
   #   """
 
@@ -166,13 +200,8 @@ defmodule Galeria.Config.LightHydrator do
 
   # style [:button, :style, :solid], ~CSS""" 
   # 
-  #   &.<%= class_name(:button, :color, :ctrl) %> {
-  #     background: <%= @color_text %>;
-  #     color: white;
-  #   }
-  # 
-  #   &.<%= class_name(:button, :color, :danger) %> {
-  #     background: <%= @danger_regular %>;
+  #   &.<%= class_name(:button, :color, :success) %> {
+  #     background: <%= @success_regular %>;
   #     color: white;
   #   }
   # 
@@ -181,21 +210,21 @@ defmodule Galeria.Config.LightHydrator do
   #     color: white;
   #   }
   # 
-  #   &.<%= class_name(:button, :color, :success) %> {
-  #     background: <%= @success_regular %>;
+  #   &.<%= class_name(:button, :color, :danger) %> {
+  #     background: <%= @danger_regular %>;
+  #     color: white;
+  #   }
+  # 
+  #   &.<%= class_name(:button, :color, :ctrl) %> {
+  #     background: <%= @color_text %>;
   #     color: white;
   #   }
   #   """
   # style [:button, :style, :soft], ~CSS""" 
   # 
-  #   &.<%= class_name(:button, :color, :ctrl) %> {
-  #     background: <%= @color_light %>;
-  #     color: <%= @color_text %>;
-  #   }
-  # 
-  #   &.<%= class_name(:button, :color, :danger) %> {
-  #     background: <%= @danger_light %>;
-  #     color: <%= @danger_regular %>;
+  #   &.<%= class_name(:button, :color, :success) %> {
+  #     background: <%= @success_light %>;
+  #     color: <%= @success_regular %>;
   #   }
   # 
   #   &.<%= class_name(:button, :color, :primary) %> {
@@ -203,38 +232,55 @@ defmodule Galeria.Config.LightHydrator do
   #     color: <%= @brand_regular %>;
   #   }
   # 
-  #   &.<%= class_name(:button, :color, :success) %> {
-  #     background: <%= @success_light %>;
-  #     color: <%= @success_regular %>;
+  #   &.<%= class_name(:button, :color, :danger) %> {
+  #     background: <%= @danger_light %>;
+  #     color: <%= @danger_regular %>;
+  #   }
+  # 
+  #   &.<%= class_name(:button, :color, :ctrl) %> {
+  #     background: <%= @color_light %>;
+  #     color: <%= @color_text %>;
   #   }
   #   """
   # style [:button, :style, :link], ~CSS""" 
   #   text-decoration: underline;
   # 
-  #   &.<%= class_name(:button, :color, :ctrl) %> {
-  #     color: <%= @color_text %>;
-  #   }
-  # 
-  #   &.<%= class_name(:button, :color, :danger) %> {
-  #     color: <%= @danger_regular %>;
+  #   &.<%= class_name(:button, :color, :success) %> {
+  #     color: <%= @success_regular %>;
   #   }
   # 
   #   &.<%= class_name(:button, :color, :primary) %> {
   #     color: <%= @brand_regular %>;
   #   }
   # 
-  #   &.<%= class_name(:button, :color, :success) %> {
-  #     color: <%= @success_regular %>;
+  #   &.<%= class_name(:button, :color, :danger) %> {
+  #     color: <%= @danger_regular %>;
+  #   }
+  # 
+  #   &.<%= class_name(:button, :color, :ctrl) %> {
+  #     color: <%= @color_text %>;
   #   }
   #   """
   # style [:button, :style, :transparent], ~CSS""" 
   #   background: transparent;
   # 
-  #   &.<%= class_name(:button, :color, :ctrl) %> {
-  #     color: <%= @color_text %>;
+  #   &.<%= class_name(:button, :color, :success) %> {
+  #     color: <%= @success_regular %>;
+  #   }
+  # 
+  #   &.<%= class_name(:button, :color, :primary) %> {
+  #     color: <%= @brand_regular %>;
   # 
   #     &:hover {
-  #       background: <%= @color_text %>;
+  #       background: <%= @brand_regular %>;
+  # 
+  #       .<%= class_name(:button, :classes, :icon_class) %> {
+  #         fill: white;
+  #       }
+  #     }
+  # 
+  #     .<%= class_name(:button, :classes, :icon_class) %> {
+  #       fill: <%= @brand_regular %>;
   #     }
   #   }
   # 
@@ -242,12 +288,12 @@ defmodule Galeria.Config.LightHydrator do
   #     color: <%= @danger_regular %>;
   #   }
   # 
-  #   &.<%= class_name(:button, :color, :primary) %> {
-  #     color: <%= @brand_regular %>;
-  #   }
+  #   &.<%= class_name(:button, :color, :ctrl) %> {
+  #     color: <%= @color_text %>;
   # 
-  #   &.<%= class_name(:button, :color, :success) %> {
-  #     color: <%= @success_regular %>;
+  #     &:hover {
+  #       background: <%= @color_text %>;
+  #     }
   #   }
   #   """
 

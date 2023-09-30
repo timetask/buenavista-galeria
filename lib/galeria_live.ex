@@ -26,12 +26,7 @@ defmodule Galeria.GaleriaLive do
             <a :if={@theme_name == "dark"} href={change_theme_url(@socket, "light")}>
               <.button size={:md} style={:transparent} color={:ctrl} icon={:dark_mode} />
             </a>
-            <.button
-              size={:md}
-              style={:transparent}
-              color={:ctrl}
-              icon={:collapse}
-            />
+            <.button size={:md} style={:transparent} color={:ctrl} icon={:collapse} />
           </:actions>
         </.sidebar_title>
       </:sidebar>
