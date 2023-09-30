@@ -4,20 +4,20 @@ defmodule Galeria.HTML.Layout do
   import Phoenix.Controller,
     only: [get_csrf_token: 0]
 
-  embed_templates("layout/*")
-
   def galeria_css_url(conn) do
     prefix = conn.private.phoenix_router.__galeria_url_prefix__()
-    Path.join(prefix, "/css/galeria.css")
+    Path.join(prefix, "/static/css/galeria.css")
   end
 
   def current_theme_url(conn) do
     prefix = conn.private.phoenix_router.__galeria_url_prefix__()
-    Path.join(prefix, "/themes/#{conn.assigns.theme_name}.css")
+    Path.join(prefix, "/static/themes/#{conn.assigns.theme_name}.css")
   end
 
   def js_url(conn) do
     prefix = conn.private.phoenix_router.__galeria_url_prefix__()
-    Path.join(prefix, "/js/galeria.js")
+    Path.join(prefix, "/static/js/galeria.js")
   end
+
+  embed_templates "layout/*"
 end

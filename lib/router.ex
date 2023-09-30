@@ -24,7 +24,7 @@ defmodule Galeria.Router do
         end
 
         unless Module.get_attribute(__MODULE__, :galeria_url_prefix) do
-          @galeria_url_prefix Phoenix.Router.scoped_path(__MODULE__, "/static")
+          @galeria_url_prefix Phoenix.Router.scoped_path(__MODULE__, "/")
           def __galeria_url_prefix__, do: @galeria_url_prefix
         end
       end

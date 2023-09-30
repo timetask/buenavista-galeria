@@ -17,32 +17,17 @@ defmodule Galeria.GaleriaLive do
     <.sidebar_layout status={if @sidebar_open?, do: :open, else: :closed}>
       <:sidebar>
         <.sidebar_title>
-          Galeria
+          <:title>Galeria</:title>
+          <:subtitle>Component</:subtitle>
           <:actions>
             <a :if={@theme_name == "light"} href={change_theme_url(@socket, "dark")}>
-              <.button
-                size={:md}
-                border={:thin}
-                style={:transparent}
-                color={:ctrl}
-                icon={:light_mode}
-              />
+              <.button size={:md} style={:transparent} color={:ctrl} icon={:light_mode} />
             </a>
             <a :if={@theme_name == "dark"} href={change_theme_url(@socket, "light")}>
-              <.button size={:md} border={:thin} style={:transparent} color={:ctrl} icon={:dark_mode} />
+              <.button size={:md} style={:transparent} color={:ctrl} icon={:dark_mode} />
             </a>
             <.button
-              :if={@sidebar_open?}
               size={:md}
-              border={:thin}
-              style={:transparent}
-              color={:ctrl}
-              icon={:collapse}
-            />
-            <.button
-              :if={not @sidebar_open?}
-              size={:md}
-              border={:thin}
               style={:transparent}
               color={:ctrl}
               icon={:collapse}
@@ -165,7 +150,7 @@ defmodule Galeria.GaleriaLive do
   end
 
   def change_theme_url(socket, theme_name) when is_binary(theme_name) do
-    prefix = socket.private.connect_info.private.phoenix_router.__galeria_url_prefix__()
+    prefix = socket.router.__galeria_url_prefix__()
     Path.join(prefix, "/change-theme/#{theme_name}")
   end
 end

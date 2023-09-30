@@ -9,7 +9,7 @@ defmodule Galeria.Plugs.ChangeThemePlug do
         {:ok, theme} -> {:ok, theme}
         {:error, :not_found} -> Galeria.Config.get_default_theme()
       end
-    
+
     {_, redirect_to} = List.keyfind(conn.req_headers, "referer", 0, "/dev/galeria")
     [_, redirect_to] = String.split(redirect_to, conn.host)
 
