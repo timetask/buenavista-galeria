@@ -12,6 +12,8 @@ defmodule Galeria.Config.BaseHydrator do
 
   # app
   var :app_bg, ""
+  var :app_bg_2, ""
+  var :app_bg_3, ""
 
   # font
   var :font_sm, ~VAR[size(3)]
@@ -58,10 +60,35 @@ defmodule Galeria.Config.BaseHydrator do
   var :main_padding, ~VAR[size(4)]
 
   # ---------------------------------------------------------------------
+  # Galeria.Components.Typography                       sidebar_subtitle
+  # ---------------------------------------------------------------------
+
+  style [:sidebar_subtitle, :classes, :base_class], ~CSS"""
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+  """
+
+  style [:sidebar_subtitle, :classes, :subtitle_class], ~CSS"""
+    font-weight: 400;
+    font-size: <%= @font_md %>;
+    color: <%= @color_light %>;
+    text-transform: uppercase;
+    margin: 0;
+  """
+
+  style [:sidebar_subtitle, :classes, :actions_class], ~CSS"""
+    gap: <%= @padding_sm %>;
+    align-items: center;
+    display: flex;
+  """
+
+  # ---------------------------------------------------------------------
   # Galeria.Components.Typography                          sidebar_title
   # ---------------------------------------------------------------------
 
   style [:sidebar_title, :classes, :base_class], ~CSS"""
+    margin-bottom: <%= @padding_lg %>;
     justify-content: space-between;
     align-items: center;
     display: flex;
@@ -78,14 +105,53 @@ defmodule Galeria.Config.BaseHydrator do
   style [:sidebar_title, :classes, :subtitle_class], ~CSS"""
     font-weight: 400;
     font-size: <%= @font_md %>;
-    color: <%= @color_regular %>;
+    color: <%= @color_text %>;
     display: block;
   """
 
   style [:sidebar_title, :classes, :actions_class], ~CSS"""
-    gap: 0.25rem;
+    gap: <%= @padding_sm %>;
     align-items: center;
     display: flex;
+  """
+
+  # ---------------------------------------------------------------------
+  # Galeria.Components.Nav                                      nav_list
+  # ---------------------------------------------------------------------
+
+  style [:nav_list, :classes, :base_class], ~CSS"""
+    display: flex;
+  """
+
+  style [:nav_list, :classes, :item_class], ~CSS"""
+    font-size: <%= @font_md %>;
+    border-radius: <%= @padding_md %>;
+    color: <%= @color_text %>;
+    text-decoration: none;
+    padding: <%= @padding_md %> <%= @padding_lg %>;
+
+    &:hover {
+      background: <%= @app_bg_3 %>;
+    }
+  """
+
+  style [:nav_list, :classes, :item_selected_class], ~CSS"""
+    background: <%= @app_bg_3 %>;
+  """
+
+  style [:nav_list, :direction, :vertical], ~CSS"""
+    width: 100%;
+    flex-direction: column;
+    gap: <%= @padding_sm %>;
+  """
+
+  style [:nav_list, :direction, :horizontal], ~CSS"""
+    gap: <%= @padding_sm %>;
+    flex-direction: row;
+
+    .<%= class_name(:nav_list, :classes, :item_class) %> {
+      width: 100%;
+    }
   """
 
   # ---------------------------------------------------------------------
@@ -99,11 +165,14 @@ defmodule Galeria.Config.BaseHydrator do
   """
 
   style [:sidebar_layout, :classes, :sidebar_class], ~CSS"""
-    background: <%= @color_light %>;
+    gap: <%= @padding_lg %>;
+    background: <%= @app_bg_2 %>;
     border-right: 1px solid <%= @color_border %>;
     padding: <%= @padding_lg %>;
     min-height: 100vh;
     flex-grow: 1;
+    flex-direction: column;
+    display: flex;
   """
 
   style [:sidebar_layout, :classes, :main_class], ~CSS"""
@@ -158,7 +227,6 @@ defmodule Galeria.Config.BaseHydrator do
   """
 
   style [:button, :classes, :icon_class], ~CSS"""
-    fill: <%= @color_text %>;
     aspect-ratio: 1 / 1;
 
     .<%= class_name(:button, :size, :sm) %> & {
@@ -252,7 +320,7 @@ defmodule Galeria.Config.BaseHydrator do
     }
 
     &.<%= class_name(:button, :color, :ctrl) %> {
-      background: <%= @color_light %>;
+      background: <%= @app_bg_2 %>;
       color: <%= @color_text %>;
     }
   """
@@ -309,6 +377,14 @@ defmodule Galeria.Config.BaseHydrator do
 
       &:hover {
         background: <%= @color_text %>;
+
+        .<%= class_name(:button, :classes, :icon_class) %> {
+          fill: <%= @app_bg %>;
+        }
+      }
+
+      .<%= class_name(:button, :classes, :icon_class) %> {
+        fill: <%= @color_light %>;
       }
     }
   """
@@ -321,5 +397,31 @@ defmodule Galeria.Config.BaseHydrator do
   style [:button, :border, :thick], ~CSS"""
     border-style: solid;
     border-width: 4px;
+  """
+
+  # ---------------------------------------------------------------------
+  # Galeria.Components.Box                               collapsible_box
+  # ---------------------------------------------------------------------
+
+  style [:collapsible_box, :classes, :base_class], ~CSS"""
+    gap: <%= @padding_md %>;
+    width: 100%;
+    flex-direction: column;
+    display: flex;
+  """
+
+  style [:collapsible_box, :classes, :header_class], ~CSS"""
+  """
+
+  style [:collapsible_box, :classes, :content_class], ~CSS"""
+  """
+
+  # style [:collapsible_box, :status, :open], ~CSS"""
+  # """
+  style [:collapsible_box, :status, :closed], ~CSS"""
+
+    .<%= class_name(:collapsible_box, :classes, :content_class) %> {
+      display: none;
+    }
   """
 end

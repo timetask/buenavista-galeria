@@ -4,11 +4,13 @@ defmodule Galeria.GaleriaLive do
 
   alias BuenaVista.Component
   alias BuenaVista.Helpers
-  import Galeria.Components.Layout
-  import Galeria.Components.Typography
-  import Galeria.Components.Button
 
-  @base_url Application.compile_env(:galeria, :base_url)
+  import Galeria.Components.Box
+  import Galeria.Components.Button
+  import Galeria.Components.Layout
+  import Galeria.Components.Nav
+  import Galeria.Components.Typography
+
   @apps Application.compile_env(:buenavista, :apps)
 
   @impl true
@@ -29,6 +31,36 @@ defmodule Galeria.GaleriaLive do
             <.button size={:md} style={:transparent} color={:ctrl} icon={:collapse} />
           </:actions>
         </.sidebar_title>
+        <.collapsible_box>
+          <:header>
+            <.sidebar_subtitle>
+              <:subtitle>Compositions</:subtitle>
+              <:actions>
+                <.button size={:sm} style={:transparent} color={:ctrl} icon={:chevron_down} />
+              </:actions>
+            </.sidebar_subtitle>
+          </:header>
+          <:content>
+            Content
+          </:content>
+        </.collapsible_box>
+        <.collapsible_box :for={{module, components} <- @modules}>
+          <:header>
+            <.sidebar_subtitle>
+              <:subtitle><%= pretty_module(module) %></:subtitle>
+              <:actions>
+                <.button size={:sm} style={:transparent} color={:ctrl} icon={:chevron_down} />
+              </:actions>
+            </.sidebar_subtitle>
+          </:header>
+          <:content>
+            <.nav_list
+              direction={:vertical}
+              selected_item={component_to_nav_item(@socket, @current_component)}
+              items={components_to_nav_items(@socket, components)}
+            />
+          </:content>
+        </.collapsible_box>
       </:sidebar>
       <:main>
         <%= @live_action %>
@@ -51,7 +83,7 @@ defmodule Galeria.GaleriaLive do
   end
 
   @impl true
-  def handle_params(params, _uri, %{assigns: %{live_action: :index}} = socket) do
+  def handle_params(_params, _uri, %{assigns: %{live_action: :index}} = socket) do
     {:noreply,
      socket
      |> assign(:current_component, nil)
@@ -59,16 +91,15 @@ defmodule Galeria.GaleriaLive do
   end
 
   def handle_params(params, _uri, %{assigns: %{live_action: :component}} = socket) do
-    dbg("handle params live_action: :component")
+    case get_current_component(socket, params) do
+      %Component{} = component ->
+        {:noreply,
+         socket
+         |> assign(:current_component, component)
+         |> assign(:page_title, component.name)}
 
-    component = get_current_component(socket, params)
-
-    if match?(%Component{}, component) do
-      socket
-      |> assign(:current_component, component)
-      |> assign(:page_title, "#{component.name} #{component.__MODULE__}")
-    else
-      push_patch(socket, to: index_url())
+      _ ->
+        {:noreply, push_patch(socket, to: base_url(socket))}
     end
   end
 
@@ -105,11 +136,8 @@ defmodule Galeria.GaleriaLive do
   # ----------------------------------------
   # Helpers
   # ----------------------------------------
-  # defp nav_item_state(%Component{name: :name}, %Component{name: :name}), do: :selected
-  # defp nav_item_state(_component_1, _component_2), do: :default
-
   defp get_current_component(%Phoenix.LiveView.Socket{} = socket, params) when is_map(params) do
-    component_name = params |> Map.get("component") |> String.to_existing_atom()
+    component_name = params |> Map.get("component_name") |> String.to_existing_atom()
 
     for {_module, components} <- socket.assigns.modules, reduce: nil do
       acc -> find_component(components, component_name, acc)
@@ -127,25 +155,34 @@ defmodule Galeria.GaleriaLive do
     end
   end
 
-  # defp build_component_items(components) do
-  #   for {_, component} <- components do
-  #     %{url: component_url(component), nav: :patch, item: component}
-  #   end
-  # end
+  defp components_to_nav_items(socket, components) do
+    for {_, component} <- components, do: component_to_nav_item(socket, component)
+  end
+
+  defp component_to_nav_item(socket, component) do
+    %Galeria.Components.Nav.Item{
+      id: component.name,
+      url: component_url(socket, component),
+      text: component.name
+    }
+  end
+
+  defp pretty_module(mod) do
+    mod |> Module.split() |> List.last()
+  end
 
   # ----------------------------------------
   # Urls
   # ----------------------------------------
-  def index_url() do
-    @base_url
+  def base_url(socket) do
+    socket.router.__galeria_url_prefix__()
   end
 
-  def component_url(%Component{} = component) do
-    Path.join(@base_url, Atom.to_string(component.name))
+  def component_url(socket, %Component{} = component) do
+    Path.join(base_url(socket), "/component/" <> Atom.to_string(component.name))
   end
 
   def change_theme_url(socket, theme_name) when is_binary(theme_name) do
-    prefix = socket.router.__galeria_url_prefix__()
-    Path.join(prefix, "/change-theme/#{theme_name}")
+    Path.join(base_url(socket), "/change-theme/#{theme_name}")
   end
 end

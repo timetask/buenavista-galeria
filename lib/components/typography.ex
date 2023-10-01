@@ -22,4 +22,22 @@ defmodule Galeria.Components.Typography do
     </header>
     """
   end
+
+  classes [:subtitle_class, :actions_class]
+
+  slot :subtitle, required: true
+  slot :actions
+
+  component sidebar_subtitle(assigns) do
+    ~H"""
+    <header class={@base_class}>
+      <h3 class={@subtitle_class}>
+        <%= render_slot(@subtitle) %>
+      </h3>
+      <div :if={not Enum.empty?(@actions)} class={@actions_class}>
+        <%= render_slot(@actions) %>
+      </div>
+    </header>
+    """
+  end
 end

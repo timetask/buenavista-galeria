@@ -7,7 +7,11 @@ defmodule Galeria.Components.Button do
   variant :border, [:none, :thin, :thick], :none
 
   attr :type, :string, default: "button", values: ["button", "submit"]
-  attr :icon, :atom, values: [:light_mode, :dark_mode, :collapse, :expand, nil], default: nil
+
+  attr :icon, :atom,
+    values: [:light_mode, :dark_mode, :collapse, :chevron_up, :chevron_down, :expand, nil],
+    default: nil
+
   attr :rest, :global
 
   slot :inner_block
@@ -57,6 +61,22 @@ defmodule Galeria.Components.Button do
     ~H"""
     <svg class={@class} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
       <path d="M18 6h2v12h-2zm-8 5H4v2h6v5l6-6-6-6z"></path>
+    </svg>
+    """
+  end
+
+  defp icon(%{icon: :chevron_up} = assigns) do
+    ~H"""
+    <svg class={@class} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      <path d="m12 6.879-7.061 7.06 2.122 2.122L12 11.121l4.939 4.94 2.122-2.122z"></path>
+    </svg>
+    """
+  end
+
+  defp icon(%{icon: :chevron_down} = assigns) do
+    ~H"""
+    <svg class={@class} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+      <path d="M16.939 7.939 12 12.879l-4.939-4.94-2.122 2.122L12 17.121l7.061-7.06z"></path>
     </svg>
     """
   end
