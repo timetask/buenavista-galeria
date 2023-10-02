@@ -10,12 +10,12 @@ defmodule Galeria.Components.Typography do
   component sidebar_title(assigns) do
     ~H"""
     <header class={@base_class}>
-      <h1 class={@title_class}>
+      <div class={@title_class}>
         <span :if={not Enum.empty?(@subtitle)} class={@subtitle_class}>
           <%= render_slot(@subtitle) %>
         </span>
         <%= render_slot(@title) %>
-      </h1>
+      </div>
       <div :if={not Enum.empty?(@actions)} class={@actions_class}>
         <%= render_slot(@actions) %>
       </div>
@@ -34,6 +34,28 @@ defmodule Galeria.Components.Typography do
       <h3 class={@subtitle_class}>
         <%= render_slot(@subtitle) %>
       </h3>
+      <div :if={not Enum.empty?(@actions)} class={@actions_class}>
+        <%= render_slot(@actions) %>
+      </div>
+    </header>
+    """
+  end
+
+  classes [:title_class, :subtitle_class, :actions_class]
+
+  slot :title, required: true
+  slot :subtitle
+  slot :actions
+
+  component page_title(assigns) do
+    ~H"""
+    <header class={@base_class}>
+      <h1 class={@title_class}>
+        <span :if={not Enum.empty?(@subtitle)} class={@subtitle_class}>
+          <%= render_slot(@subtitle) %>
+        </span>
+        <%= render_slot(@title) %>
+      </h1>
       <div :if={not Enum.empty?(@actions)} class={@actions_class}>
         <%= render_slot(@actions) %>
       </div>

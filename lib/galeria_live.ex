@@ -47,7 +47,7 @@ defmodule Galeria.GaleriaLive do
         <.collapsible_box :for={{module, components} <- @modules}>
           <:header>
             <.sidebar_subtitle>
-              <:subtitle><%= pretty_module(module) %></:subtitle>
+              <:subtitle><%= pretty_module_short(module) %></:subtitle>
               <:actions>
                 <.button size={:sm} style={:transparent} color={:ctrl} icon={:chevron_down} />
               </:actions>
@@ -63,10 +63,20 @@ defmodule Galeria.GaleriaLive do
         </.collapsible_box>
       </:sidebar>
       <:main>
-        <%= @live_action %>
-        <%= inspect(@current_component) %>
+        <.component_page :if={@live_action == :component} current_component={@current_component} />
       </:main>
     </.sidebar_layout>
+    """
+  end
+
+  attr :current_component, BuenaVista.Component, required: true
+
+  defp component_page(assigns) do
+    ~H"""
+    <.page_title>
+      <:title><%= @current_component.name %></:title>
+      <:subtitle><%= pretty_module_long(@current_component) %></:subtitle>
+    </.page_title>
     """
   end
 
@@ -167,8 +177,12 @@ defmodule Galeria.GaleriaLive do
     }
   end
 
-  defp pretty_module(mod) do
+  defp pretty_module_short(mod) when is_atom(mod) do
     mod |> Module.split() |> List.last()
+  end
+
+  defp pretty_module_long(%Component{} = component) do
+    component.module |> Atom.to_string() |> String.replace("Elixir.", "") |> then(&(&1 <> "."))
   end
 
   # ----------------------------------------

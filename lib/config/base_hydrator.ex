@@ -62,7 +62,30 @@ defmodule Galeria.Config.BaseHydrator do
   var :sidebar_width_collapsed, ~VAR[size(4)]
 
   # main
-  var :main_padding, ~VAR[size(4)]
+  var :main_padding, ~VAR[size(4) size(6)]
+
+  # ---------------------------------------------------------------------
+  # Galeria.Components.Typography                             page_title
+  # ---------------------------------------------------------------------
+
+  # style [:page_title, :classes, :base_class], ~CSS"""
+  # """
+  style [:page_title, :classes, :title_class], ~CSS"""
+    font-weight: <%= @weight_bold %>;
+    font-size: <%= @font_lg %>;
+    color: <%= @color_title %>;
+    margin: 0;
+    display: inline-flex;
+  """
+
+  style [:page_title, :classes, :subtitle_class], ~CSS"""
+    font-weight: <%= @weight_light %>;
+    color: <%= @color_light %>;
+    display: inline-flex;
+  """
+
+  # style [:page_title, :classes, :actions_class], ~CSS"""
+  # """
 
   # ---------------------------------------------------------------------
   # Galeria.Components.Typography                       sidebar_subtitle
@@ -75,10 +98,11 @@ defmodule Galeria.Config.BaseHydrator do
   """
 
   style [:sidebar_subtitle, :classes, :subtitle_class], ~CSS"""
-    font-weight: 400;
+    font-weight: <%= @weight_light %>;
     font-size: <%= @font_md %>;
     color: <%= @color_light %>;
     text-transform: uppercase;
+    letter-spacing: 2px;
     margin: 0;
   """
 
@@ -104,13 +128,20 @@ defmodule Galeria.Config.BaseHydrator do
     font-size: <%= @font_lg %>;
     color: <%= @color_title %>;
     text-transform: uppercase;
+    letter-spacing: 2px;
+    border: 2px solid <%= @color_title %>;
+    
+    padding: <%= @padding_sm %> <%= @padding_md %>;
+    text-align: center;
     margin: 0;
+    box-shadow: <%= @app_bg_2 %> 4px 4px 0 -2px, <%= @color_title %> 4px 4px;
   """
 
   style [:sidebar_title, :classes, :subtitle_class], ~CSS"""
-    font-weight: 400;
+    font-weight: <%= @weight_regular %>;
     font-size: <%= @font_md %>;
-    color: <%= @color_text %>;
+    letter-spacing: 4px;
+    text-align: center;
     display: block;
   """
 
@@ -145,9 +176,9 @@ defmodule Galeria.Config.BaseHydrator do
   """
 
   style [:nav_list, :direction, :vertical], ~CSS"""
+    gap: <%= @padding_sm %>;
     width: 100%;
     flex-direction: column;
-    gap: <%= @padding_sm %>;
   """
 
   style [:nav_list, :direction, :horizontal], ~CSS"""
@@ -181,7 +212,7 @@ defmodule Galeria.Config.BaseHydrator do
   """
 
   style [:sidebar_layout, :classes, :main_class], ~CSS"""
-    padding: <%= @padding_lg %>;
+    padding: <%= @main_padding %>;
     flex-grow: 999;
     flex-basis: 0;
   """
