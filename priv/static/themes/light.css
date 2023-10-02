@@ -1,13 +1,33 @@
 /* lib/assets/themes/light/typography.css */
+.page-title {
+  justify-content: space-between;
+  flex-direction: row;
+  display: flex;
+  .title {
+    font-weight: var(--weight-bold);
+    font-size: var(--font-lg);
+    color: var(--color-title);
+    margin: 0;
+    display: inline-flex;
+  }
+  .subtitle {
+    font-weight: var(--weight-light);
+    color: var(--color-light);
+    display: inline-flex;
+  }
+  .actions {
+  }
+}
 .sidebar-subtitle {
   justify-content: space-between;
   align-items: center;
   display: flex;
   .subtitle {
-    font-weight: 400;
+    font-weight: var(--weight-light);
     font-size: var(--font-md);
     color: var(--color-light);
     text-transform: uppercase;
+    letter-spacing: 2px;
     margin: 0;
   }
   .actions {
@@ -24,14 +44,20 @@
   .title {
     font-weight: 800;
     font-size: var(--font-lg);
+    box-shadow: var(--app-bg-2) 4px 4px 0 -2px, var(--color-title) 4px 4px;
+    border: 2px solid var(--color-title);
     color: var(--color-title);
     text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    padding: var(--padding-sm) var(--padding-md);
     margin: 0;
   }
   .subtitle {
-    font-weight: 400;
+    font-weight: var(--weight-regular);
     font-size: var(--font-md);
-    color: var(--color-text);
+    letter-spacing: 4px;
+    text-align: center;
     display: block;
   }
   .actions {
@@ -58,9 +84,9 @@
     background: var(--app-bg-3);
   }
   &.nav-list-vertical {
+    gap: var(--padding-sm);
     width: 100%;
     flex-direction: column;
-    gap: var(--padding-sm);
   }
   &.nav-list-horizontal {
     gap: var(--padding-sm);
@@ -87,7 +113,7 @@
     display: flex;
   }
   .main {
-    padding: var(--padding-lg);
+    padding: var(--main-padding);
     flex-grow: 999;
     flex-basis: 0;
   }
@@ -281,7 +307,7 @@
 
 /* lib/assets/themes/light.css */
 :root {
-  --main-padding: 1rem;
+  --main-padding: 1rem 1.5rem;
   --sidebar-width-collapsed: 1rem;
   --sidebar-width: 20rem;
   --sidebar-padding: 1rem;
@@ -304,7 +330,10 @@
   --icon-lg: 1.75rem;
   --icon-md: 1.5rem;
   --icon-sm: 1.25rem;
-  --font-lg: 1.5rem;
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-bold: 500;
+  --font-lg: 1.75rem;
   --font-md: 1rem;
   --font-sm: 0.75rem;
   --app-bg-3: #e4e4e7;

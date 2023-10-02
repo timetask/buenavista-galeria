@@ -17,7 +17,12 @@ defmodule Galeria.Config.DarkHydrator do
   # font
   # var :font_sm, ~VAR[size(3)]
   # var :font_md, ~VAR[size(4)]
-  # var :font_lg, ~VAR[size(6)]
+  # var :font_lg, ~VAR[size(7)]
+
+  # weight
+  # var :weight_bold, "500"
+  # var :weight_regular, "400"
+  # var :weight_light, "300"
 
   # icon
   # var :icon_sm, ~VAR[size(5)]
@@ -51,13 +56,37 @@ defmodule Galeria.Config.DarkHydrator do
   # var :brand_light, ~VAR[color(:purple, 100)]
 
   # main
-  # var :main_padding, ~VAR[size(4)]
+  # var :main_padding, ~VAR[size(4) size(6)]
 
   # sidebar
   # var :sidebar_padding, ~VAR[size(4)]
   # var :sidebar_width, ~VAR[size(80)]
   # var :sidebar_width_collapsed, ~VAR[size(4)]
   var :sidebar_bg, ~VAR[color(:gray, 700)]
+
+  # ---------------------------------------------------------------------
+  # Galeria.Components.Typography                             page_title
+  # ---------------------------------------------------------------------
+
+  # style [:page_title, :classes, :base_class], ~CSS""" 
+  #   justify-content: space-between;
+  #   flex-direction: row;
+  #   display: flex;
+  #   """
+  # style [:page_title, :classes, :title_class], ~CSS""" 
+  #   font-weight: <%= @weight_bold %>;
+  #   font-size: <%= @font_lg %>;
+  #   color: <%= @color_title %>;
+  #   margin: 0;
+  #   display: inline-flex;
+  #   """
+  # style [:page_title, :classes, :subtitle_class], ~CSS""" 
+  #   font-weight: <%= @weight_light %>;
+  #   color: <%= @color_light %>;
+  #   display: inline-flex;
+  #   """
+  # style [:page_title, :classes, :actions_class], ~CSS""" 
+  #   """
 
   # ---------------------------------------------------------------------
   # Galeria.Components.Typography                       sidebar_subtitle
@@ -69,10 +98,11 @@ defmodule Galeria.Config.DarkHydrator do
   #   display: flex;
   #   """
   # style [:sidebar_subtitle, :classes, :subtitle_class], ~CSS""" 
-  #   font-weight: 400;
+  #   font-weight: <%= @weight_light %>;
   #   font-size: <%= @font_md %>;
   #   color: <%= @color_light %>;
   #   text-transform: uppercase;
+  #   letter-spacing: 2px;
   #   margin: 0;
   #   """
   # style [:sidebar_subtitle, :classes, :actions_class], ~CSS""" 
@@ -94,14 +124,20 @@ defmodule Galeria.Config.DarkHydrator do
   # style [:sidebar_title, :classes, :title_class], ~CSS""" 
   #   font-weight: 800;
   #   font-size: <%= @font_lg %>;
+  #   box-shadow: <%= @app_bg_2 %> 4px 4px 0 -2px, <%= @color_title %> 4px 4px;
+  #   border: 2px solid <%= @color_title %>;
   #   color: <%= @color_title %>;
   #   text-transform: uppercase;
+  #   letter-spacing: 2px;
+  #   text-align: center;
+  #   padding: <%= @padding_sm %> <%= @padding_md %>;
   #   margin: 0;
   #   """
   # style [:sidebar_title, :classes, :subtitle_class], ~CSS""" 
-  #   font-weight: 400;
+  #   font-weight: <%= @weight_regular %>;
   #   font-size: <%= @font_md %>;
-  #   color: <%= @color_text %>;
+  #   letter-spacing: 4px;
+  #   text-align: center;
   #   display: block;
   #   """
   # style [:sidebar_title, :classes, :actions_class], ~CSS""" 
@@ -133,9 +169,9 @@ defmodule Galeria.Config.DarkHydrator do
   #   """
 
   # style [:nav_list, :direction, :vertical], ~CSS""" 
+  #   gap: <%= @padding_sm %>;
   #   width: 100%;
   #   flex-direction: column;
-  #   gap: <%= @padding_sm %>;
   #   """
   # style [:nav_list, :direction, :horizontal], ~CSS""" 
   #   gap: <%= @padding_sm %>;
@@ -166,7 +202,7 @@ defmodule Galeria.Config.DarkHydrator do
   #   display: flex;
   #   """
   # style [:sidebar_layout, :classes, :main_class], ~CSS""" 
-  #   padding: <%= @padding_lg %>;
+  #   padding: <%= @main_padding %>;
   #   flex-grow: 999;
   #   flex-basis: 0;
   #   """
