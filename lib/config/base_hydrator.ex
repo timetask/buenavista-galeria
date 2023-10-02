@@ -18,7 +18,12 @@ defmodule Galeria.Config.BaseHydrator do
   # font
   var :font_sm, ~VAR[size(3)]
   var :font_md, ~VAR[size(4)]
-  var :font_lg, ~VAR[size(6)]
+  var :font_lg, ~VAR[size(7)]
+
+  # weight
+  var :weight_bold, "500"
+  var :weight_regular, "400"
+  var :weight_light, "300"
 
   # icon
   var :icon_sm, ~VAR[size(5)]

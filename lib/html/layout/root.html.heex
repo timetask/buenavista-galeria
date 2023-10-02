@@ -5,14 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content={get_csrf_token()} />
     <title><%= @page_title %> ⋅ Galeria</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
     <link phx-track-static rel="stylesheet" href={galeria_css_url(@conn)} />
     <link phx-track-static rel="stylesheet" href={current_theme_url(@conn)} />
-     <script defer phx-track-static type="text/javascript" src={js_url(@conn)}>
+    <script defer phx-track-static type="text/javascript" src={js_url(@conn)}>
     </script>
-
   </head>
   <body>
     <%= @inner_content %>
