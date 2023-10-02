@@ -5,78 +5,73 @@ defmodule Galeria.GaleriaLive do
   alias BuenaVista.Component
   alias BuenaVista.Helpers
 
-  import Galeria.Components.Box
-  import Galeria.Components.Button
-  import Galeria.Components.Layout
-  import Galeria.Components.Nav
-  import Galeria.Components.Typography
+  alias Galeria.Components.Box
+  alias Galeria.Components.Button
+  alias Galeria.Components.Layout
+  alias Galeria.Components.Nav
+  alias Galeria.Components.Typography
 
   @apps Application.compile_env(:buenavista, :apps)
 
   @impl true
   def render(assigns) do
     ~H"""
-    <.sidebar_layout status={if @sidebar_open?, do: :open, else: :closed}>
+    <Layout.sidebar_layout status={if @sidebar_open?, do: :open, else: :closed}>
       <:sidebar>
-        <.sidebar_title>
+        <Typography.sidebar_title>
           <:title>Galeria</:title>
           <:subtitle>Component</:subtitle>
           <:actions>
             <a :if={@theme_name == "light"} href={change_theme_url(@socket, "dark")}>
-              <.button size={:md} style={:transparent} color={:ctrl} icon={:light_mode} />
+              <Button.button size={:md} style={:transparent} color={:ctrl} icon={:light_mode} />
             </a>
             <a :if={@theme_name == "dark"} href={change_theme_url(@socket, "light")}>
-              <.button size={:md} style={:transparent} color={:ctrl} icon={:dark_mode} />
+              <Button.button size={:md} style={:transparent} color={:ctrl} icon={:dark_mode} />
             </a>
-            <.button size={:md} style={:transparent} color={:ctrl} icon={:collapse} />
+            <Button.button size={:md} style={:transparent} color={:ctrl} icon={:collapse} />
           </:actions>
-        </.sidebar_title>
-        <.collapsible_box>
+        </Typography.sidebar_title>
+        <Box.collapsible_box>
           <:header>
-            <.sidebar_subtitle>
+            <Typography.sidebar_subtitle>
               <:subtitle>Compositions</:subtitle>
               <:actions>
-                <.button size={:sm} style={:transparent} color={:ctrl} icon={:chevron_down} />
+                <Button.button size={:sm} style={:transparent} color={:ctrl} icon={:chevron_down} />
               </:actions>
-            </.sidebar_subtitle>
+            </Typography.sidebar_subtitle>
           </:header>
           <:content>
             Content
           </:content>
-        </.collapsible_box>
-        <.collapsible_box :for={{module, components} <- @modules}>
+        </Box.collapsible_box>
+        <Box.collapsible_box :for={{module, components} <- @modules}>
           <:header>
-            <.sidebar_subtitle>
+            <Typography.sidebar_subtitle>
               <:subtitle><%= pretty_module_short(module) %></:subtitle>
               <:actions>
-                <.button size={:sm} style={:transparent} color={:ctrl} icon={:chevron_down} />
+                <Button.button size={:sm} style={:transparent} color={:ctrl} icon={:chevron_down} />
               </:actions>
-            </.sidebar_subtitle>
+            </Typography.sidebar_subtitle>
           </:header>
           <:content>
-            <.nav_list
+            <Nav.nav_list
               direction={:vertical}
               selected_item={component_to_nav_item(@socket, @current_component)}
               items={components_to_nav_items(@socket, components)}
             />
           </:content>
-        </.collapsible_box>
+        </Box.collapsible_box>
       </:sidebar>
       <:main>
-        <.component_page :if={@live_action == :component} current_component={@current_component} />
+        <.live_component
+          :if={@live_action == :component}
+          id={"component-#{@current_component.name}"}
+          module={Galeria.LiveComponents.ComponentPage}
+          current_component={@current_component}
+          params={@params}
+        />
       </:main>
-    </.sidebar_layout>
-    """
-  end
-
-  attr :current_component, BuenaVista.Component, required: true
-
-  defp component_page(assigns) do
-    ~H"""
-    <.page_title>
-      <:title><%= @current_component.name %></:title>
-      <:subtitle><%= pretty_module_long(@current_component) %></:subtitle>
-    </.page_title>
+    </Layout.sidebar_layout>
     """
   end
 
@@ -106,6 +101,7 @@ defmodule Galeria.GaleriaLive do
         {:noreply,
          socket
          |> assign(:current_component, component)
+         |> assign(:params, params)
          |> assign(:page_title, component.name)}
 
       _ ->
@@ -170,19 +166,11 @@ defmodule Galeria.GaleriaLive do
   end
 
   defp component_to_nav_item(socket, component) do
-    %Galeria.Components.Nav.Item{
-      id: component.name,
-      url: component_url(socket, component),
-      text: component.name
-    }
+    %Nav.Item{id: component.name, url: component_url(socket, component), text: component.name}
   end
 
   defp pretty_module_short(mod) when is_atom(mod) do
     mod |> Module.split() |> List.last()
-  end
-
-  defp pretty_module_long(%Component{} = component) do
-    component.module |> Atom.to_string() |> String.replace("Elixir.", "") |> then(&(&1 <> "."))
   end
 
   # ----------------------------------------
