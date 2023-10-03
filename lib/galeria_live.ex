@@ -22,10 +22,10 @@ defmodule Galeria.GaleriaLive do
           <:title>Galeria</:title>
           <:subtitle>Component</:subtitle>
           <:actions>
-            <a :if={@theme_name == "light"} href={change_theme_url(@socket, "dark")}>
+            <a :if={@theme_name == "light"} href={change_theme_url(@base_url, "dark")}>
               <Button.button size={:md} style={:transparent} color={:ctrl} icon={:light_mode} />
             </a>
-            <a :if={@theme_name == "dark"} href={change_theme_url(@socket, "light")}>
+            <a :if={@theme_name == "dark"} href={change_theme_url(@base_url, "light")}>
               <Button.button size={:md} style={:transparent} color={:ctrl} icon={:dark_mode} />
             </a>
             <Button.button size={:md} style={:transparent} color={:ctrl} icon={:collapse} />
@@ -56,8 +56,8 @@ defmodule Galeria.GaleriaLive do
           <:content>
             <Nav.nav_list
               direction={:vertical}
-              selected_item={component_to_nav_item(@socket, @current_component)}
-              items={components_to_nav_items(@socket, components)}
+              selected_item={component_to_nav_item(@base_url, @current_component, @params)}
+              items={components_to_nav_items(@base_url, components, @params)}
             />
           </:content>
         </Box.collapsible_box>
@@ -80,18 +80,22 @@ defmodule Galeria.GaleriaLive do
   # ----------------------------------------
   @impl true
   def mount(_params, session, socket) do
+    base_url = socket.router.__galeria_url_prefix__()
+
     {:ok,
      socket
+     |> assign(:base_url, base_url)
      |> assign_sidebar_status()
      |> assign_theme(session)
      |> assign_modules()}
   end
 
   @impl true
-  def handle_params(_params, _uri, %{assigns: %{live_action: :index}} = socket) do
+  def handle_params(params, _uri, %{assigns: %{live_action: :index}} = socket) do
     {:noreply,
      socket
      |> assign(:current_component, nil)
+     |> assign(:params, params)
      |> assign(:page_title, "Index")}
   end
 
@@ -142,7 +146,7 @@ defmodule Galeria.GaleriaLive do
   # ----------------------------------------
   # Helpers
   # ----------------------------------------
-  defp get_current_component(%Phoenix.LiveView.Socket{} = socket, params) when is_map(params) do
+  defp get_current_component(socket, params) when is_map(params) do
     component_name = params |> Map.get("component_name") |> String.to_existing_atom()
 
     for {_module, components} <- socket.assigns.modules, reduce: nil do
@@ -161,12 +165,19 @@ defmodule Galeria.GaleriaLive do
     end
   end
 
-  defp components_to_nav_items(socket, components) do
-    for {_, component} <- components, do: component_to_nav_item(socket, component)
+  defp components_to_nav_items(base_url, components, params) do
+    for {_, component} <- components, do: component_to_nav_item(base_url, component, params)
   end
 
-  defp component_to_nav_item(socket, component) do
-    %Nav.Item{id: component.name, url: component_url(socket, component), text: component.name}
+  defp component_to_nav_item(base_url, %Component{} = component, params) do
+    component_url = component_url(base_url, component) |> URI.parse()
+
+    final_url =
+      if nav_item = Map.get(params, "nav"),
+        do: component_url |> URI.append_query("nav=#{nav_item}") |> URI.to_string(),
+        else: component_url |> URI.to_string()
+
+    %Nav.Item{id: component.name, url: final_url, text: component.name}
   end
 
   defp pretty_module_short(mod) when is_atom(mod) do
@@ -176,15 +187,15 @@ defmodule Galeria.GaleriaLive do
   # ----------------------------------------
   # Urls
   # ----------------------------------------
-  def base_url(socket) do
-    socket.router.__galeria_url_prefix__()
+  def base_url(base_url) do
+    base_url
   end
 
-  def component_url(socket, %Component{} = component) do
-    Path.join(base_url(socket), "/component/" <> Atom.to_string(component.name))
+  def component_url(base_url, %Component{} = component) do
+    Path.join(base_url, "/component/" <> Atom.to_string(component.name))
   end
 
-  def change_theme_url(socket, theme_name) when is_binary(theme_name) do
-    Path.join(base_url(socket), "/change-theme/#{theme_name}")
+  def change_theme_url(base_url, theme_name) when is_binary(theme_name) do
+    Path.join(base_url, "/change-theme/#{theme_name}")
   end
 end
