@@ -17,7 +17,8 @@ defmodule Galeria.Config.DarkHydrator do
   # font
   # var :font_sm, ~VAR[size(3)]
   # var :font_md, ~VAR[size(4)]
-  # var :font_lg, ~VAR[size(7)]
+  # var :font_lg, ~VAR[size(5)]
+  # var :font_xl, ~VAR[size(7)]
 
   # weight
   # var :weight_bold, "500"
@@ -69,6 +70,9 @@ defmodule Galeria.Config.DarkHydrator do
   # ---------------------------------------------------------------------
 
   # style [:page_title, :classes, :base_class], ~CSS""" 
+  #   border-bottom: 1px solid <%= @color_border %>;
+  #   padding-bottom: <%= @padding_md %>;
+  #   margin-bottom: <%= @padding_lg %>;
   #   justify-content: space-between;
   #   flex-direction: row;
   #   display: flex;
@@ -98,12 +102,23 @@ defmodule Galeria.Config.DarkHydrator do
   #   display: flex;
   #   """
   # style [:sidebar_subtitle, :classes, :subtitle_class], ~CSS""" 
+  #   position: relative;
   #   font-weight: <%= @weight_light %>;
   #   font-size: <%= @font_md %>;
   #   color: <%= @color_light %>;
   #   text-transform: uppercase;
   #   letter-spacing: 2px;
   #   margin: 0;
+  # 
+  #   &:before {
+  #     position: absolute;
+  #     border-bottom: 1px solid <%= @color_light %>;
+  #     content: "";
+  #     height: 1px;
+  #     width: 26px;
+  #     left: 0;
+  #     bottom: 0;
+  #   }
   #   """
   # style [:sidebar_subtitle, :classes, :actions_class], ~CSS""" 
   #   gap: <%= @padding_sm %>;
@@ -123,7 +138,7 @@ defmodule Galeria.Config.DarkHydrator do
   #   """
   # style [:sidebar_title, :classes, :title_class], ~CSS""" 
   #   font-weight: 800;
-  #   font-size: <%= @font_lg %>;
+  #   font-size: <%= @font_xl %>;
   #   box-shadow: <%= @app_bg_2 %> 4px 4px 0 -2px, <%= @color_title %> 4px 4px;
   #   border: 2px solid <%= @color_title %>;
   #   color: <%= @color_title %>;
@@ -166,6 +181,7 @@ defmodule Galeria.Config.DarkHydrator do
   #   """
   # style [:nav_list, :classes, :item_selected_class], ~CSS""" 
   #   background: <%= @app_bg_3 %>;
+  #   color: <%= @color_title %>;
   #   """
 
   # style [:nav_list, :direction, :vertical], ~CSS""" 
@@ -181,6 +197,23 @@ defmodule Galeria.Config.DarkHydrator do
   #     width: 100%;
   #   }
   #   """
+
+  # ---------------------------------------------------------------------
+  # Galeria.Components.Layout                              editor_layout
+  # ---------------------------------------------------------------------
+
+  # style [:editor_layout, :classes, :base_class], ~CSS"""
+  # """
+  # style [:editor_layout, :classes, :main_class], ~CSS"""
+  # """
+  # style [:editor_layout, :classes, :preview_class], ~CSS"""
+  # """
+  # style [:editor_layout, :classes, :hydrators_container_class], ~CSS"""
+  # """
+  # style [:editor_layout, :classes, :hydrator_class], ~CSS"""
+  # """
+  # style [:editor_layout, :classes, :sidebar_class], ~CSS"""
+  # """
 
   # ---------------------------------------------------------------------
   # Galeria.Components.Layout                             sidebar_layout
@@ -419,7 +452,7 @@ defmodule Galeria.Config.DarkHydrator do
   # ---------------------------------------------------------------------
 
   # style [:collapsible_box, :classes, :base_class], ~CSS""" 
-  #   gap: <%= @padding_md %>;
+  #   gap: <%= @padding_sm %>;
   #   width: 100%;
   #   flex-direction: column;
   #   display: flex;

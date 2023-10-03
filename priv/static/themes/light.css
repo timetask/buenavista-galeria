@@ -1,5 +1,8 @@
 /* lib/assets/themes/light/typography.css */
 .page-title {
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--padding-md);
+  margin-bottom: var(--padding-lg);
   justify-content: space-between;
   flex-direction: row;
   display: flex;
@@ -23,12 +26,22 @@
   align-items: center;
   display: flex;
   .subtitle {
+    position: relative;
     font-weight: var(--weight-light);
     font-size: var(--font-md);
     color: var(--color-light);
     text-transform: uppercase;
     letter-spacing: 2px;
     margin: 0;
+    &:before {
+      position: absolute;
+      border-bottom: 1px solid var(--color-light);
+      content: "";
+      height: 1px;
+      width: 26px;
+      left: 0;
+      bottom: 0;
+    }
   }
   .actions {
     gap: var(--padding-sm);
@@ -43,7 +56,7 @@
   display: flex;
   .title {
     font-weight: 800;
-    font-size: var(--font-lg);
+    font-size: var(--font-xl);
     box-shadow: var(--app-bg-2) 4px 4px 0 -2px, var(--color-title) 4px 4px;
     border: 2px solid var(--color-title);
     color: var(--color-title);
@@ -82,6 +95,7 @@
   }
   .item-selected {
     background: var(--app-bg-3);
+    color: var(--color-title);
   }
   &.nav-list-vertical {
     gap: var(--padding-sm);
@@ -98,6 +112,18 @@
 }
 
 /* lib/assets/themes/light/layout.css */
+.editor-layout {
+  .main {
+  }
+  .preview {
+  }
+  .hydrators-container {
+  }
+  .hydrator {
+  }
+  .sidebar {
+  }
+}
 .sidebar-layout {
   background: var(--app-bg);
   flex-wrap: wrap;
@@ -288,7 +314,7 @@
 
 /* lib/assets/themes/light/box.css */
 .collapsible-box {
-  gap: var(--padding-md);
+  gap: var(--padding-sm);
   width: 100%;
   flex-direction: column;
   display: flex;
@@ -333,10 +359,11 @@
   --weight-light: 300;
   --weight-regular: 400;
   --weight-bold: 500;
-  --font-lg: 1.75rem;
+  --font-xl: 1.75rem;
+  --font-lg: 1.25rem;
   --font-md: 1rem;
   --font-sm: 0.75rem;
   --app-bg-3: #e4e4e7;
-  --app-bg-2: #fafafa;
-  --app-bg: #fff;
+  --app-bg-2: #f4f4f5;
+  --app-bg: #fafafa;
 }
