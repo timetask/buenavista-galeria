@@ -62,6 +62,8 @@ defmodule Galeria.Config.BaseHydrator do
   var :sidebar_width, ~VAR[size(80)]
   var :sidebar_width_collapsed, ~VAR[size(4)]
 
+  var :page_sidebar_width, ~VAR[size(80)]
+
   # main
   var :main_padding, ~VAR[size(4) size(6)]
 
@@ -213,18 +215,81 @@ defmodule Galeria.Config.BaseHydrator do
   # Galeria.Components.Layout                              editor_layout
   # ---------------------------------------------------------------------
 
-  # style [:editor_layout, :classes, :base_class], ~CSS"""
-  # """
-  # style [:editor_layout, :classes, :main_class], ~CSS"""
-  # """
+  style [:editor_layout, :classes, :base_class], ~CSS"""
+    gap: <%= @padding_lg %>;
+    flex-wrap: wrap;
+    display: flex;
+  """
+
+  style [:editor_layout, :classes, :main_class], ~CSS"""
+    gap: <%= @padding_lg %>;
+    flex-grow: 999;
+    flex-direction: column;
+    flex-basis: 0;
+    display: flex;
+  """
+
   # style [:editor_layout, :classes, :preview_class], ~CSS"""
   # """
-  # style [:editor_layout, :classes, :hydrators_container_class], ~CSS"""
-  # """
-  # style [:editor_layout, :classes, :hydrator_class], ~CSS"""
-  # """
-  # style [:editor_layout, :classes, :sidebar_class], ~CSS"""
-  # """
+  style [:editor_layout, :classes, :hydrators_container_class], ~CSS"""
+    gap: <%= @padding_lg %>;
+    flex-direction: row;
+    display: flex;
+  """
+
+  style [:editor_layout, :classes, :hydrator_class], ~CSS"""
+    flex-grow: 1;
+  """
+
+  style [:editor_layout, :classes, :sidebar_class], ~CSS"""
+    gap: <%= @padding_lg %>;
+    width: <%= @page_sidebar_width %>;
+    padding: <%= @padding_lg %>;
+    flex-grow: 1;
+    flex-direction: column;
+    display: flex;
+  """
+
+  # ---------------------------------------------------------------------
+  # Galeria.Components.Layout                                grid_layout
+  # ---------------------------------------------------------------------
+
+  style [:grid_layout, :classes, :base_class], ~CSS"""
+    gap: <%= @padding_lg %>;
+    flex-direction: column;
+    display: flex;
+  """
+
+  style [:grid_layout, :classes, :variant_class], ~CSS"""
+    gap: <%= @padding_md %>;
+    flex-direction: row;
+    display: flex;
+  """
+
+  # ---------------------------------------------------------------------
+  # Galeria.Components.Layout                             inspect_layout
+  # ---------------------------------------------------------------------
+
+  style [:inspect_layout, :classes, :base_class], ~CSS"""
+    flex-direction: row;
+    display: flex;
+  """
+
+  style [:inspect_layout, :classes, :main_class], ~CSS"""
+    flex-grow: 999;
+    flex-direction: column;
+    flex-basis: 0;
+    display: flex;
+  """
+
+  style [:inspect_layout, :classes, :sidebar_class], ~CSS"""
+    gap: <%= @padding_lg %>;
+    padding: <%= @padding_lg %>;
+    flex-grow: 1;
+    flex-direction: column;
+    display: flex;
+    width: <%= @page_sidebar_width %>;
+  """
 
   # ---------------------------------------------------------------------
   # Galeria.Components.Layout                             sidebar_layout
