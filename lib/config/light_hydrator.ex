@@ -68,287 +68,46 @@ defmodule Galeria.Config.LightHydrator do
   # var :main_padding, ~VAR[size(4) size(6)]
 
   # ---------------------------------------------------------------------
-  # Galeria.Components.Typography                             page_title
+  # Galeria.Components.Box                               collapsible_box
   # ---------------------------------------------------------------------
 
-  # style [:page_title, :classes, :base_class], ~CSS""" 
-  #   border-bottom: 1px solid <%= @color_border %>;
-  #   padding-bottom: <%= @padding_md %>;
-  #   margin-bottom: <%= @padding_lg %>;
-  #   justify-content: space-between;
-  #   flex-direction: row;
-  #   display: flex;
-  #   """
-  # style [:page_title, :classes, :title_class], ~CSS""" 
-  #   font-weight: <%= @weight_bold %>;
-  #   font-size: <%= @font_lg %>;
-  #   color: <%= @color_title %>;
-  #   margin: 0;
-  #   display: inline-flex;
-  #   """
-  # style [:page_title, :classes, :subtitle_class], ~CSS""" 
-  #   font-weight: <%= @weight_light %>;
-  #   color: <%= @color_light %>;
-  #   display: inline-flex;
-  #   """
-  # style [:page_title, :classes, :actions_class], ~CSS""" 
-  #   """
-
-  # ---------------------------------------------------------------------
-  # Galeria.Components.Typography                       sidebar_subtitle
-  # ---------------------------------------------------------------------
-
-  # style [:sidebar_subtitle, :classes, :base_class], ~CSS""" 
-  #   justify-content: space-between;
-  #   align-items: center;
-  #   display: flex;
-  #   """
-  # style [:sidebar_subtitle, :classes, :subtitle_class], ~CSS""" 
-  #   position: relative;
-  #   font-weight: <%= @weight_light %>;
-  #   font-size: <%= @font_md %>;
-  #   color: <%= @color_light %>;
-  #   text-transform: uppercase;
-  #   letter-spacing: 2px;
-  #   margin: 0;
-  # 
-  #   &:before {
-  #     position: absolute;
-  #     border-bottom: 1px solid <%= @color_light %>;
-  #     content: "";
-  #     height: 1px;
-  #     width: 26px;
-  #     left: 0;
-  #     bottom: 0;
-  #   }
-  #   """
-  # style [:sidebar_subtitle, :classes, :actions_class], ~CSS""" 
-  #   gap: <%= @padding_sm %>;
-  #   align-items: center;
-  #   display: flex;
-  #   """
-
-  # ---------------------------------------------------------------------
-  # Galeria.Components.Typography                          sidebar_title
-  # ---------------------------------------------------------------------
-
-  # style [:sidebar_title, :classes, :base_class], ~CSS""" 
-  #   margin-bottom: <%= @padding_lg %>;
-  #   justify-content: space-between;
-  #   align-items: center;
-  #   display: flex;
-  #   """
-  # style [:sidebar_title, :classes, :title_class], ~CSS""" 
-  #   font-weight: 800;
-  #   font-size: <%= @font_xl %>;
-  #   box-shadow: <%= @app_bg_2 %> 4px 4px 0 -2px, <%= @color_title %> 4px 4px;
-  #   border: 2px solid <%= @color_title %>;
-  #   color: <%= @color_title %>;
-  #   text-transform: uppercase;
-  #   letter-spacing: 2px;
-  #   text-align: center;
-  #   padding: <%= @padding_sm %> <%= @padding_md %>;
-  #   margin: 0;
-  #   """
-  # style [:sidebar_title, :classes, :subtitle_class], ~CSS""" 
-  #   font-weight: <%= @weight_regular %>;
-  #   font-size: <%= @font_md %>;
-  #   letter-spacing: 4px;
-  #   text-align: center;
-  #   display: block;
-  #   """
-  # style [:sidebar_title, :classes, :actions_class], ~CSS""" 
-  #   gap: <%= @padding_sm %>;
-  #   align-items: center;
-  #   display: flex;
-  #   """
-
-  # ---------------------------------------------------------------------
-  # Galeria.Components.Nav                                      nav_list
-  # ---------------------------------------------------------------------
-
-  # style [:nav_list, :classes, :base_class], ~CSS""" 
-  #   display: flex;
-  #   """
-  # style [:nav_list, :classes, :item_class], ~CSS""" 
-  #   font-size: <%= @font_md %>;
-  #   border-radius: <%= @padding_md %>;
-  #   color: <%= @color_text %>;
-  #   text-decoration: none;
-  #   padding: <%= @padding_md %> <%= @padding_lg %>;
-  # 
-  #   &:hover {
-  #     background: <%= @app_bg_3 %>;
-  #   }
-  #   """
-  # style [:nav_list, :classes, :item_selected_class], ~CSS""" 
-  #   background: <%= @app_bg_3 %>;
-  #   color: <%= @color_title %>;
-  #   """
-
-  # style [:nav_list, :direction, :vertical], ~CSS""" 
+  # style [:collapsible_box, :classes, :base_class], ~CSS""" 
   #   gap: <%= @padding_sm %>;
   #   width: 100%;
   #   flex-direction: column;
-  #   """
-  # style [:nav_list, :direction, :horizontal], ~CSS""" 
-  #   gap: <%= @padding_sm %>;
-  #   flex-direction: row;
-  # 
-  #   .<%= class_name(:nav_list, :classes, :item_class) %> {
-  #     width: 100%;
-  #   }
-  #   """
-
-  # ---------------------------------------------------------------------
-  # Galeria.Components.Layout                              editor_layout
-  # ---------------------------------------------------------------------
-
-  # style [:editor_layout, :classes, :base_class], ~CSS""" 
-  #   gap: <%= @padding_lg %>;
-  #   flex-wrap: wrap;
   #   display: flex;
   #   """
-  # style [:editor_layout, :classes, :main_class], ~CSS""" 
-  #   gap: <%= @padding_lg %>;
-  #   flex-grow: 999;
-  #   flex-direction: column;
-  #   flex-basis: 0;
-  #   display: flex;
+  # style [:collapsible_box, :classes, :header_class], ~CSS""" 
   #   """
-  # style [:editor_layout, :classes, :preview_class], ~CSS"""
+  # style [:collapsible_box, :classes, :content_class], ~CSS""" 
+  #   """
+
+  # style [:collapsible_box, :status, :open], ~CSS"""
   # """
-  # style [:editor_layout, :classes, :hydrators_container_class], ~CSS""" 
-  #   gap: <%= @padding_lg %>;
-  #   flex-direction: row;
-  #   display: flex;
-  #   """
-  # style [:editor_layout, :classes, :hydrator_class], ~CSS""" 
-  #   flex-grow: 1;
-  #   """
-  # style [:editor_layout, :classes, :sidebar_class], ~CSS""" 
-  #   gap: <%= @padding_lg %>;
-  #   width: <%= @page_sidebar_width %>;
-  #   flex-grow: 1;
-  #   flex-direction: column;
-  #   display: flex;
+  # style [:collapsible_box, :status, :closed], ~CSS""" 
+  # 
+  #   .<%= class_name(:collapsible_box, :classes, :content_class) %> {
+  #     display: none;
+  #   }
   #   """
 
   # ---------------------------------------------------------------------
-  # Galeria.Components.Layout                                grid_layout
+  # Galeria.Components.Box                                           box
   # ---------------------------------------------------------------------
 
-  # style [:grid_layout, :classes, :base_class], ~CSS""" 
-  #   gap: <%= @padding_lg %>;
-  #   flex-direction: column;
-  #   display: flex;
-  #   """
-  # style [:grid_layout, :classes, :variant_class], ~CSS""" 
-  #   gap: <%= @padding_md %>;
-  #   flex-direction: row;
-  #   display: flex;
-  #   """
-
-  # ---------------------------------------------------------------------
-  # Galeria.Components.Layout                             inspect_layout
-  # ---------------------------------------------------------------------
-
-  # style [:inspect_layout, :classes, :base_class], ~CSS""" 
-  #   flex-direction: row;
-  #   display: flex;
-  #   """
-  # style [:inspect_layout, :classes, :main_class], ~CSS""" 
-  #   flex-grow: 999;
-  #   flex-direction: column;
-  #   flex-basis: 0;
-  #   display: flex;
-  #   """
-  # style [:inspect_layout, :classes, :sidebar_class], ~CSS""" 
-  #   gap: <%= @padding_lg %>;
-  #   padding: <%= @padding_lg %>;
-  #   width: <%= @page_sidebar_width %>;
-  #   flex-grow: 1;
-  #   flex-direction: column;
-  #   display: flex;
-  #   """
-
-  # ---------------------------------------------------------------------
-  # Galeria.Components.Layout                             sidebar_layout
-  # ---------------------------------------------------------------------
-
-  # style [:sidebar_layout, :classes, :base_class], ~CSS""" 
-  #   background: <%= @app_bg %>;
-  #   flex-wrap: wrap;
-  #   display: flex;
-  #   """
-  # style [:sidebar_layout, :classes, :sidebar_class], ~CSS""" 
-  #   gap: <%= @padding_lg %>;
+  # style [:box, :classes, :base_class], ~CSS""" 
   #   background: <%= @app_bg_2 %>;
-  #   border-right: 1px solid <%= @color_border %>;
-  #   padding: <%= @padding_lg %>;
-  #   min-height: 100vh;
-  #   flex-grow: 1;
-  #   flex-direction: column;
-  #   display: flex;
-  #   """
-  # style [:sidebar_layout, :classes, :main_class], ~CSS""" 
-  #   padding: <%= @main_padding %>;
-  #   flex-grow: 999;
-  #   flex-basis: 0;
-  #   """
-
-  # style [:sidebar_layout, :status, :open], ~CSS""" 
-  # 
-  #   .<%= class_name(:sidebar_layout, :classes, :sidebar_class) %> {
-  #     width: <%= @sidebar_width %>;
-  #   }
-  #   """
-  # style [:sidebar_layout, :status, :closed], ~CSS""" 
-  # 
-  #   &:hover {
-  # 
-  #     .<%= class_name(:sidebar_layout, :classes, :sidebar_class) %> {
-  #       background: <%= @color_border %>;
-  #     }
-  #   }
-  # 
-  #   .<%= class_name(:sidebar_layout, :classes, :sidebar_class) %> {
-  #     cursor: pointer;
-  #     padding: 0;
-  #     width: <%= @sidebar_width_collapsed %>;
-  #     width: <%= @sidebar_width_collapsed %>;
-  # 
-  #     * {
-  #       display: none;
-  #     }
-  #   }
-  #   """
-
-  # ---------------------------------------------------------------------
-  # Galeria.Components.Input                                      select
-  # ---------------------------------------------------------------------
-
-  # style [:select, :classes, :base_class], ~CSS""" 
-  #   background: transparent;
   #   border-radius: <%= @padding_sm %>;
-  #   border: 1px solid <%= @color_border %>;
-  #   color: <%= @color_text %>;
-  #   padding: <%= @padding_md %>;
-  #   width: 100%;
   #   """
 
-  # ---------------------------------------------------------------------
-  # Galeria.Components.Input                                       label
-  # ---------------------------------------------------------------------
-
-  # style [:label, :classes, :base_class], ~CSS""" 
-  #   font-weight: <%= @weight_bold %>;
-  #   font-size: <%= @font_sm %>;
-  #   color: <%= @color_light %>;
-  #   text-transform: uppercase;
-  #   letter-spacing: 2px;
-  #   margin-bottom: <%= @padding_sm %>;
-  #   display: block;
+  # style [:box, :padding, :sm], ~CSS""" 
+  #   padding: <%= @padding_sm %>;
+  #   """
+  # style [:box, :padding, :md], ~CSS""" 
+  #   padding: <%= @padding_md %>;
+  #   """
+  # style [:box, :padding, :lg], ~CSS""" 
+  #   padding: <%= @padding_lg %>;
   #   """
 
   # ---------------------------------------------------------------------
@@ -532,45 +291,286 @@ defmodule Galeria.Config.LightHydrator do
   #   """
 
   # ---------------------------------------------------------------------
-  # Galeria.Components.Box                                           box
+  # Galeria.Components.Input                                       label
   # ---------------------------------------------------------------------
 
-  # style [:box, :classes, :base_class], ~CSS""" 
-  #   background: <%= @app_bg_2 %>;
+  # style [:label, :classes, :base_class], ~CSS""" 
+  #   font-weight: <%= @weight_bold %>;
+  #   font-size: <%= @font_sm %>;
+  #   color: <%= @color_light %>;
+  #   text-transform: uppercase;
+  #   letter-spacing: 2px;
+  #   margin-bottom: <%= @padding_sm %>;
+  #   display: block;
+  #   """
+
+  # ---------------------------------------------------------------------
+  # Galeria.Components.Input                                      select
+  # ---------------------------------------------------------------------
+
+  # style [:select, :classes, :base_class], ~CSS""" 
+  #   background: transparent;
   #   border-radius: <%= @padding_sm %>;
-  #   """
-
-  # style [:box, :padding, :sm], ~CSS""" 
-  #   padding: <%= @padding_sm %>;
-  #   """
-  # style [:box, :padding, :md], ~CSS""" 
+  #   border: 1px solid <%= @color_border %>;
+  #   color: <%= @color_text %>;
   #   padding: <%= @padding_md %>;
-  #   """
-  # style [:box, :padding, :lg], ~CSS""" 
-  #   padding: <%= @padding_lg %>;
-  #   """
-
-  # ---------------------------------------------------------------------
-  # Galeria.Components.Box                               collapsible_box
-  # ---------------------------------------------------------------------
-
-  # style [:collapsible_box, :classes, :base_class], ~CSS""" 
-  #   gap: <%= @padding_sm %>;
   #   width: 100%;
+  #   """
+
+  # ---------------------------------------------------------------------
+  # Galeria.Components.Layout                             sidebar_layout
+  # ---------------------------------------------------------------------
+
+  # style [:sidebar_layout, :classes, :base_class], ~CSS""" 
+  #   background: <%= @app_bg %>;
+  #   flex-wrap: wrap;
+  #   display: flex;
+  #   """
+  # style [:sidebar_layout, :classes, :sidebar_class], ~CSS""" 
+  #   gap: <%= @padding_lg %>;
+  #   background: <%= @app_bg_2 %>;
+  #   border-right: 1px solid <%= @color_border %>;
+  #   padding: <%= @padding_lg %>;
+  #   min-height: 100vh;
+  #   flex-grow: 1;
   #   flex-direction: column;
   #   display: flex;
   #   """
-  # style [:collapsible_box, :classes, :header_class], ~CSS""" 
-  #   """
-  # style [:collapsible_box, :classes, :content_class], ~CSS""" 
+  # style [:sidebar_layout, :classes, :main_class], ~CSS""" 
+  #   padding: <%= @main_padding %>;
+  #   flex-grow: 999;
+  #   flex-basis: 0;
   #   """
 
-  # style [:collapsible_box, :status, :open], ~CSS"""
-  # """
-  # style [:collapsible_box, :status, :closed], ~CSS""" 
+  # style [:sidebar_layout, :status, :open], ~CSS""" 
   # 
-  #   .<%= class_name(:collapsible_box, :classes, :content_class) %> {
-  #     display: none;
+  #   .<%= class_name(:sidebar_layout, :classes, :sidebar_class) %> {
+  #     width: <%= @sidebar_width %>;
   #   }
+  #   """
+  # style [:sidebar_layout, :status, :closed], ~CSS""" 
+  # 
+  #   &:hover {
+  # 
+  #     .<%= class_name(:sidebar_layout, :classes, :sidebar_class) %> {
+  #       background: <%= @color_border %>;
+  #     }
+  #   }
+  # 
+  #   .<%= class_name(:sidebar_layout, :classes, :sidebar_class) %> {
+  #     cursor: pointer;
+  #     padding: 0;
+  #     width: <%= @sidebar_width_collapsed %>;
+  #     width: <%= @sidebar_width_collapsed %>;
+  # 
+  #     * {
+  #       display: none;
+  #     }
+  #   }
+  #   """
+
+  # ---------------------------------------------------------------------
+  # Galeria.Components.Layout                             inspect_layout
+  # ---------------------------------------------------------------------
+
+  # style [:inspect_layout, :classes, :base_class], ~CSS""" 
+  #   flex-direction: row;
+  #   display: flex;
+  #   """
+  # style [:inspect_layout, :classes, :main_class], ~CSS""" 
+  #   flex-grow: 999;
+  #   flex-direction: column;
+  #   flex-basis: 0;
+  #   display: flex;
+  #   """
+  # style [:inspect_layout, :classes, :sidebar_class], ~CSS""" 
+  #   gap: <%= @padding_lg %>;
+  #   padding: <%= @padding_lg %>;
+  #   width: <%= @page_sidebar_width %>;
+  #   flex-grow: 1;
+  #   flex-direction: column;
+  #   display: flex;
+  #   """
+
+  # ---------------------------------------------------------------------
+  # Galeria.Components.Layout                                grid_layout
+  # ---------------------------------------------------------------------
+
+  # style [:grid_layout, :classes, :base_class], ~CSS""" 
+  #   gap: <%= @padding_lg %>;
+  #   flex-direction: column;
+  #   display: flex;
+  #   """
+  # style [:grid_layout, :classes, :variant_class], ~CSS""" 
+  #   gap: <%= @padding_md %>;
+  #   flex-direction: row;
+  #   display: flex;
+  #   """
+
+  # ---------------------------------------------------------------------
+  # Galeria.Components.Layout                              editor_layout
+  # ---------------------------------------------------------------------
+
+  # style [:editor_layout, :classes, :base_class], ~CSS""" 
+  #   gap: <%= @padding_lg %>;
+  #   flex-wrap: wrap;
+  #   display: flex;
+  #   """
+  # style [:editor_layout, :classes, :main_class], ~CSS""" 
+  #   gap: <%= @padding_lg %>;
+  #   flex-grow: 999;
+  #   flex-direction: column;
+  #   flex-basis: 0;
+  #   display: flex;
+  #   """
+  # style [:editor_layout, :classes, :preview_class], ~CSS"""
+  # """
+  # style [:editor_layout, :classes, :hydrators_container_class], ~CSS""" 
+  #   gap: <%= @padding_lg %>;
+  #   flex-direction: row;
+  #   display: flex;
+  #   """
+  # style [:editor_layout, :classes, :hydrator_class], ~CSS""" 
+  #   flex-grow: 1;
+  #   """
+  # style [:editor_layout, :classes, :sidebar_class], ~CSS""" 
+  #   gap: <%= @padding_lg %>;
+  #   width: <%= @page_sidebar_width %>;
+  #   flex-grow: 1;
+  #   flex-direction: column;
+  #   display: flex;
+  #   """
+
+  # ---------------------------------------------------------------------
+  # Galeria.Components.Nav                                      nav_list
+  # ---------------------------------------------------------------------
+
+  # style [:nav_list, :classes, :base_class], ~CSS""" 
+  #   display: flex;
+  #   """
+  # style [:nav_list, :classes, :item_class], ~CSS""" 
+  #   font-size: <%= @font_md %>;
+  #   border-radius: <%= @padding_md %>;
+  #   color: <%= @color_text %>;
+  #   text-decoration: none;
+  #   padding: <%= @padding_md %> <%= @padding_lg %>;
+  # 
+  #   &:hover {
+  #     background: <%= @app_bg_3 %>;
+  #   }
+  #   """
+  # style [:nav_list, :classes, :item_selected_class], ~CSS""" 
+  #   background: <%= @app_bg_3 %>;
+  #   color: <%= @color_title %>;
+  #   """
+
+  # style [:nav_list, :direction, :vertical], ~CSS""" 
+  #   gap: <%= @padding_sm %>;
+  #   width: 100%;
+  #   flex-direction: column;
+  #   """
+  # style [:nav_list, :direction, :horizontal], ~CSS""" 
+  #   gap: <%= @padding_sm %>;
+  #   flex-direction: row;
+  # 
+  #   .<%= class_name(:nav_list, :classes, :item_class) %> {
+  #     width: 100%;
+  #   }
+  #   """
+
+  # ---------------------------------------------------------------------
+  # Galeria.Components.Typography                          sidebar_title
+  # ---------------------------------------------------------------------
+
+  # style [:sidebar_title, :classes, :base_class], ~CSS""" 
+  #   margin-bottom: <%= @padding_lg %>;
+  #   justify-content: space-between;
+  #   align-items: center;
+  #   display: flex;
+  #   """
+  # style [:sidebar_title, :classes, :title_class], ~CSS""" 
+  #   font-weight: 800;
+  #   font-size: <%= @font_xl %>;
+  #   box-shadow: <%= @app_bg_2 %> 4px 4px 0 -2px, <%= @color_title %> 4px 4px;
+  #   border: 2px solid <%= @color_title %>;
+  #   color: <%= @color_title %>;
+  #   text-transform: uppercase;
+  #   letter-spacing: 2px;
+  #   text-align: center;
+  #   padding: <%= @padding_sm %> <%= @padding_md %>;
+  #   margin: 0;
+  #   """
+  # style [:sidebar_title, :classes, :subtitle_class], ~CSS""" 
+  #   font-weight: <%= @weight_regular %>;
+  #   font-size: <%= @font_md %>;
+  #   letter-spacing: 4px;
+  #   text-align: center;
+  #   display: block;
+  #   """
+  # style [:sidebar_title, :classes, :actions_class], ~CSS""" 
+  #   gap: <%= @padding_sm %>;
+  #   align-items: center;
+  #   display: flex;
+  #   """
+
+  # ---------------------------------------------------------------------
+  # Galeria.Components.Typography                       sidebar_subtitle
+  # ---------------------------------------------------------------------
+
+  # style [:sidebar_subtitle, :classes, :base_class], ~CSS""" 
+  #   justify-content: space-between;
+  #   align-items: center;
+  #   display: flex;
+  #   """
+  # style [:sidebar_subtitle, :classes, :subtitle_class], ~CSS""" 
+  #   position: relative;
+  #   font-weight: <%= @weight_light %>;
+  #   font-size: <%= @font_md %>;
+  #   color: <%= @color_light %>;
+  #   text-transform: uppercase;
+  #   letter-spacing: 2px;
+  #   margin: 0;
+  # 
+  #   &:before {
+  #     position: absolute;
+  #     border-bottom: 1px solid <%= @color_light %>;
+  #     content: "";
+  #     height: 1px;
+  #     width: 26px;
+  #     left: 0;
+  #     bottom: 0;
+  #   }
+  #   """
+  # style [:sidebar_subtitle, :classes, :actions_class], ~CSS""" 
+  #   gap: <%= @padding_sm %>;
+  #   align-items: center;
+  #   display: flex;
+  #   """
+
+  # ---------------------------------------------------------------------
+  # Galeria.Components.Typography                             page_title
+  # ---------------------------------------------------------------------
+
+  # style [:page_title, :classes, :base_class], ~CSS""" 
+  #   border-bottom: 1px solid <%= @color_border %>;
+  #   padding-bottom: <%= @padding_md %>;
+  #   margin-bottom: <%= @padding_lg %>;
+  #   justify-content: space-between;
+  #   flex-direction: row;
+  #   display: flex;
+  #   """
+  # style [:page_title, :classes, :title_class], ~CSS""" 
+  #   font-weight: <%= @weight_bold %>;
+  #   font-size: <%= @font_lg %>;
+  #   color: <%= @color_title %>;
+  #   margin: 0;
+  #   display: inline-flex;
+  #   """
+  # style [:page_title, :classes, :subtitle_class], ~CSS""" 
+  #   font-weight: <%= @weight_light %>;
+  #   color: <%= @color_light %>;
+  #   display: inline-flex;
+  #   """
+  # style [:page_title, :classes, :actions_class], ~CSS""" 
   #   """
 end

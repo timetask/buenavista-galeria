@@ -2,6 +2,7 @@ defmodule Galeria.Components.Input do
   use BuenaVista.Component
 
   attr :for, :string, default: nil
+  slot :inner_block
 
   component label(assigns) do
     ~H"""
