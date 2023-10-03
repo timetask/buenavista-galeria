@@ -67,6 +67,8 @@ defmodule Galeria.GaleriaLive do
           :if={@live_action == :component}
           id={"component-#{@current_component.name}"}
           module={Galeria.LiveComponents.ComponentPage}
+          themes={get_themes()}
+          current_theme={nil}
           current_component={@current_component}
           params={@params}
         />
@@ -182,6 +184,15 @@ defmodule Galeria.GaleriaLive do
 
   defp pretty_module_short(mod) when is_atom(mod) do
     mod |> Module.split() |> List.last()
+  end
+
+  defp get_themes() do
+    :buenavista
+    |> Application.get_env(:themes)
+    |> Enum.reject(fn theme ->
+      css = Keyword.get(theme, :css)
+      is_nil(css)
+    end)
   end
 
   # ----------------------------------------

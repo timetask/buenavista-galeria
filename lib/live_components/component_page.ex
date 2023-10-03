@@ -49,8 +49,10 @@ defmodule Galeria.LiveComponents.ComponentPage do
         </:hydrator>
         <:sidebar>
           <Box.box>
-            <Input.label for="theme-picker">Theme</Input.label>
-            <Input.select id="theme-picker" options={theme_options()} />
+            <Input.group>
+              <Input.label for="theme-picker">Theme</Input.label>
+              <Input.select id="theme-picker" options={theme_options(@themes)} />
+            </Input.group>
           </Box.box>
           <Box.box>
             Variant picker
@@ -97,19 +99,12 @@ defmodule Galeria.LiveComponents.ComponentPage do
     ]
   end
 
-  defp theme_options() do
-    for theme <- get_themes() do
+  defp theme_options(themes) do
+    for theme <- themes do
       name = Keyword.get(theme, :name)
       {name, name}
     end
   end
 
-  defp get_themes() do
-    :buenavista
-    |> Application.get_env(:themes)
-    |> Enum.reject(fn theme ->
-      css = Keyword.get(theme, :css)
-      is_nil(css)
-    end)
   end
 end
