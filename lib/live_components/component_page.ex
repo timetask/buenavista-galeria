@@ -55,7 +55,17 @@ defmodule Galeria.LiveComponents.ComponentPage do
             </Input.group>
           </Box.box>
           <Box.box>
-            Variant picker
+            <Input.fieldset>
+              <Input.group :for={variant <- @current_component.variants}>
+                <Input.label for={variant_id(@current_component, variant)}>
+                  <%= variant.name %>
+                </Input.label>
+                <Input.select
+                  id={variant_id(@current_component, variant)}
+                  options={variant_options(variant)}
+                />
+              </Input.group>
+            </Input.fieldset>
           </Box.box>
           <Box.box padding={:none}>
             Variables
@@ -106,5 +116,14 @@ defmodule Galeria.LiveComponents.ComponentPage do
     end
   end
 
+  defp variant_id(%Component{} = component, %Component.Variant{} = variant) do
+    "#{component.name}-variant-#{variant.name}"
+  end
+
+  defp variant_options(%Component.Variant{} = variant) do
+    for {key, value} <- variant.options do
+      name = if key == variant.default, do: ":#{key} (defaul)", else: ":#{key}"   
+      {key, name}
+    end
   end
 end
