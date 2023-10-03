@@ -136,7 +136,6 @@
   .editor_layout-sidebar_class {
     gap: var(--padding-lg);
     width: var(--page-sidebar-width);
-    padding: var(--padding-lg);
     flex-grow: 1;
     flex-direction: column;
     display: flex;
@@ -164,10 +163,10 @@
   .inspect_layout-sidebar_class {
     gap: var(--padding-lg);
     padding: var(--padding-lg);
+    width: var(--page-sidebar-width);
     flex-grow: 1;
     flex-direction: column;
     display: flex;
-    width: var(--page-sidebar-width);
   }
 }
 .sidebar-layout {
@@ -359,6 +358,19 @@
 }
 
 /* lib/assets/themes/dark/box.css */
+.box {
+  background: var(--app-bg-2);
+  border-radius: var(--padding-sm);
+  &.box-sm {
+    padding: var(--padding-sm);
+  }
+  &.box-md {
+    padding: var(--padding-md);
+  }
+  &.box-lg {
+    padding: var(--padding-lg);
+  }
+}
 .collapsible-box {
   gap: var(--padding-sm);
   width: 100%;
@@ -381,7 +393,7 @@
 :root {
   --sidebar-bg: #3f3f46;
   --main-padding: 1rem 1.5rem;
-  --page-sidebar-width: 20rem;
+  --page-sidebar-width: 28rem;
   --sidebar-width-collapsed: 1rem;
   --sidebar-width: 20rem;
   --sidebar-padding: 1rem;

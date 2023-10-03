@@ -62,7 +62,7 @@ defmodule Galeria.Config.LightHydrator do
   # var :sidebar_width_collapsed, ~VAR[size(4)]
 
   # page
-  # var :page_sidebar_width, ~VAR[size(80)]
+  # var :page_sidebar_width, ~VAR[size(112)]
 
   # main
   # var :main_padding, ~VAR[size(4) size(6)]
@@ -229,7 +229,6 @@ defmodule Galeria.Config.LightHydrator do
   # style [:editor_layout, :classes, :sidebar_class], ~CSS""" 
   #   gap: <%= @padding_lg %>;
   #   width: <%= @page_sidebar_width %>;
-  #   padding: <%= @padding_lg %>;
   #   flex-grow: 1;
   #   flex-direction: column;
   #   display: flex;
@@ -267,10 +266,10 @@ defmodule Galeria.Config.LightHydrator do
   # style [:inspect_layout, :classes, :sidebar_class], ~CSS""" 
   #   gap: <%= @padding_lg %>;
   #   padding: <%= @padding_lg %>;
+  #   width: <%= @page_sidebar_width %>;
   #   flex-grow: 1;
   #   flex-direction: column;
   #   display: flex;
-  #   width: <%= @page_sidebar_width %>;
   #   """
 
   # ---------------------------------------------------------------------
@@ -503,6 +502,25 @@ defmodule Galeria.Config.LightHydrator do
   # style [:button, :border, :thick], ~CSS""" 
   #   border-style: solid;
   #   border-width: 4px;
+  #   """
+
+  # ---------------------------------------------------------------------
+  # Galeria.Components.Box                                           box
+  # ---------------------------------------------------------------------
+
+  # style [:box, :classes, :base_class], ~CSS""" 
+  #   background: <%= @app_bg_2 %>;
+  #   border-radius: <%= @padding_sm %>;
+  #   """
+
+  # style [:box, :padding, :sm], ~CSS""" 
+  #   padding: <%= @padding_sm %>;
+  #   """
+  # style [:box, :padding, :md], ~CSS""" 
+  #   padding: <%= @padding_md %>;
+  #   """
+  # style [:box, :padding, :lg], ~CSS""" 
+  #   padding: <%= @padding_lg %>;
   #   """
 
   # ---------------------------------------------------------------------

@@ -19,4 +19,15 @@ defmodule Galeria.Components.Box do
     </div>
     """
   end
+
+  variant :padding, [:sm, :md, :lg, :none], :md
+  slot :inner_block
+
+  component box(assigns) do
+    ~H"""
+    <div class={[@base_class, @variant_classes]}>
+      <%= render_slot(@inner_block) %>
+    </div>
+    """
+  end
 end

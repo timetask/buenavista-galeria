@@ -3,6 +3,7 @@ defmodule Galeria.LiveComponents.ComponentPage do
 
   alias BuenaVista.Component
 
+  alias Galeria.Components.Box
   alias Galeria.Components.Layout
   alias Galeria.Components.Nav
   alias Galeria.Components.Typography
@@ -30,10 +31,32 @@ defmodule Galeria.LiveComponents.ComponentPage do
         <:variant>Variant 2</:variant>
       </Layout.grid_layout>
       <Layout.editor_layout :if={@current_nav_id == "editor"}>
-        <:preview>Preview</:preview>
-        <:hydrator>Hydrator 1</:hydrator>
-        <:hydrator>Hydrator 2</:hydrator>
-        <:sidebar>Sidebar</:sidebar>
+        <:preview>
+          <Box.box>
+            Preview 
+          </Box.box>
+        </:preview>
+        <:hydrator>
+          <Box.box>
+            Hydrator
+          </Box.box>
+        </:hydrator>
+        <:hydrator>
+          <Box.box>
+            Parent Hydrator
+          </Box.box>
+        </:hydrator>
+        <:sidebar>
+          <Box.box>
+            Theme Picker
+          </Box.box>
+          <Box.box>
+            Variant picker
+          </Box.box>
+          <Box.box padding={:none}>
+            Variables
+          </Box.box>
+        </:sidebar>
       </Layout.editor_layout>
     </div>
     """
