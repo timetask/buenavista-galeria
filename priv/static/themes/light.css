@@ -211,6 +211,25 @@
   }
 }
 
+/* lib/assets/themes/light/input.css */
+.select {
+  background: transparent;
+  border-radius: var(--padding-sm);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  padding: var(--padding-md);
+  width: 100%;
+}
+.label {
+  font-weight: var(--weight-bold);
+  font-size: var(--font-sm);
+  color: var(--color-light);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: var(--padding-sm);
+  display: block;
+}
+
 /* lib/assets/themes/light/button.css */
 .button {
   line-height: 1;

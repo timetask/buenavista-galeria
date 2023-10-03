@@ -325,6 +325,33 @@ defmodule Galeria.Config.LightHydrator do
   #   """
 
   # ---------------------------------------------------------------------
+  # Galeria.Components.Input                                      select
+  # ---------------------------------------------------------------------
+
+  # style [:select, :classes, :base_class], ~CSS""" 
+  #   background: transparent;
+  #   border-radius: <%= @padding_sm %>;
+  #   border: 1px solid <%= @color_border %>;
+  #   color: <%= @color_text %>;
+  #   padding: <%= @padding_md %>;
+  #   width: 100%;
+  #   """
+
+  # ---------------------------------------------------------------------
+  # Galeria.Components.Input                                       label
+  # ---------------------------------------------------------------------
+
+  # style [:label, :classes, :base_class], ~CSS""" 
+  #   font-weight: <%= @weight_bold %>;
+  #   font-size: <%= @font_sm %>;
+  #   color: <%= @color_light %>;
+  #   text-transform: uppercase;
+  #   letter-spacing: 2px;
+  #   margin-bottom: <%= @padding_sm %>;
+  #   display: block;
+  #   """
+
+  # ---------------------------------------------------------------------
   # Galeria.Components.Button                                     button
   # ---------------------------------------------------------------------
 
