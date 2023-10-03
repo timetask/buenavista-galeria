@@ -177,14 +177,22 @@
 }
 
 /* lib/assets/themes/dark/input.css */
+.fieldset {
+  gap: var(--padding-md);
+  flex-direction: column;
+  display: flex;
+}
+.group {
+  gap: var(--padding-sm);
+  flex-direction: column;
+  display: flex;
+}
 .label {
   font-weight: var(--weight-bold);
   font-size: var(--font-sm);
   color: var(--color-light);
   text-transform: uppercase;
   letter-spacing: 2px;
-  margin-bottom: var(--padding-sm);
-  display: block;
 }
 .select {
   background: transparent;

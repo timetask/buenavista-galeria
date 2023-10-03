@@ -292,6 +292,26 @@ defmodule Galeria.Config.DarkHydrator do
   #   """
 
   # ---------------------------------------------------------------------
+  # Galeria.Components.Input                                    fieldset
+  # ---------------------------------------------------------------------
+
+  # style [:fieldset, :classes, :base_class], ~CSS""" 
+  #   gap: <%= @padding_md %>;
+  #   flex-direction: column;
+  #   display: flex;
+  #   """
+
+  # ---------------------------------------------------------------------
+  # Galeria.Components.Input                                       group
+  # ---------------------------------------------------------------------
+
+  # style [:group, :classes, :base_class], ~CSS""" 
+  #   gap: <%= @padding_sm %>;
+  #   flex-direction: column;
+  #   display: flex;
+  #   """
+
+  # ---------------------------------------------------------------------
   # Galeria.Components.Input                                       label
   # ---------------------------------------------------------------------
 
@@ -301,8 +321,6 @@ defmodule Galeria.Config.DarkHydrator do
   #   color: <%= @color_light %>;
   #   text-transform: uppercase;
   #   letter-spacing: 2px;
-  #   margin-bottom: <%= @padding_sm %>;
-  #   display: block;
   #   """
 
   # ---------------------------------------------------------------------
