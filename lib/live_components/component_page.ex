@@ -4,6 +4,7 @@ defmodule Galeria.LiveComponents.ComponentPage do
   alias BuenaVista.Component
 
   alias Galeria.Components.Box
+  alias Galeria.Components.Input
   alias Galeria.Components.Layout
   alias Galeria.Components.Nav
   alias Galeria.Components.Typography
@@ -33,7 +34,7 @@ defmodule Galeria.LiveComponents.ComponentPage do
       <Layout.editor_layout :if={@current_nav_id == "editor"}>
         <:preview>
           <Box.box>
-            Preview 
+            Preview
           </Box.box>
         </:preview>
         <:hydrator>
@@ -48,7 +49,8 @@ defmodule Galeria.LiveComponents.ComponentPage do
         </:hydrator>
         <:sidebar>
           <Box.box>
-            Theme Picker
+            <Input.label for="theme-picker">Theme</Input.label>
+            <Input.select id="theme-picker" options={theme_options()} />
           </Box.box>
           <Box.box>
             Variant picker
@@ -93,5 +95,21 @@ defmodule Galeria.LiveComponents.ComponentPage do
       %Nav.Item{id: "grid", url: "?nav=grid", text: "Grid"},
       %Nav.Item{id: "editor", url: "?nav=editor", text: "Editor"}
     ]
+  end
+
+  defp theme_options() do
+    for theme <- get_themes() do
+      name = Keyword.get(theme, :name)
+      {name, name}
+    end
+  end
+
+  defp get_themes() do
+    :buenavista
+    |> Application.get_env(:themes)
+    |> Enum.reject(fn theme ->
+      css = Keyword.get(theme, :css)
+      is_nil(css)
+    end)
   end
 end
