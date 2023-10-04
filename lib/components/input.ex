@@ -1,17 +1,20 @@
 defmodule Galeria.Components.Input do
   use BuenaVista.Component
 
+  slot :inner_block
+
   component fieldset(assigns) do
     ~H"""
     <div class={@base_class}><%= render_slot(@inner_block) %></div>
     """
   end
 
+  variant :direction, [:vertical, :horizontal], :vertical
   slot :inner_block
 
   component group(assigns) do
     ~H"""
-    <div class={@base_class}><%= render_slot(@inner_block) %></div>
+    <div class={[@base_class, @variant_classes]}><%= render_slot(@inner_block) %></div>
     """
   end
 

@@ -97,7 +97,7 @@ defmodule Galeria.Config.LightHydrator do
 
   # style [:box, :classes, :base_class], ~CSS""" 
   #   background: <%= @app_bg_2 %>;
-  #   border-radius: <%= @padding_sm %>;
+  #   border: 1px solid <%= @color_border %>;
   #   """
 
   # style [:box, :padding, :sm], ~CSS""" 
@@ -306,8 +306,16 @@ defmodule Galeria.Config.LightHydrator do
 
   # style [:group, :classes, :base_class], ~CSS""" 
   #   gap: <%= @padding_sm %>;
+  #   """
+
+  # style [:group, :direction, :vertical], ~CSS""" 
   #   flex-direction: column;
   #   display: flex;
+  #   """
+  # style [:group, :direction, :horizontal], ~CSS""" 
+  #   grid-template-columns: 120px 1fr;
+  #   display: grid;
+  #   align-items: center;
   #   """
 
   # ---------------------------------------------------------------------
@@ -331,8 +339,13 @@ defmodule Galeria.Config.LightHydrator do
   #   border-radius: <%= @padding_sm %>;
   #   border: 1px solid <%= @color_border %>;
   #   color: <%= @color_text %>;
+  #   cursor: pointer;
   #   padding: <%= @padding_md %>;
   #   width: 100%;
+  # 
+  #   &:hover {
+  #     background: <%= @color_border %>;
+  #   }
   #   """
 
   # ---------------------------------------------------------------------
@@ -494,6 +507,48 @@ defmodule Galeria.Config.LightHydrator do
   #   .<%= class_name(:nav_list, :classes, :item_class) %> {
   #     width: 100%;
   #   }
+  #   """
+
+  # ---------------------------------------------------------------------
+  # Galeria.Components.Table                                       table
+  # ---------------------------------------------------------------------
+
+  # style [:table, :classes, :base_class], ~CSS""" 
+  #   border-collapse: collapse;
+  #   width: 100%;
+  # 
+  #   & tr .<%= class_name(:table, :classes, :th_class) %>:last-child,
+  # & tr .<%= class_name(:table, :classes, :td_class) %>:last-child {
+  #     border-right: 0;
+  #   }
+  # 
+  #   & tr .<%= class_name(:table, :classes, :th_class) %>:first-child,
+  # & tr .<%= class_name(:table, :classes, :td_class) %>:first-child {
+  #     border-left: 0;
+  #   }
+  # 
+  #   & thead tr:first-child .<%= class_name(:table, :classes, :th_class) %> {
+  #     border-top: 0;
+  #   }
+  # 
+  #   & tbody tr:last-child .<%= class_name(:table, :classes, :td_class) %> {
+  #     border-bottom: 0;
+  #   }
+  #   """
+  # style [:table, :classes, :th_class], ~CSS""" 
+  #   font-weight: <%= @weight_bold %>;
+  #   font-size: <%= @font_sm %>;
+  #   border: 1px solid <%= @color_border %>;
+  #   color: <%= @color_light %>;
+  #   text-transform: uppercase;
+  #   letter-spacing: 2px;
+  #   text-align: left;
+  #   padding: <%= @padding_md %>;
+  #   """
+  # style [:table, :classes, :td_class], ~CSS""" 
+  #   border: 1px solid <%= @color_border %>;
+  #   color: <%= @color_text %>;
+  #   padding: <%= @padding_md %>;
   #   """
 
   # ---------------------------------------------------------------------

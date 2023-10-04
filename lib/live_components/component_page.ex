@@ -7,6 +7,7 @@ defmodule Galeria.LiveComponents.ComponentPage do
   alias Galeria.Components.Input
   alias Galeria.Components.Layout
   alias Galeria.Components.Nav
+  alias Galeria.Components.Table
   alias Galeria.Components.Typography
 
   def render(assigns) do
@@ -49,14 +50,14 @@ defmodule Galeria.LiveComponents.ComponentPage do
         </:hydrator>
         <:sidebar>
           <Box.box>
-            <Input.group>
+            <Input.group direction={:horizontal}>
               <Input.label for="theme-picker">Theme</Input.label>
               <Input.select id="theme-picker" options={theme_options(@themes)} />
             </Input.group>
           </Box.box>
           <Box.box>
             <Input.fieldset>
-              <Input.group :for={variant <- @current_component.variants}>
+              <Input.group :for={variant <- @current_component.variants} direction={:horizontal}>
                 <Input.label for={variant_id(@current_component, variant)}>
                   <%= variant.name %>
                 </Input.label>
@@ -68,7 +69,16 @@ defmodule Galeria.LiveComponents.ComponentPage do
             </Input.fieldset>
           </Box.box>
           <Box.box padding={:none}>
-            Variables
+            <Table.table rows={@streams.variables}>
+              <:col :let={variable} label="Variable">:<%= variable.key %></:col>
+              <:col :let={variable} label="Value"><%= variable.css_value %></:col>
+              <:col :let={variable} label="Function">
+                <%= if variable.property.type == :var do %>
+                  <%= variable.property.raw_body %>
+                <% else %>
+                <% end %>
+              </:col>
+            </Table.table>
           </Box.box>
         </:sidebar>
       </Layout.editor_layout>
@@ -76,11 +86,25 @@ defmodule Galeria.LiveComponents.ComponentPage do
     """
   end
 
+  # ----------------------------------------
+  # Life Cycle
+  # ----------------------------------------
+  def mount(socket) do
+    {:ok, stream_configure(socket, :variables, dom_id: &"var-#{&1.key}")}
+  end
+
   def update(assigns, socket) do
     {:ok,
      socket
      |> assign(assigns)
-     |> assign_current_nav()}
+     |> assign_current_nav()
+     |> stream_variables()}
+  end
+
+  defp stream_variables(socket) do
+    hydrator = socket.assigns.current_theme.hydrator.module_name
+    variables = hydrator.get_variables() |> Enum.map(fn {_key, var} -> var end) |> Enum.reverse()
+    stream(socket, :variables, variables)
   end
 
   defp assign_current_nav(socket) do
@@ -93,14 +117,9 @@ defmodule Galeria.LiveComponents.ComponentPage do
     assign(socket, :current_nav_id, nav_id)
   end
 
-  defp pretty_component_module(%Component{} = component) do
-    component.module |> Atom.to_string() |> String.replace("Elixir.", "") |> then(&(&1 <> "."))
-  end
-
-  defp find_nav_item(nav_id) when is_binary(nav_id) do
-    Enum.find(nav_items(), &(&1.id == nav_id))
-  end
-
+  # ----------------------------------------
+  # Content
+  # ----------------------------------------
   defp nav_items() do
     [
       %Nav.Item{id: "inspect", url: "?nav=inspect", text: "Inspect"},
@@ -111,8 +130,7 @@ defmodule Galeria.LiveComponents.ComponentPage do
 
   defp theme_options(themes) do
     for theme <- themes do
-      name = Keyword.get(theme, :name)
-      {name, name}
+      {theme.name, theme.name}
     end
   end
 
@@ -121,9 +139,20 @@ defmodule Galeria.LiveComponents.ComponentPage do
   end
 
   defp variant_options(%Component.Variant{} = variant) do
-    for {key, value} <- variant.options do
-      name = if key == variant.default, do: ":#{key} (defaul)", else: ":#{key}"   
+    for {key, _value} <- variant.options do
+      name = if key == variant.default, do: ":#{key} (default)", else: ":#{key}"
       {key, name}
     end
+  end
+
+  # ----------------------------------------
+  # 
+  # ----------------------------------------
+  defp pretty_component_module(%Component{} = component) do
+    component.module |> Atom.to_string() |> String.replace("Elixir.", "") |> then(&(&1 <> "."))
+  end
+
+  defp find_nav_item(nav_id) when is_binary(nav_id) do
+    Enum.find(nav_items(), &(&1.id == nav_id))
   end
 end

@@ -9,9 +9,9 @@ defmodule Galeria.HTML.Layout do
     Path.join(prefix, "/static/css/galeria.css")
   end
 
-  def current_theme_url(conn) do
+  def current_galeria_theme_url(conn) do
     prefix = conn.private.phoenix_router.__galeria_url_prefix__()
-    Path.join(prefix, "/static/themes/#{conn.assigns.theme_name}.css")
+    Path.join(prefix, "/static/themes/#{conn.assigns.galeria_theme_name}.css")
   end
 
   def js_url(conn) do

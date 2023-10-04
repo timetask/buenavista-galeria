@@ -22,10 +22,10 @@ defmodule Galeria.GaleriaLive do
           <:title>Galeria</:title>
           <:subtitle>Component</:subtitle>
           <:actions>
-            <a :if={@theme_name == "light"} href={change_theme_url(@base_url, "dark")}>
+            <a :if={@galeria_theme_name == "light"} href={change_galeria_theme_url(@base_url, "dark")}>
               <Button.button size={:md} style={:transparent} color={:ctrl} icon={:light_mode} />
             </a>
-            <a :if={@theme_name == "dark"} href={change_theme_url(@base_url, "light")}>
+            <a :if={@galeria_theme_name == "dark"} href={change_galeria_theme_url(@base_url, "light")}>
               <Button.button size={:md} style={:transparent} color={:ctrl} icon={:dark_mode} />
             </a>
             <Button.button size={:md} style={:transparent} color={:ctrl} icon={:collapse} />
@@ -67,8 +67,8 @@ defmodule Galeria.GaleriaLive do
           :if={@live_action == :component}
           id={"component-#{@current_component.name}"}
           module={Galeria.LiveComponents.ComponentPage}
-          themes={get_themes()}
-          current_theme={nil}
+          themes={@project_themes}
+          current_theme={@current_project_theme}
           current_component={@current_component}
           params={@params}
         />
@@ -88,8 +88,10 @@ defmodule Galeria.GaleriaLive do
      socket
      |> assign(:base_url, base_url)
      |> assign_sidebar_status()
-     |> assign_theme(session)
-     |> assign_modules()}
+     |> assign_modules()
+     |> assign_galeria_theme(session)
+     |> assign_project_themes()
+     |> assign_current_project_theme()}
   end
 
   @impl true
@@ -127,7 +129,7 @@ defmodule Galeria.GaleriaLive do
     assign(socket, :modules, modules)
   end
 
-  defp assign_theme(socket, session) do
+  defp assign_galeria_theme(socket, session) do
     theme_name =
       with theme_name when is_binary(theme_name) <- Map.get(session, "galeria_theme_name"),
            {:ok, _theme} <- Galeria.Config.find_theme(theme_name) do
@@ -138,7 +140,24 @@ defmodule Galeria.GaleriaLive do
           theme.name
       end
 
-    assign(socket, :theme_name, theme_name)
+    assign(socket, :galeria_theme_name, theme_name)
+  end
+
+  defp assign_project_themes(socket) do
+    themes =
+      BuenaVista.Config.get_themes()
+      |> Enum.reject(&is_nil(&1.css))
+
+    assign(socket, :project_themes, themes)
+  end
+
+  defp assign_current_project_theme(socket, theme_name \\ nil) do
+    theme =
+      if is_nil(theme_name),
+        do: List.first(socket.assigns.project_themes),
+        else: Enum.find(socket.assigns.project_themes, &(&1.name == theme_name))
+
+    assign(socket, :current_project_theme, theme)
   end
 
   # ----------------------------------------
@@ -186,15 +205,6 @@ defmodule Galeria.GaleriaLive do
     mod |> Module.split() |> List.last()
   end
 
-  defp get_themes() do
-    :buenavista
-    |> Application.get_env(:themes)
-    |> Enum.reject(fn theme ->
-      css = Keyword.get(theme, :css)
-      is_nil(css)
-    end)
-  end
-
   # ----------------------------------------
   # Urls
   # ----------------------------------------
@@ -206,7 +216,7 @@ defmodule Galeria.GaleriaLive do
     Path.join(base_url, "/component/" <> Atom.to_string(component.name))
   end
 
-  def change_theme_url(base_url, theme_name) when is_binary(theme_name) do
+  def change_galeria_theme_url(base_url, theme_name) when is_binary(theme_name) do
     Path.join(base_url, "/change-theme/#{theme_name}")
   end
 end
