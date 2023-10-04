@@ -39,7 +39,8 @@ defmodule Galeria.MixProject do
   defp deps do
     [
       {:phoenix_live_view, "~> 0.18"},
-      {:buenavista, path: "../buenavista"}
+      {:buenavista, path: "../buenavista"},
+      {:live_monaco_editor, "~> 0.1"}
     ]
   end
 end
