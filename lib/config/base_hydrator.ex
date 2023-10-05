@@ -330,8 +330,8 @@ defmodule Galeria.Config.BaseHydrator do
 
   style [:group, :direction, :horizontal], ~CSS"""
     grid-template-columns: 120px 1fr;
-    display: grid;
     align-items: center;
+    display: grid;
   """
 
   # ---------------------------------------------------------------------
@@ -370,8 +370,7 @@ defmodule Galeria.Config.BaseHydrator do
 
   style [:sidebar_layout, :classes, :base_class], ~CSS"""
     background: <%= @app_bg %>;
-    flex-wrap: wrap;
-    display: flex;
+    display: grid;
   """
 
   style [:sidebar_layout, :classes, :sidebar_class], ~CSS"""
@@ -392,13 +391,11 @@ defmodule Galeria.Config.BaseHydrator do
   """
 
   style [:sidebar_layout, :status, :open], ~CSS"""
-
-    .<%= class_name(:sidebar_layout, :classes, :sidebar_class) %> {
-      width: <%= @sidebar_width %>;
-    }
+    grid-template-columns: <%= @sidebar_width %> 1fr;
   """
 
   style [:sidebar_layout, :status, :closed], ~CSS"""
+    grid-template-columns: <%= @sidebar_width_collapsed %> 1fr;
 
     &:hover {
 
@@ -410,8 +407,6 @@ defmodule Galeria.Config.BaseHydrator do
     .<%= class_name(:sidebar_layout, :classes, :sidebar_class) %> {
       cursor: pointer;
       padding: 0;
-      width: <%= @sidebar_width_collapsed %>;
-      width: <%= @sidebar_width_collapsed %>;
 
       * {
         display: none;
@@ -466,7 +461,7 @@ defmodule Galeria.Config.BaseHydrator do
 
   style [:editor_layout, :classes, :base_class], ~CSS"""
     gap: <%= @padding_lg %>;
-    flex-wrap: wrap;
+    flex-direction: row;
     display: flex;
   """
 
@@ -480,14 +475,9 @@ defmodule Galeria.Config.BaseHydrator do
 
   # style [:editor_layout, :classes, :preview_class], ~CSS"""
   # """
-  style [:editor_layout, :classes, :hydrators_container_class], ~CSS"""
+  style [:editor_layout, :classes, :editors_container_class], ~CSS"""
     gap: <%= @padding_lg %>;
-    flex-direction: row;
-    display: flex;
-  """
-
-  style [:editor_layout, :classes, :hydrator_class], ~CSS"""
-    flex-grow: 1;
+    display: grid;
   """
 
   style [:editor_layout, :classes, :sidebar_class], ~CSS"""
@@ -496,6 +486,41 @@ defmodule Galeria.Config.BaseHydrator do
     flex-grow: 1;
     flex-direction: column;
     display: flex;
+  """
+
+  style [:editor_layout, :columns, :one], ~CSS"""
+
+    .<%= class_name(:editor_layour, :classes, :editors_container_class) %> {
+      grid-template-columns: 1fr;
+    }
+  """
+
+  style [:editor_layout, :columns, :two], ~CSS"""
+
+    .<%= class_name(:editor_layout, :classes, :editors_container_class) %> {
+      grid-template-columns: 1fr 1fr;
+    }
+  """
+
+  style [:editor_layout, :columns, :three], ~CSS"""
+
+    .<%= class_name(:editor_layout, :classes, :editors_container_class) %> {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  """
+
+  style [:editor_layout, :columns, :four], ~CSS"""
+
+    .<%= class_name(:editor_layout, :classes, :editors_container_class) %> {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+  """
+
+  style [:editor_layout, :columns, :five], ~CSS"""
+
+    .<%= class_name(:editor_layout, :classes, :editors_container_class) %> {
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
   """
 
   # ---------------------------------------------------------------------
@@ -684,5 +709,25 @@ defmodule Galeria.Config.BaseHydrator do
   """
 
   style [:page_title, :classes, :actions_class], ~CSS"""
+  """
+
+  # ---------------------------------------------------------------------
+  # Galeria.Components.Typography                          page_subtitle
+  # ---------------------------------------------------------------------
+
+  style [:page_subtitle, :classes, :base_class], ~CSS"""
+    justify-content: space-between;
+    flex-direction: row;
+    display: flex;
+  """
+
+  style [:page_subtitle, :classes, :subtitle_class], ~CSS"""
+    font-weight: <%= @weight_regular %>;
+    font-size: <%= @font_md %>;
+    color: <%= @color_light %>;
+    margin: 0;
+  """
+
+  style [:page_subtitle, :classes, :actions_class], ~CSS"""
   """
 end

@@ -18,7 +18,7 @@ defmodule Galeria.Components.Table do
         </th>
       </thead>
       <tbody>
-        <tr :for={{row_id, row} <- @rows} id={row_id}>
+        <tr :for={row <- @rows}>
           <td :for={col <- @col} class={@td_class}>
             <%= render_slot(col, row) %>
           </td>

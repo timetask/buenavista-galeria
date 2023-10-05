@@ -54,29 +54,27 @@ defmodule Galeria.Components.Layout do
     """
   end
 
-  slot :preview
-  slot :hydrator
-  slot :sidebar
+  variant :columns, [:one, :two, :three, :four, :five], :one
+  slot :preview, required: true
+  slot :editors, required: true
+  slot :sidebar, required: true
 
   classes [
     :main_class,
     :preview_class,
-    :hydrators_container_class,
-    :hydrator_class,
+    :editors_container_class,
     :sidebar_class
   ]
 
   component editor_layout(assigns) do
     ~H"""
-    <div class={@base_class}>
+    <div class={[@base_class, @variant_classes]}>
       <div class={@main_class}>
-        <div class={@preview_class}><%= render_slot(@preview) %></div>
-        <div class={@hydrators_container_class}>
-          <%= for hydrator <- @hydrator do %>
-            <div class={@hydrator_class}>
-              <%= render_slot(hydrator) %>
-            </div>
-          <% end %>
+        <div class={@preview_class}>
+          <%= render_slot(@preview) %>
+        </div>
+        <div class={@editors_container_class}>
+          <%= render_slot(@editors) %>
         </div>
       </div>
       <div class={@sidebar_class}>

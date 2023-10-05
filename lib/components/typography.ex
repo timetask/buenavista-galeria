@@ -44,8 +44,8 @@ defmodule Galeria.Components.Typography do
   classes [:title_class, :subtitle_class, :actions_class]
 
   slot :title, required: true
-  slot :subtitle
   slot :actions
+  slot :subtitle
 
   component page_title(assigns) do
     ~H"""
@@ -56,6 +56,24 @@ defmodule Galeria.Components.Typography do
         </span>
         <%= render_slot(@title) %>
       </h1>
+      <div :if={not Enum.empty?(@actions)} class={@actions_class}>
+        <%= render_slot(@actions) %>
+      </div>
+    </header>
+    """
+  end
+
+  slot :subtitle, required: true
+  slot :actions
+
+  classes [:subtitle_class, :actions_class]
+
+  component page_subtitle(assigns) do
+    ~H"""
+    <header class={@base_class}>
+      <h2 class={@subtitle_class}>
+        <%= render_slot(@subtitle) %>
+      </h2>
       <div :if={not Enum.empty?(@actions)} class={@actions_class}>
         <%= render_slot(@actions) %>
       </div>
