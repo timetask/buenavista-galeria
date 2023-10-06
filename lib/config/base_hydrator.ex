@@ -72,24 +72,24 @@ defmodule Galeria.Config.BaseHydrator do
   # Galeria.Components.Box                               collapsible_box
   # ---------------------------------------------------------------------
 
-  style [:collapsible_box, :classes, :base_class], ~CSS"""
-    gap: <%= @padding_sm %>;
+  style :collapsible_box, :base_class, ~CSS"""
+    gap: $padding_sm;
     width: 100%;
     flex-direction: column;
     display: flex;
   """
 
-  style [:collapsible_box, :classes, :header_class], ~CSS"""
+  style :collapsible_box, :header_class, ~CSS"""
   """
 
-  style [:collapsible_box, :classes, :content_class], ~CSS"""
+  style :collapsible_box, :content_class, ~CSS"""
   """
 
-  # style [:collapsible_box, :status, :open], ~CSS"""
+  # style :collapsible_box, :status, :open, ~CSS"""
   # """
-  style [:collapsible_box, :status, :closed], ~CSS"""
+  style :collapsible_box, :status, :closed, ~CSS"""
 
-    .<%= class_name(:collapsible_box, :classes, :content_class) %> {
+    .$collapsible_box__content_class {
       display: none;
     }
   """
@@ -98,209 +98,209 @@ defmodule Galeria.Config.BaseHydrator do
   # Galeria.Components.Box                                           box
   # ---------------------------------------------------------------------
 
-  style [:box, :classes, :base_class], ~CSS"""
-    background: <%= @app_bg_2 %>;
-    border: 1px solid <%= @color_border %>;
+  style :box, :base_class, ~CSS"""
+    background: $app_bg_2;
+    border: 1px solid $color_border;
   """
 
-  style [:box, :padding, :sm], ~CSS"""
-    padding: <%= @padding_sm %>;
+  style :box, :padding, :sm, ~CSS"""
+    padding: $padding_sm;
   """
 
-  style [:box, :padding, :md], ~CSS"""
-    padding: <%= @padding_md %>;
+  style :box, :padding, :md, ~CSS"""
+    padding: $padding_md;
   """
 
-  style [:box, :padding, :lg], ~CSS"""
-    padding: <%= @padding_lg %>;
+  style :box, :padding, :lg, ~CSS"""
+    padding: $padding_lg;
   """
 
   # ---------------------------------------------------------------------
   # Galeria.Components.Button                                     button
   # ---------------------------------------------------------------------
 
-  style [:button, :classes, :base_class], ~CSS"""
+  style :button, :base_class, ~CSS"""
     line-height: 1;
     border: none;
     cursor: pointer;
 
     &:hover {
 
-      .<%= class_name(:button, :classes, :icon_class) %> {
-        fill: <%= @app_bg %>;
+      .$button__icon_class {
+        fill: $app_bg;
       }
     }
   """
 
-  style [:button, :classes, :icon_class], ~CSS"""
+  style :button, :icon_class, ~CSS"""
     aspect-ratio: 1 / 1;
 
-    .<%= class_name(:button, :size, :sm) %> & {
-      height: <%= @icon_sm %>;
+    .$button__size__sm & {
+      height: $icon_sm;
     }
 
-    .<%= class_name(:button, :size, :md) %> & {
-      height: <%= @icon_md %>;
+    .$button__size__md & {
+      height: $icon_md;
     }
 
-    .<%= class_name(:button, :size, :lg) %> & {
-      height: <%= @icon_lg %>;
+    .$button__size__lg & {
+      height: $icon_lg;
     }
   """
 
-  style [:button, :size, :sm], ~CSS"""
-    font-size: <%= @font_sm %>;
-    border-radius: <%= @padding_sm %>;
-    padding: <%= @padding_sm %>;
+  style :button, :size, :sm, ~CSS"""
+    font-size: $font_sm;
+    border-radius: $padding_sm;
+    padding: $padding_sm;
   """
 
-  style [:button, :size, :md], ~CSS"""
-    font-size: <%= @font_md %>;
-    border-radius: <%= @padding_md %>;
-    padding: <%= @padding_md %>;
+  style :button, :size, :md, ~CSS"""
+    font-size: $font_md;
+    border-radius: $padding_md;
+    padding: $padding_md;
   """
 
-  style [:button, :size, :lg], ~CSS"""
-    font-size: <%= @font_lg %>;
-    border-radius: <%= @padding_lg %>;
-    padding: <%= @padding_lg %>;
+  style :button, :size, :lg, ~CSS"""
+    font-size: $font_lg;
+    border-radius: $padding_lg;
+    padding: $padding_lg;
   """
 
-  style [:button, :color, :ctrl], ~CSS"""
-    border-color: <%= @color_border %>;
-    color: <%= @color_text %>;
+  style :button, :color, :ctrl, ~CSS"""
+    border-color: $color_border;
+    color: $color_text;
   """
 
-  style [:button, :color, :primary], ~CSS"""
-    border-color: <%= @brand_regular %>;
+  style :button, :color, :primary, ~CSS"""
+    border-color: $brand_regular;
   """
 
-  style [:button, :color, :success], ~CSS"""
-    border-color: <%= @success_regular %>;
-    color: <%= @success_dark %>;
+  style :button, :color, :success, ~CSS"""
+    border-color: $success_regular;
+    color: $success_dark;
   """
 
-  style [:button, :color, :danger], ~CSS"""
-    border-color: <%= @danger_regular %>;
-    color: <%= @danger_dark %>;
+  style :button, :color, :danger, ~CSS"""
+    border-color: $danger_regular;
+    color: $danger_dark;
   """
 
-  style [:button, :style, :solid], ~CSS"""
+  style :button, :style, :solid, ~CSS"""
 
-    &.<%= class_name(:button, :color, :success) %> {
-      background: <%= @success_regular %>;
+    &.$button__color__success {
+      background: $success_regular;
       color: white;
     }
 
-    &.<%= class_name(:button, :color, :primary) %> {
-      background: <%= @brand_regular %>;
+    &.$button__color__primary {
+      background: $brand_regular;
       color: white;
     }
 
-    &.<%= class_name(:button, :color, :danger) %> {
-      background: <%= @danger_regular %>;
+    &.$button__color__danger {
+      background: $danger_regular;
       color: white;
     }
 
-    &.<%= class_name(:button, :color, :ctrl) %> {
-      background: <%= @color_text %>;
+    &.$button__color__ctrl {
+      background: $color_text;
       color: white;
     }
   """
 
-  style [:button, :style, :soft], ~CSS"""
+  style :button, :style, :soft, ~CSS"""
 
-    &.<%= class_name(:button, :color, :success) %> {
-      background: <%= @success_light %>;
-      color: <%= @success_regular %>;
+    &.$button__color__success {
+      background: $success_light;
+      color: $success_regular;
     }
 
-    &.<%= class_name(:button, :color, :primary) %> {
-      background: <%= @brand_light %>;
-      color: <%= @brand_regular %>;
+    &.$button__color__primary {
+      background: $brand_light;
+      color: $brand_regular;
     }
 
-    &.<%= class_name(:button, :color, :danger) %> {
-      background: <%= @danger_light %>;
-      color: <%= @danger_regular %>;
+    &.$button__color__danger {
+      background: $danger_light;
+      color: $danger_regular;
     }
 
-    &.<%= class_name(:button, :color, :ctrl) %> {
-      background: <%= @app_bg_2 %>;
-      color: <%= @color_text %>;
+    &.$button__color__ctrl {
+      background: $app_bg_2;
+      color: $color_text;
     }
   """
 
-  style [:button, :style, :link], ~CSS"""
+  style :button, :style, :link, ~CSS"""
     text-decoration: underline;
 
-    &.<%= class_name(:button, :color, :success) %> {
-      color: <%= @success_regular %>;
+    &.$button__color__success {
+      color: $success_regular;
     }
 
-    &.<%= class_name(:button, :color, :primary) %> {
-      color: <%= @brand_regular %>;
+    &.$button__color__primary {
+      color: $brand_regular;
     }
 
-    &.<%= class_name(:button, :color, :danger) %> {
-      color: <%= @danger_regular %>;
+    &.$button__color__danger {
+      color: $danger_regular;
     }
 
-    &.<%= class_name(:button, :color, :ctrl) %> {
-      color: <%= @color_text %>;
+    &.$button__color__ctrl {
+      color: $color_text;
     }
   """
 
-  style [:button, :style, :transparent], ~CSS"""
+  style :button, :style, :transparent, ~CSS"""
     background: transparent;
 
-    &.<%= class_name(:button, :color, :success) %> {
-      color: <%= @success_regular %>;
+    &.$button__color__success {
+      color: $success_regular;
     }
 
-    &.<%= class_name(:button, :color, :primary) %> {
-      color: <%= @brand_regular %>;
+    &.$button__color__primary {
+      color: $brand_regular;
 
       &:hover {
-        background: <%= @brand_regular %>;
+        background: $brand_regular;
 
-        .<%= class_name(:button, :classes, :icon_class) %> {
+        .$button__icon_class {
           fill: white;
         }
       }
 
-      .<%= class_name(:button, :classes, :icon_class) %> {
-        fill: <%= @brand_regular %>;
+      .$button__icon_class {
+        fill: $brand_regular;
       }
     }
 
-    &.<%= class_name(:button, :color, :danger) %> {
-      color: <%= @danger_regular %>;
+    &.$button__color__danger {
+      color: $danger_regular;
     }
 
-    &.<%= class_name(:button, :color, :ctrl) %> {
-      color: <%= @color_text %>;
+    &.$button__color__ctrl {
+      color: $color_text;
 
       &:hover {
-        background: <%= @color_text %>;
+        background: $color_text;
 
-        .<%= class_name(:button, :classes, :icon_class) %> {
-          fill: <%= @app_bg %>;
+        .$button__icon_class {
+          fill: $app_bg;
         }
       }
 
-      .<%= class_name(:button, :classes, :icon_class) %> {
-        fill: <%= @color_light %>;
+      .$button__icon_class {
+        fill: $color_light;
       }
     }
   """
 
-  style [:button, :border, :thin], ~CSS"""
+  style :button, :border, :thin, ~CSS"""
     border-style: solid;
     border-width: 1px;
   """
 
-  style [:button, :border, :thick], ~CSS"""
+  style :button, :border, :thick, ~CSS"""
     border-style: solid;
     border-width: 4px;
   """
@@ -309,8 +309,8 @@ defmodule Galeria.Config.BaseHydrator do
   # Galeria.Components.Input                                    fieldset
   # ---------------------------------------------------------------------
 
-  style [:fieldset, :classes, :base_class], ~CSS"""
-    gap: <%= @padding_md %>;
+  style :fieldset, :base_class, ~CSS"""
+    gap: $padding_md;
     flex-direction: column;
     display: flex;
   """
@@ -319,16 +319,16 @@ defmodule Galeria.Config.BaseHydrator do
   # Galeria.Components.Input                                       group
   # ---------------------------------------------------------------------
 
-  style [:group, :classes, :base_class], ~CSS"""
-    gap: <%= @padding_sm %>;
+  style :group, :base_class, ~CSS"""
+    gap: $padding_sm;
   """
 
-  style [:group, :direction, :vertical], ~CSS"""
+  style :group, :direction, :vertical, ~CSS"""
     flex-direction: column;
     display: flex;
   """
 
-  style [:group, :direction, :horizontal], ~CSS"""
+  style :group, :direction, :horizontal, ~CSS"""
     grid-template-columns: 120px 1fr;
     align-items: center;
     display: grid;
@@ -338,10 +338,10 @@ defmodule Galeria.Config.BaseHydrator do
   # Galeria.Components.Input                                       label
   # ---------------------------------------------------------------------
 
-  style [:label, :classes, :base_class], ~CSS"""
-    font-weight: <%= @weight_bold %>;
-    font-size: <%= @font_sm %>;
-    color: <%= @color_light %>;
+  style :label, :base_class, ~CSS"""
+    font-weight: $weight_bold;
+    font-size: $font_sm;
+    color: $color_light;
     text-transform: uppercase;
     letter-spacing: 2px;
   """
@@ -350,17 +350,17 @@ defmodule Galeria.Config.BaseHydrator do
   # Galeria.Components.Input                                      select
   # ---------------------------------------------------------------------
 
-  style [:select, :classes, :base_class], ~CSS"""
+  style :select, :base_class, ~CSS"""
     background: transparent;
-    border-radius: <%= @padding_sm %>;
-    border: 1px solid <%= @color_border %>;
-    color: <%= @color_text %>;
+    border-radius: $padding_sm;
+    border: 1px solid $color_border;
+    color: $color_text;
     cursor: pointer;
-    padding: <%= @padding_md %>;
+    padding: $padding_md;
     width: 100%;
 
     &:hover {
-      background: <%= @color_border %>;
+      background: $color_border;
     }
   """
 
@@ -368,43 +368,43 @@ defmodule Galeria.Config.BaseHydrator do
   # Galeria.Components.Layout                             sidebar_layout
   # ---------------------------------------------------------------------
 
-  style [:sidebar_layout, :classes, :base_class], ~CSS"""
-    background: <%= @app_bg %>;
+  style :sidebar_layout, :base_class, ~CSS"""
+    background: $app_bg;
     display: grid;
   """
 
-  style [:sidebar_layout, :classes, :sidebar_class], ~CSS"""
-    gap: <%= @padding_lg %>;
-    background: <%= @app_bg_2 %>;
-    border-right: 1px solid <%= @color_border %>;
-    padding: <%= @padding_lg %>;
+  style :sidebar_layout, :sidebar_class, ~CSS"""
+    gap: $padding_lg;
+    background: $app_bg_2;
+    border-right: 1px solid $color_border;
+    padding: $padding_lg;
     min-height: 100vh;
     flex-grow: 1;
     flex-direction: column;
     display: flex;
   """
 
-  style [:sidebar_layout, :classes, :main_class], ~CSS"""
-    padding: <%= @main_padding %>;
+  style :sidebar_layout, :main_class, ~CSS"""
+    padding: $main_padding;
     flex-grow: 999;
     flex-basis: 0;
   """
 
-  style [:sidebar_layout, :status, :open], ~CSS"""
-    grid-template-columns: <%= @sidebar_width %> 1fr;
+  style :sidebar_layout, :status, :open, ~CSS"""
+    grid-template-columns: $sidebar_width 1fr;
   """
 
-  style [:sidebar_layout, :status, :closed], ~CSS"""
-    grid-template-columns: <%= @sidebar_width_collapsed %> 1fr;
+  style :sidebar_layout, :status, :closed, ~CSS"""
+    grid-template-columns: $sidebar_width_collapsed 1fr;
 
     &:hover {
 
-      .<%= class_name(:sidebar_layout, :classes, :sidebar_class) %> {
-        background: <%= @color_border %>;
+      .$sidebar_layout__sidebar_class {
+        background: $color_border;
       }
     }
 
-    .<%= class_name(:sidebar_layout, :classes, :sidebar_class) %> {
+    .$sidebar_layout__sidebar_class {
       cursor: pointer;
       padding: 0;
 
@@ -418,22 +418,22 @@ defmodule Galeria.Config.BaseHydrator do
   # Galeria.Components.Layout                             inspect_layout
   # ---------------------------------------------------------------------
 
-  style [:inspect_layout, :classes, :base_class], ~CSS"""
+  style :inspect_layout, :base_class, ~CSS"""
     flex-direction: row;
     display: flex;
   """
 
-  style [:inspect_layout, :classes, :main_class], ~CSS"""
+  style :inspect_layout, :main_class, ~CSS"""
     flex-grow: 999;
     flex-direction: column;
     flex-basis: 0;
     display: flex;
   """
 
-  style [:inspect_layout, :classes, :sidebar_class], ~CSS"""
-    gap: <%= @padding_lg %>;
-    padding: <%= @padding_lg %>;
-    width: <%= @page_sidebar_width %>;
+  style :inspect_layout, :sidebar_class, ~CSS"""
+    gap: $padding_lg;
+    padding: $padding_lg;
+    width: $page_sidebar_width;
     flex-grow: 1;
     flex-direction: column;
     display: flex;
@@ -443,14 +443,14 @@ defmodule Galeria.Config.BaseHydrator do
   # Galeria.Components.Layout                                grid_layout
   # ---------------------------------------------------------------------
 
-  style [:grid_layout, :classes, :base_class], ~CSS"""
-    gap: <%= @padding_lg %>;
+  style :grid_layout, :base_class, ~CSS"""
+    gap: $padding_lg;
     flex-direction: column;
     display: flex;
   """
 
-  style [:grid_layout, :classes, :variant_class], ~CSS"""
-    gap: <%= @padding_md %>;
+  style :grid_layout, :variant_class, ~CSS"""
+    gap: $padding_md;
     flex-direction: row;
     display: flex;
   """
@@ -459,66 +459,66 @@ defmodule Galeria.Config.BaseHydrator do
   # Galeria.Components.Layout                              editor_layout
   # ---------------------------------------------------------------------
 
-  style [:editor_layout, :classes, :base_class], ~CSS"""
-    gap: <%= @padding_lg %>;
+  style :editor_layout, :base_class, ~CSS"""
+    gap: $padding_lg;
     flex-direction: row;
     display: flex;
   """
 
-  style [:editor_layout, :classes, :main_class], ~CSS"""
-    gap: <%= @padding_lg %>;
+  style :editor_layout, :main_class, ~CSS"""
+    gap: $padding_lg;
     flex-grow: 999;
     flex-direction: column;
     flex-basis: 0;
     display: flex;
   """
 
-  # style [:editor_layout, :classes, :preview_class], ~CSS"""
+  # style :editor_layout, :preview_class, ~CSS"""
   # """
-  style [:editor_layout, :classes, :editors_container_class], ~CSS"""
-    gap: <%= @padding_lg %>;
+  style :editor_layout, :editors_container_class, ~CSS"""
+    gap: $padding_lg;
     display: grid;
   """
 
-  style [:editor_layout, :classes, :sidebar_class], ~CSS"""
-    gap: <%= @padding_lg %>;
-    width: <%= @page_sidebar_width %>;
+  style :editor_layout, :sidebar_class, ~CSS"""
+    gap: $padding_lg;
+    width: $page_sidebar_width;
     flex-grow: 1;
     flex-direction: column;
     display: flex;
   """
 
-  style [:editor_layout, :columns, :one], ~CSS"""
+  style :editor_layout, :columns, :one, ~CSS"""
 
-    .<%= class_name(:editor_layour, :classes, :editors_container_class) %> {
+    .$editor_layour__editors_container_class {
       grid-template-columns: 1fr;
     }
   """
 
-  style [:editor_layout, :columns, :two], ~CSS"""
+  style :editor_layout, :columns, :two, ~CSS"""
 
-    .<%= class_name(:editor_layout, :classes, :editors_container_class) %> {
+    .$editor_layout__editors_container_class {
       grid-template-columns: 1fr 1fr;
     }
   """
 
-  style [:editor_layout, :columns, :three], ~CSS"""
+  style :editor_layout, :columns, :three, ~CSS"""
 
-    .<%= class_name(:editor_layout, :classes, :editors_container_class) %> {
+    .$editor_layout__editors_container_class {
       grid-template-columns: 1fr 1fr 1fr;
     }
   """
 
-  style [:editor_layout, :columns, :four], ~CSS"""
+  style :editor_layout, :columns, :four, ~CSS"""
 
-    .<%= class_name(:editor_layout, :classes, :editors_container_class) %> {
+    .$editor_layout__editors_container_class {
       grid-template-columns: 1fr 1fr 1fr 1fr;
     }
   """
 
-  style [:editor_layout, :columns, :five], ~CSS"""
+  style :editor_layout, :columns, :five, ~CSS"""
 
-    .<%= class_name(:editor_layout, :classes, :editors_container_class) %> {
+    .$editor_layout__editors_container_class {
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     }
   """
@@ -527,38 +527,38 @@ defmodule Galeria.Config.BaseHydrator do
   # Galeria.Components.Nav                                      nav_list
   # ---------------------------------------------------------------------
 
-  style [:nav_list, :classes, :base_class], ~CSS"""
+  style :nav_list, :base_class, ~CSS"""
     display: flex;
   """
 
-  style [:nav_list, :classes, :item_class], ~CSS"""
-    font-size: <%= @font_md %>;
-    border-radius: <%= @padding_md %>;
-    color: <%= @color_text %>;
+  style :nav_list, :item_class, ~CSS"""
+    font-size: $font_md;
+    border-radius: $padding_md;
+    color: $color_text;
     text-decoration: none;
-    padding: <%= @padding_md %> <%= @padding_lg %>;
+    padding: $padding_md $padding_lg;
 
     &:hover {
-      background: <%= @app_bg_3 %>;
+      background: $app_bg_3;
     }
   """
 
-  style [:nav_list, :classes, :item_selected_class], ~CSS"""
-    background: <%= @app_bg_3 %>;
-    color: <%= @color_title %>;
+  style :nav_list, :item_selected_class, ~CSS"""
+    background: $app_bg_3;
+    color: $color_title;
   """
 
-  style [:nav_list, :direction, :vertical], ~CSS"""
-    gap: <%= @padding_sm %>;
+  style :nav_list, :direction, :vertical, ~CSS"""
+    gap: $padding_sm;
     width: 100%;
     flex-direction: column;
   """
 
-  style [:nav_list, :direction, :horizontal], ~CSS"""
-    gap: <%= @padding_sm %>;
+  style :nav_list, :direction, :horizontal, ~CSS"""
+    gap: $padding_sm;
     flex-direction: row;
 
-    .<%= class_name(:nav_list, :classes, :item_class) %> {
+    .$nav_list__item_class {
       width: 100%;
     }
   """
@@ -567,80 +567,80 @@ defmodule Galeria.Config.BaseHydrator do
   # Galeria.Components.Table                                       table
   # ---------------------------------------------------------------------
 
-  style [:table, :classes, :base_class], ~CSS"""
+  style :table, :base_class, ~CSS"""
     border-collapse: collapse;
     width: 100%;
 
-    & tr .<%= class_name(:table, :classes, :th_class) %>:last-child,
-  & tr .<%= class_name(:table, :classes, :td_class) %>:last-child {
+    & tr .$table__th_class:last-child,
+  & tr .$table__td_class:last-child {
       border-right: 0;
     }
 
-    & tr .<%= class_name(:table, :classes, :th_class) %>:first-child,
-  & tr .<%= class_name(:table, :classes, :td_class) %>:first-child {
+    & tr .$table__th_class:first-child,
+  & tr .$table__td_class:first-child {
       border-left: 0;
     }
 
-    & thead tr:first-child .<%= class_name(:table, :classes, :th_class) %> {
+    & thead tr:first-child .$table__th_class {
       border-top: 0;
     }
 
-    & tbody tr:last-child .<%= class_name(:table, :classes, :td_class) %> {
+    & tbody tr:last-child .$table__td_class {
       border-bottom: 0;
     }
   """
 
-  style [:table, :classes, :th_class], ~CSS"""
-    font-weight: <%= @weight_bold %>;
-    font-size: <%= @font_sm %>;
-    border: 1px solid <%= @color_border %>;
-    color: <%= @color_light %>;
+  style :table, :th_class, ~CSS"""
+    font-weight: $weight_bold;
+    font-size: $font_sm;
+    border: 1px solid $color_border;
+    color: $color_light;
     text-transform: uppercase;
     letter-spacing: 2px;
     text-align: left;
-    padding: <%= @padding_md %>;
+    padding: $padding_md;
   """
 
-  style [:table, :classes, :td_class], ~CSS"""
-    border: 1px solid <%= @color_border %>;
-    color: <%= @color_text %>;
-    padding: <%= @padding_md %>;
+  style :table, :td_class, ~CSS"""
+    border: 1px solid $color_border;
+    color: $color_text;
+    padding: $padding_md;
   """
 
   # ---------------------------------------------------------------------
   # Galeria.Components.Typography                          sidebar_title
   # ---------------------------------------------------------------------
 
-  style [:sidebar_title, :classes, :base_class], ~CSS"""
-    margin-bottom: <%= @padding_lg %>;
+  style :sidebar_title, :base_class, ~CSS"""
+    margin-bottom: $padding_lg;
     justify-content: space-between;
     align-items: center;
     display: flex;
   """
 
-  style [:sidebar_title, :classes, :title_class], ~CSS"""
+  style :sidebar_title, :title_class, ~CSS"""
     font-weight: 800;
-    font-size: <%= @font_xl %>;
-    box-shadow: <%= @app_bg_2 %> 4px 4px 0 -2px, <%= @color_title %> 4px 4px;
-    border: 2px solid <%= @color_title %>;
-    color: <%= @color_title %>;
+    font-size: $font_xl;
+    box-shadow: $app_bg_2 4px 4px 0 -2px, $color_title 4px 4px;
+    border: 2px solid $color_title;
+    color: $color_title;
     text-transform: uppercase;
     letter-spacing: 2px;
     text-align: center;
-    padding: <%= @padding_sm %> <%= @padding_md %>;
+    padding: $padding_sm $padding_md;
     margin: 0;
   """
 
-  style [:sidebar_title, :classes, :subtitle_class], ~CSS"""
-    font-weight: <%= @weight_regular %>;
-    font-size: <%= @font_md %>;
+  style :sidebar_title, :subtitle_class, ~CSS"""
+    font-weight: $weight_regular;
+    font-size: $font_md;
     letter-spacing: 4px;
     text-align: center;
     display: block;
   """
 
-  style [:sidebar_title, :classes, :actions_class], ~CSS"""
-    gap: <%= @padding_sm %>;
+  style :sidebar_title, :actions_class, ~CSS"""
+    gap: $padding_sm;
     align-items: center;
     display: flex;
   """
@@ -649,24 +649,24 @@ defmodule Galeria.Config.BaseHydrator do
   # Galeria.Components.Typography                       sidebar_subtitle
   # ---------------------------------------------------------------------
 
-  style [:sidebar_subtitle, :classes, :base_class], ~CSS"""
+  style :sidebar_subtitle, :base_class, ~CSS"""
     justify-content: space-between;
     align-items: center;
     display: flex;
   """
 
-  style [:sidebar_subtitle, :classes, :subtitle_class], ~CSS"""
+  style :sidebar_subtitle, :subtitle_class, ~CSS"""
     position: relative;
-    font-weight: <%= @weight_light %>;
-    font-size: <%= @font_md %>;
-    color: <%= @color_light %>;
+    font-weight: $weight_light;
+    font-size: $font_md;
+    color: $color_light;
     text-transform: uppercase;
     letter-spacing: 2px;
     margin: 0;
 
     &:before {
       position: absolute;
-      border-bottom: 1px solid <%= @color_light %>;
+      border-bottom: 1px solid $color_light;
       content: "";
       height: 1px;
       width: 26px;
@@ -675,8 +675,8 @@ defmodule Galeria.Config.BaseHydrator do
     }
   """
 
-  style [:sidebar_subtitle, :classes, :actions_class], ~CSS"""
-    gap: <%= @padding_sm %>;
+  style :sidebar_subtitle, :actions_class, ~CSS"""
+    gap: $padding_sm;
     align-items: center;
     display: flex;
   """
@@ -685,49 +685,49 @@ defmodule Galeria.Config.BaseHydrator do
   # Galeria.Components.Typography                             page_title
   # ---------------------------------------------------------------------
 
-  style [:page_title, :classes, :base_class], ~CSS"""
-    border-bottom: 1px solid <%= @color_border %>;
-    padding-bottom: <%= @padding_md %>;
-    margin-bottom: <%= @padding_lg %>;
+  style :page_title, :base_class, ~CSS"""
+    border-bottom: 1px solid $color_border;
+    padding-bottom: $padding_md;
+    margin-bottom: $padding_lg;
     justify-content: space-between;
     flex-direction: row;
     display: flex;
   """
 
-  style [:page_title, :classes, :title_class], ~CSS"""
-    font-weight: <%= @weight_bold %>;
-    font-size: <%= @font_lg %>;
-    color: <%= @color_title %>;
+  style :page_title, :title_class, ~CSS"""
+    font-weight: $weight_bold;
+    font-size: $font_lg;
+    color: $color_title;
     margin: 0;
     display: inline-flex;
   """
 
-  style [:page_title, :classes, :subtitle_class], ~CSS"""
-    font-weight: <%= @weight_light %>;
-    color: <%= @color_light %>;
+  style :page_title, :subtitle_class, ~CSS"""
+    font-weight: $weight_light;
+    color: $color_light;
     display: inline-flex;
   """
 
-  style [:page_title, :classes, :actions_class], ~CSS"""
+  style :page_title, :actions_class, ~CSS"""
   """
 
   # ---------------------------------------------------------------------
   # Galeria.Components.Typography                          page_subtitle
   # ---------------------------------------------------------------------
 
-  style [:page_subtitle, :classes, :base_class], ~CSS"""
+  style :page_subtitle, :base_class, ~CSS"""
     justify-content: space-between;
     flex-direction: row;
     display: flex;
   """
 
-  style [:page_subtitle, :classes, :subtitle_class], ~CSS"""
-    font-weight: <%= @weight_regular %>;
-    font-size: <%= @font_md %>;
-    color: <%= @color_light %>;
+  style :page_subtitle, :subtitle_class, ~CSS"""
+    font-weight: $weight_regular;
+    font-size: $font_md;
+    color: $color_light;
     margin: 0;
   """
 
-  style [:page_subtitle, :classes, :actions_class], ~CSS"""
+  style :page_subtitle, :actions_class, ~CSS"""
   """
 end
