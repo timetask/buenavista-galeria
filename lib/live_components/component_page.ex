@@ -35,6 +35,7 @@ defmodule Galeria.LiveComponents.ComponentPage do
       </Layout.grid_layout>
       <Layout.editor_layout :if={@current_nav_id == "editor"} columns={hydrator_cols(@hydrators)}>
         <:preview>
+          <Typography.page_subtitle subtitle="Preview" />
           <Box.box>
             <.component_preview
               component={@current_component}
@@ -45,9 +46,7 @@ defmodule Galeria.LiveComponents.ComponentPage do
         </:preview>
         <:editors>
           <%= for hydrator <- @hydrators do %>
-            <Typography.page_subtitle>
-              <:subtitle><%= pretty_module(hydrator) %></:subtitle>
-            </Typography.page_subtitle>
+            <Typography.page_subtitle subtitle={pretty_module(hydrator)} />
           <% end %>
           <%= for variant <- @current_component.variants do %>
             <%= for {option, class} when not is_nil(class) <- variant.options do %>
@@ -66,37 +65,21 @@ defmodule Galeria.LiveComponents.ComponentPage do
           <% end %>
         </:editors>
         <:sidebar>
+          <Typography.page_subtitle subtitle="Theme" />
           <Box.box>
             <Input.group direction={:horizontal}>
               <Input.label for="theme-picker">Theme</Input.label>
               <Input.select id="theme-picker" options={theme_options(@themes)} />
             </Input.group>
           </Box.box>
-          <Box.box>
-            <Input.fieldset>
-              <Input.group :for={variant <- @current_component.variants} direction={:horizontal}>
-                <Input.label for={variant_id(@current_component, variant)}>
-                  <%= variant.name %>
-                </Input.label>
-                <Input.select
-                  id={variant_id(@current_component, variant)}
-                  options={variant_options(variant)}
-                />
-              </Input.group>
-            </Input.fieldset>
-          </Box.box>
-          <Box.box padding={:none}>
-            <Table.table rows={@variables}>
-              <:col :let={variable} label="Variable">:<%= variable.key %></:col>
-              <:col :let={variable} label="Value"><%= variable.css_value %></:col>
-              <:col :let={variable} label="Function">
-                <%= if variable.property.type == :var do %>
-                  <%= variable.property.raw_body %>
-                <% else %>
-                <% end %>
-              </:col>
-            </Table.table>
-          </Box.box>
+          <Typography.page_subtitle subtitle="Variants" />
+          <.component_variants component={@current_component} />
+          <Typography.page_subtitle subtitle="Attrs" />
+          <.component_attributes component={@current_component} />
+          <Typography.page_subtitle subtitle="Slots" />
+          <.component_slots component={@current_component} />
+          <Typography.page_subtitle subtitle="Variables" />
+          <.component_variables variables={@variables} />
         </:sidebar>
       </Layout.editor_layout>
     </div>
@@ -116,6 +99,77 @@ defmodule Galeria.LiveComponents.ComponentPage do
         {__ENV__.module, __ENV__.function, __ENV__.file, __ENV__.line}
       ) %>
     </div>
+    """
+  end
+
+  attr :component, Component, required: true
+
+  defp component_variants(assigns) do
+    ~H"""
+    <Box.box>
+      <Input.fieldset>
+        <Input.group :for={variant <- @component.variants} direction={:horizontal}>
+          <Input.label for={variant_id(@component, variant)}>
+            <%= variant.name %>
+          </Input.label>
+          <Input.select id={variant_id(@component, variant)} options={variant_options(variant)} />
+        </Input.group>
+      </Input.fieldset>
+    </Box.box>
+    """
+  end
+
+  attr :component, Component, required: true
+
+  defp component_attributes(assigns) do
+    ~H"""
+    <Box.box>
+      <Input.fieldset>
+        <Input.group :for={attr <- @component.attrs} direction={:horizontal}>
+          <Input.label for={attr_id(@component, attr)}>
+            <%= attr.name %>
+          </Input.label>
+          <% dbg(attr) %>
+          <Input.input />
+        </Input.group>
+      </Input.fieldset>
+    </Box.box>
+    """
+  end
+
+  attr :component, Component, required: true
+
+  defp component_slots(assigns) do
+    ~H"""
+    <Box.box>
+      <Input.fieldset>
+        <Input.group :for={slot <- @component.slots} direction={:horizontal}>
+          <Input.label for={slot_id(@component, slot)}>
+            <%= slot.name %>
+          </Input.label>
+          <Input.input />
+        </Input.group>
+      </Input.fieldset>
+    </Box.box>
+    """
+  end
+
+  attr :variables, :list, required: true
+
+  defp component_variables(assigns) do
+    ~H"""
+    <Box.box padding={:none}>
+      <Table.table rows={@variables}>
+        <:col :let={variable} label="Key">:<%= variable.key %></:col>
+        <:col :let={variable} label="Value"><%= variable.css_value %></:col>
+        <:col :let={variable} label="Function">
+          <%= if variable.property.type == :var do %>
+            <%= variable.property.raw_body %>
+          <% else %>
+          <% end %>
+        </:col>
+      </Table.table>
+    </Box.box>
     """
   end
 
@@ -227,6 +281,14 @@ defmodule Galeria.LiveComponents.ComponentPage do
       name = if key == variant.default, do: ":#{key} (default)", else: ":#{key}"
       {key, name}
     end
+  end
+
+  defp attr_id(component, attr) do
+    "#{component.name}-#{attr.name}-#{attr.line}"
+  end
+
+  defp slot_id(component, attr) do
+    "#{component.name}-#{attr.name}-#{attr.line}"
   end
 
   defp editor_id(hydrator, component, variant, option) do

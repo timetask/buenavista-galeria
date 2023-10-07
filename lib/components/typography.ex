@@ -63,7 +63,7 @@ defmodule Galeria.Components.Typography do
     """
   end
 
-  slot :subtitle, required: true
+  attr :subtitle, :string, required: true
   slot :actions
 
   classes [:subtitle_class, :actions_class]
@@ -72,7 +72,7 @@ defmodule Galeria.Components.Typography do
     ~H"""
     <header class={@base_class}>
       <h2 class={@subtitle_class}>
-        <%= render_slot(@subtitle) %>
+        <%= @subtitle %>
       </h2>
       <div :if={not Enum.empty?(@actions)} class={@actions_class}>
         <%= render_slot(@actions) %>

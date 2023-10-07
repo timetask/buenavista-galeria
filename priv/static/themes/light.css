@@ -201,6 +201,17 @@
   text-transform: uppercase;
   letter-spacing: 2px;
 }
+.input {
+  background: transparent;
+  border-radius: var(--padding-sm);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  cursor: pointer;
+  padding: var(--padding-md);
+  width: 100%;
+  &.input-disabled {
+  }
+}
 .select {
   background: transparent;
   border-radius: var(--padding-sm);

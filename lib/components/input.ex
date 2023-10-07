@@ -27,6 +27,20 @@ defmodule Galeria.Components.Input do
     """
   end
 
+  variant :state, [:default, :disabled], :default
+  attr :value, :string
+
+  component input(assigns) do
+    ~H"""
+    <input
+      type="text"
+      class={[@base_class, @variant_classes]}
+      disabled={@state == :disabled}
+      autocomplete="off"
+    />
+    """
+  end
+
   slot :inner_block
 
   attr :id, :string, default: nil
