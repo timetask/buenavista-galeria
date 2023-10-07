@@ -1,5 +1,6 @@
 defmodule Galeria.LiveComponents.ComponentPage do
   use Phoenix.LiveComponent
+  require Phoenix.LiveView.TagEngine
 
   alias BuenaVista.Component
 
@@ -35,7 +36,11 @@ defmodule Galeria.LiveComponents.ComponentPage do
       <Layout.editor_layout :if={@current_nav_id == "editor"} columns={hydrator_cols(@hydrators)}>
         <:preview>
           <Box.box>
-            Preview
+            <.component_preview
+              component={@current_component}
+              theme={@current_theme}
+              args={@preview_args}
+            />
           </Box.box>
         </:preview>
         <:editors>
@@ -98,6 +103,22 @@ defmodule Galeria.LiveComponents.ComponentPage do
     """
   end
 
+  attr :component, Component, required: true
+  attr :theme, BuenaVista.Theme, required: true
+  attr :args, :any, required: true
+
+  defp component_preview(assigns) do
+    ~H"""
+    <div>
+      <%= Phoenix.LiveView.TagEngine.component(
+        Function.capture(@component.module, @component.name, 1),
+        @args,
+        {__ENV__.module, __ENV__.function, __ENV__.file, __ENV__.line}
+      ) %>
+    </div>
+    """
+  end
+
   attr :id, :string, required: true
   attr :value, :string, required: true
 
@@ -137,13 +158,26 @@ defmodule Galeria.LiveComponents.ComponentPage do
      socket
      |> assign(assigns)
      |> assign_current_nav()
+     |> assign_preview_args()
      |> assign_variables()
      |> assign_hydrators()}
   end
 
+  defp assign_preview_args(socket) do
+    assigns = []
+    inner_block = Phoenix.LiveView.TagEngine.inner_block(:inner_block, do: ~H[Hello!])
+    args = %{inner_block: %{slot: :inner_block, inner_block: inner_block}}
+    assign(socket, :preview_args, args)
+  end
+
   defp assign_variables(socket) do
     hydrator = socket.assigns.current_theme.hydrator.module_name
-    variables = hydrator.get_variables() |> Enum.map(fn {_key, var} -> var end) |> Enum.reverse()
+
+    variables =
+      hydrator.get_variables()
+      |> Enum.map(fn {_key, var} -> var end)
+      |> Enum.reverse()
+
     assign(socket, :variables, variables)
   end
 
