@@ -49,7 +49,7 @@ defmodule Galeria.LiveComponents.ComponentPage do
               <%= for hydrator <- @hydrators do %>
                 <Box.box padding={:none}>
                   <Input.label>
-                    :<%= variant.name %> :<%= option %>
+                    <%= variant.name %>: <%= option %>
                   </Input.label>
                   <.editor
                     id={editor_id(hydrator, @current_component, variant, option)}
@@ -113,13 +113,15 @@ defmodule Galeria.LiveComponents.ComponentPage do
           %{
             "fontFamily" => "Inconsolata",
             "fontSize" => "16",
-            "language" => "css",
+            "language" => nil,
+            "wordWrap" => "on",
             "glyphMargin" => false,
             "folding" => false,
             "showFoldingControls" => "never",
             "lineNumbers" => "off",
             "lineDecorationsWidth" => 0,
-            "lineNumbersMinChars" => 0
+            "lineNumbersMinChars" => 0,
+            "theme" => "vs-dark"
           }
         )
       }
@@ -158,7 +160,6 @@ defmodule Galeria.LiveComponents.ComponentPage do
   defp assign_hydrators(socket) do
     hydrator = socket.assigns.current_theme.hydrator
     hydrators = get_hydrators(hydrator.module_name)
-    dbg(hydrators)
     assign(socket, :hydrators, hydrators)
   end
 
@@ -195,15 +196,18 @@ defmodule Galeria.LiveComponents.ComponentPage do
   end
 
   defp editor_id(hydrator, component, variant, option) do
-    "#{hydrator}-#{component.name}-#{variant.name}#{option}"
+    "#{hydrator}-#{component.name}-#{variant.name}-#{option}"
   end
 
   defp editor_code(hydrator, component, variant, option) do
     styles = hydrator.get_styles_map()
 
     case Map.get(styles, {component.name, variant.name, option}) do
-      %BuenaVista.Hydrator.Style{parent: false} = style -> style.css
-      _ -> ""
+      %BuenaVista.Hydrator.Style{parent: false} = style ->
+        style.raw_css |> String.replace(~r/^  /, "") |> String.replace(~r/\n  /, "\n")
+
+      _ ->
+        ""
     end
   end
 
