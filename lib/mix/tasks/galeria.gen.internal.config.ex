@@ -1,17 +1,22 @@
-defmodule Mix.Tasks.Galeria.Gen.Css do
+defmodule Mix.Tasks.Galeria.Gen.Internal.Config do
+  @moduledoc """
+    **Intendend for internal use only.**
+
+    Generates Galerias hydrators.
+  """
   use Mix.Task
   require Logger
 
   @requirements ["app.config"]
 
-  @shortdoc "Generated galeria theme css files"
+  @shortdoc "Generates galeria hydrators"
   def run(opts) do
     {parsed_opts, _, _} = OptionParser.parse(opts, strict: [theme: :keep])
 
     themes = Galeria.Config.get_themes() |> filter_by_name(parsed_opts)
     apps = [:galeria]
 
-    BuenaVista.Generator.generate_css_files(themes, apps)
+    BuenaVista.Generator.generate_config_files(themes, apps)
   end
 
   defp filter_by_name(themes, parsed_opts) do
