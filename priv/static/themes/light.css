@@ -206,10 +206,19 @@
   border-radius: var(--padding-sm);
   border: 1px solid var(--color-border);
   color: var(--color-text);
-  cursor: pointer;
   padding: var(--padding-md);
   width: 100%;
   &.input-disabled {
+  }
+}
+.textarea {
+  background: transparent;
+  border-radius: var(--padding-sm);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  padding: var(--padding-md);
+  width: 100%;
+  &.textarea-disabled {
   }
 }
 .select {

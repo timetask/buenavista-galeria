@@ -340,12 +340,27 @@ defmodule Galeria.Config.DarkHydrator do
   #   border-radius: $padding_sm;
   #   border: 1px solid $color_border;
   #   color: $color_text;
-  #   cursor: pointer;
   #   padding: $padding_md;
   #   width: 100%;
   #   """
 
   # style :input, :state, :disabled, ~CSS"""
+  # """
+
+  # ---------------------------------------------------------------------
+  # Galeria.Components.Input                                    textarea
+  # ---------------------------------------------------------------------
+
+  # style :textarea, :base_class, ~CSS""" 
+  #   background: transparent;
+  #   border-radius: $padding_sm;
+  #   border: 1px solid $color_border;
+  #   color: $color_text;
+  #   padding: $padding_md;
+  #   width: 100%;
+  #   """
+
+  # style :textarea, :state, :disabled, ~CSS"""
   # """
 
   # ---------------------------------------------------------------------

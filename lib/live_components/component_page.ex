@@ -161,7 +161,7 @@ defmodule Galeria.LiveComponents.ComponentPage do
           <Input.label for={slot_id(@component, slot)}>
             <%= slot.name %>
           </Input.label>
-          <Input.input />
+          <Input.textarea />
         </Input.group>
       </Input.fieldset>
     </Box.box>
