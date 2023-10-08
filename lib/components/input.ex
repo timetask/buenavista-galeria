@@ -28,6 +28,7 @@ defmodule Galeria.Components.Input do
   end
 
   variant :state, [:default, :disabled], :default
+  attr :id, :string
   attr :value, :string
 
   component input(assigns) do

@@ -129,12 +129,26 @@ defmodule Galeria.LiveComponents.ComponentPage do
           <Input.label for={attr_id(@component, attr)}>
             <%= attr.name %>
           </Input.label>
-          <% dbg(attr) %>
-          <Input.input />
+          <.attr_input id={attr_id(@component, attr)} attr={attr} />
         </Input.group>
       </Input.fieldset>
     </Box.box>
     """
+  end
+
+  attr :attr, :map, required: true
+  attr :id, :string
+
+  defp attr_input(assigns) do
+    with opts when is_list(opts) <- Map.get(assigns.attr, :opts),
+         values when is_list(values) <- Keyword.get(opts, :values),
+         options = for(v <- values, do: {v, v}) do
+      assigns = assign(assigns, :values, options)
+      ~H[<Input.select id={@id} options={@values} />]
+    else
+      _ ->
+        ~H[<Input.input id={@id} />]
+    end
   end
 
   attr :component, Component, required: true
