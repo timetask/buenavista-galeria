@@ -3,7 +3,7 @@ defmodule Galeria.Themes.LightHydrator do
     nomenclator: BuenaVista.Themes.DefaultNomenclator,
     parent: Galeria.Themes.BaseHydrator
 
-  import BuenaVista.Constants.DefaultColors
+  import BuenaVista.Constants.TailwindColors
 
   # ---------------------------------------------------------------------
   # Variables

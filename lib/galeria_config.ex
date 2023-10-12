@@ -9,8 +9,8 @@ defmodule Galeria.GaleriaConfig do
               themes_dir: "lib/themes",
               css_dir: "lib/assets/themes",
               hydrator_imports: [
-                BuenaVista.Constants.DefaultColors,
-                BuenaVista.Constants.DefaultSizes
+                BuenaVista.Constants.TailwindColors,
+                BuenaVista.Constants.TailwindSizes
               ]
             ],
             themes: [
