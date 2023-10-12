@@ -13,10 +13,9 @@ defmodule Mix.Tasks.Galeria.Gen.Internal.Config do
   def run(opts) do
     {parsed_opts, _, _} = OptionParser.parse(opts, strict: [theme: :keep])
 
-    themes = Galeria.Config.get_themes() |> filter_by_name(parsed_opts)
-    apps = [:galeria]
+    themes = Galeria.GaleriaConfig.get_themes() |> filter_by_name(parsed_opts)
 
-    BuenaVista.Generator.generate_config_files(themes, apps)
+    BuenaVista.Generator.generate_theme_files(themes)
   end
 
   defp filter_by_name(themes, parsed_opts) do

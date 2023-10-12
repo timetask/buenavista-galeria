@@ -1,7 +1,7 @@
-defmodule Galeria.Config.LightHydrator do
+defmodule Galeria.Themes.LightHydrator do
   use BuenaVista.Hydrator,
-    nomenclator: BuenaVista.Template.DefaultNomenclator,
-    parent: Galeria.Config.BaseHydrator
+    nomenclator: BuenaVista.Themes.DefaultNomenclator,
+    parent: Galeria.Themes.BaseHydrator
 
   import BuenaVista.Constants.DefaultColors
 

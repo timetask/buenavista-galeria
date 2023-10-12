@@ -7,7 +7,7 @@ defmodule Galeria.Plugs.CurrentThemePlug do
         conn
 
       _ ->
-        {:ok, theme} = Galeria.Config.get_default_theme()
+        {:ok, theme} = Galeria.GaleriaConfig.get_default_theme()
         Plug.Conn.put_session(conn, :galeria_theme_name, theme.name)
     end
   end

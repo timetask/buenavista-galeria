@@ -132,11 +132,11 @@ defmodule Galeria.GaleriaLive do
   defp assign_galeria_theme(socket, session) do
     theme_name =
       with theme_name when is_binary(theme_name) <- Map.get(session, "galeria_theme_name"),
-           {:ok, _theme} <- Galeria.Config.find_theme(theme_name) do
+           {:ok, _theme} <- Galeria.GaleriaConfig.find_theme(theme_name) do
         theme_name
       else
         _ ->
-          {:ok, theme} = Galeria.Config.get_default_theme()
+          {:ok, theme} = Galeria.GaleriaConfig.get_default_theme()
           theme.name
       end
 
@@ -145,8 +145,8 @@ defmodule Galeria.GaleriaLive do
 
   defp assign_project_themes(socket) do
     themes =
-      BuenaVista.Config.get_themes()
-      |> Enum.reject(&is_nil(&1.css))
+      BuenaVista.Themes.get_themes()
+      |> Enum.reject(fn theme -> theme.output == false end)
 
     assign(socket, :project_themes, themes)
   end

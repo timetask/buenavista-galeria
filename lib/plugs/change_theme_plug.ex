@@ -5,9 +5,9 @@ defmodule Galeria.Plugs.ChangeThemePlug do
     theme_name = conn.path_params["theme_name"]
 
     {:ok, theme} =
-      case Galeria.Config.find_theme(theme_name) do
+      case Galeria.GaleriaConfig.find_theme(theme_name) do
         {:ok, theme} -> {:ok, theme}
-        {:error, :not_found} -> Galeria.Config.get_default_theme()
+        {:error, :not_found} -> Galeria.GaleriaConfig.get_default_theme()
       end
 
     {_, redirect_to} = List.keyfind(conn.req_headers, "referer", 0, "/dev/galeria")
