@@ -1,8 +1,8 @@
 defmodule Galeria.Generator do
   import Mix.Generator
 
-  @config_file Application.compile_env(:galeria, :config_path)
-  @config_module Application.compile_env(:galeria, :config_module)
+  @config_file Application.compile_env(:buenavista_galeria, :config_path)
+  @config_module Application.compile_env(:buenavista_galeria, :config_module)
 
   def generate_project_config() do
     assigns = [config_module: @config_module]
@@ -12,6 +12,8 @@ defmodule Galeria.Generator do
 
   embed_template(:config, ~S/
     defmodule <%= BuenaVista.Helpers.pretty_module(@config_module) %> do
+      use Galeria.Config
+      
 
     end
   /)

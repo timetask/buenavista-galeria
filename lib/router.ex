@@ -8,7 +8,7 @@ defmodule Galeria.Router do
 
         pipe_through Galeria.Plugs.CurrentThemePlug
 
-        live_session :galeria, root_layout: {Galeria.HTML.Layout, :root} do
+        live_session :buenavista_galeria, root_layout: {Galeria.HTML.Layout, :root} do
           live "/", Galeria.GaleriaLive, :index
           live "/ensambles/:ensamble_name", Galeria.GaleriaLive, :ensamble
           live "/component/:component_name", Galeria.GaleriaLive, :component
