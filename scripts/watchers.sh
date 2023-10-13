@@ -4,7 +4,7 @@ project_dir=`pwd`
 assets_dir="${project_dir}/lib/assets"
 static_dir="${project_dir}/priv/static"
 
-config_dir="${project_dir}/lib/config"
+themes_dir="${project_dir}/lib/themes"
 components_dir="${project_dir}/lib/components"
 
 esbuild_config="--bundle"
@@ -13,22 +13,22 @@ pids=()
 
 # Listen to component changes
 $watcher -w $components_dir/ -e ex \
-  "mix galeria.gen.internal.config --theme base" \
+  "mix galeria.gen.internal.themes --theme base" \
   &
 pids+=("$!")
 
 # Listen to base hydrator changes
-$watcher -p -w $config_dir/base_hydrator.ex \
+$watcher -p -w $themes_dir/base_hydrator.ex \
   mix galeria.gen.config --theme light --theme dark &
     
 # Listen to theme hydrators changes
-$watcher -p -w $config_dir/light_hydrator.ex \
+$watcher -p -w $themes_dir/light_hydrator.ex \
   "mix galeria.gen.intenal.css --theme light;
   esbuild $assets_dir/themes/light.css --outdir=$static_dir/themes $esbuild_config" \
   &
 pids+=("$!")
 
-$watcher -p -w $config_dir/dark_hydrator.ex \
+$watcher -p -w $themes_dir/dark_hydrator.ex \
   "mix galeria.gen.internal.css --theme dark; 
   esbuild $assets_dir/themes/dark.css --outdir=$static_dir/themes $esbuild_config" \
   &
