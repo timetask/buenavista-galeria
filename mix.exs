@@ -40,7 +40,6 @@ defmodule Galeria.MixProject do
     [
       {:phoenix_live_view, "~> 0.18"},
       {:buenavista, path: "../buenavista"},
-      {:live_monaco_editor, "~> 0.1"}
-    ]
+   ]
   end
 end
