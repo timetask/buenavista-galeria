@@ -46,7 +46,7 @@ defmodule Galeria.Components.Input do
   attr :value, :string, default: nil
   variant :state, [:default, :disabled], :default
 
-  component textarea(assigns) do
+  component codearea(assigns) do
     ~H"""
     <textarea id={@id} class={[@base_class, @variant_classes]} disabled={@state == :disabled}>
       <%= unless is_nil(@value) do %><%= @value %><% end %>

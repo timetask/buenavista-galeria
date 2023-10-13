@@ -162,7 +162,7 @@ defmodule Galeria.LiveComponents.ComponentPage do
           <Input.label for={slot_id(@component, slot)}>
             <%= slot.name %>
           </Input.label>
-          <Input.textarea />
+          <Input.codearea />
         </Input.group>
       </Input.fieldset>
     </Box.box>
@@ -193,7 +193,7 @@ defmodule Galeria.LiveComponents.ComponentPage do
 
   defp editor(assigns) do
     ~H"""
-    <Input.textarea id={@id} value={@value}/>
+    <Input.codearea id={@id} value={@value}/>
     """
   end
 

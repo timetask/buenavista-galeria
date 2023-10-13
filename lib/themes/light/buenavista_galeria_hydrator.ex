@@ -1,6 +1,6 @@
 defmodule Galeria.Themes.Light.BuenavistaGaleriaHydrator do
   use BuenaVista.Hydrator,
-    nomenclator: BuenaVista.Themes.EmptyNomenclator,
+    nomenclator: BuenaVista.Themes.DefaultNomenclator,
     parent: Galeria.Themes.Base.BuenavistaGaleriaHydrator
 
   import BuenaVista.Constants.TailwindColors
@@ -110,8 +110,6 @@ defmodule Galeria.Themes.Light.BuenavistaGaleriaHydrator do
   # style :box, :padding, :lg, ~CSS""" 
   # padding: $padding_lg;
   #   """
-  # style :box, :padding, :none, ~CSS"""
-  # """
 
   # ---------------------------------------------------------------------
   # Galeria.Components.Button                                     button
@@ -284,8 +282,6 @@ defmodule Galeria.Themes.Light.BuenavistaGaleriaHydrator do
   # }
   #   """
 
-  # style :button, :border, :none, ~CSS"""
-  # """
   # style :button, :border, :thin, ~CSS""" 
   # border-style: solid;
   # border-width: 1px;
@@ -348,16 +344,14 @@ defmodule Galeria.Themes.Light.BuenavistaGaleriaHydrator do
   # width: 100%;
   #   """
 
-  # style :input, :state, :default, ~CSS"""
-  # """
   # style :input, :state, :disabled, ~CSS"""
   # """
 
   # ---------------------------------------------------------------------
-  # Galeria.Components.Input                                    textarea
+  # Galeria.Components.Input                                    codearea
   # ---------------------------------------------------------------------
 
-  # style :textarea, :base_class, ~CSS""" 
+  # style :codearea, :base_class, ~CSS""" 
   # background: transparent;
   # border-radius: $padding_sm;
   # border: 1px solid $color_border;
@@ -366,9 +360,7 @@ defmodule Galeria.Themes.Light.BuenavistaGaleriaHydrator do
   # width: 100%;
   #   """
 
-  # style :textarea, :state, :default, ~CSS"""
-  # """
-  # style :textarea, :state, :disabled, ~CSS"""
+  # style :codearea, :state, :disabled, ~CSS"""
   # """
 
   # ---------------------------------------------------------------------
