@@ -116,6 +116,7 @@ defmodule Galeria.Themes.Light.BuenavistaGaleriaHydrator do
   # ---------------------------------------------------------------------
 
   # style :button, :base_class, ~CSS""" 
+  # 
   # line-height: 1;
   # border: none;
   # cursor: pointer;
@@ -123,16 +124,11 @@ defmodule Galeria.Themes.Light.BuenavistaGaleriaHydrator do
   # &:hover {
   # 
   # .$button__icon_class {
-  # fill: $app_bg;
+  #   fill: $app_bg;
   # }
   # }
   #   """
   # style :button, :icon_class, ~CSS""" 
-  # aspect-ratio: 1 / 1;
-  # 
-  # .$button__size__sm & {
-  # height: $icon_sm;
-  # }
   # 
   # .$button__size__md & {
   # height: $icon_md;
@@ -140,6 +136,12 @@ defmodule Galeria.Themes.Light.BuenavistaGaleriaHydrator do
   # 
   # .$button__size__lg & {
   # height: $icon_lg;
+  # }
+  # 
+  # aspect-ratio: 1 / 1;
+  # 
+  # .$button__size__sm & {
+  # height: $icon_sm;
   # }
   #   """
 
@@ -220,14 +222,43 @@ defmodule Galeria.Themes.Light.BuenavistaGaleriaHydrator do
   # }
   #   """
   # style :button, :style, :link, ~CSS""" 
+  # 
+  # &.$button__color__primary {
+  # color: $brand_regular;
+  # }
+  # 
+  # &.$button__color__danger {
+  # color: $danger_regular;
+  # }
+  # 
+  # &.$button__color__ctrl {
+  # color: $color_text;
+  # }
+  # 
   # text-decoration: underline;
   # 
   # &.$button__color__success {
   # color: $success_regular;
   # }
+  #   """
+  # style :button, :style, :transparent, ~CSS""" 
   # 
   # &.$button__color__primary {
+  # 
+  # .$button__icon_class {
+  #   fill: $brand_regular;
+  # }
+  # 
   # color: $brand_regular;
+  # 
+  # &:hover {
+  # 
+  #   background: $brand_regular;
+  # 
+  # .$button__icon_class {
+  #     fill: white;
+  #   }
+  # }
   # }
   # 
   # &.$button__color__danger {
@@ -235,50 +266,27 @@ defmodule Galeria.Themes.Light.BuenavistaGaleriaHydrator do
   # }
   # 
   # &.$button__color__ctrl {
-  # color: $color_text;
+  # 
+  # .$button__icon_class {
+  #   fill: $color_light;
   # }
-  #   """
-  # style :button, :style, :transparent, ~CSS""" 
+  # 
+  # color: $color_text;
+  # 
+  # &:hover {
+  # 
+  #   background: $color_text;
+  # 
+  # .$button__icon_class {
+  #     fill: $app_bg;
+  #   }
+  # }
+  # }
+  # 
   # background: transparent;
   # 
   # &.$button__color__success {
   # color: $success_regular;
-  # }
-  # 
-  # &.$button__color__primary {
-  # color: $brand_regular;
-  # 
-  # &:hover {
-  # background: $brand_regular;
-  # 
-  # .$button__icon_class {
-  # fill: white;
-  # }
-  # }
-  # 
-  # .$button__icon_class {
-  # fill: $brand_regular;
-  # }
-  # }
-  # 
-  # &.$button__color__danger {
-  # color: $danger_regular;
-  # }
-  # 
-  # &.$button__color__ctrl {
-  # color: $color_text;
-  # 
-  # &:hover {
-  # background: $color_text;
-  # 
-  # .$button__icon_class {
-  # fill: $app_bg;
-  # }
-  # }
-  # 
-  # .$button__icon_class {
-  # fill: $color_light;
-  # }
   # }
   #   """
 
@@ -352,22 +360,36 @@ defmodule Galeria.Themes.Light.BuenavistaGaleriaHydrator do
   # ---------------------------------------------------------------------
 
   # style :codearea, :base_class, ~CSS""" 
-  # background: transparent;
-  # border-radius: $padding_sm;
-  # border: 1px solid $color_border;
-  # color: $color_text;
-  # padding: $padding_md;
+  # 
   # width: 100%;
+  # 
+  # pre {
+  # padding: $padding_md !important;
+  # margin: 0 !important;
+  # }
+  # 
+  # code {
+  # width: 100%;
+  # display: inline-block;
+  # }
   #   """
 
   # style :codearea, :state, :disabled, ~CSS"""
   # """
+
+  # style :codearea, :border, :top, ~CSS""" 
+  # border-top: 1px solid $color_border;
+  #   """
+  # style :codearea, :border, :all, ~CSS""" 
+  # border: 1px solid $color_border;
+  #   """
 
   # ---------------------------------------------------------------------
   # Galeria.Components.Input                                      select
   # ---------------------------------------------------------------------
 
   # style :select, :base_class, ~CSS""" 
+  # 
   # background: transparent;
   # border-radius: $padding_sm;
   # border: 1px solid $color_border;
@@ -409,21 +431,23 @@ defmodule Galeria.Themes.Light.BuenavistaGaleriaHydrator do
   # grid-template-columns: $sidebar_width 1fr;
   #   """
   # style :sidebar_layout, :status, :closed, ~CSS""" 
+  # 
+  # .$sidebar_layout__sidebar_class {
+  # 
+  # cursor: pointer;
+  # padding: 0;
+  # 
+  # * {
+  #   display: none;
+  # }
+  # }
+  # 
   # grid-template-columns: $sidebar_width_collapsed 1fr;
   # 
   # &:hover {
   # 
   # .$sidebar_layout__sidebar_class {
-  # background: $color_border;
-  # }
-  # }
-  # 
-  # .$sidebar_layout__sidebar_class {
-  # cursor: pointer;
-  # padding: 0;
-  # 
-  # * {
-  # display: none;
+  #   background: $color_border;
   # }
   # }
   #   """
@@ -535,6 +559,7 @@ defmodule Galeria.Themes.Light.BuenavistaGaleriaHydrator do
   # display: flex;
   #   """
   # style :nav_list, :item_class, ~CSS""" 
+  # 
   # font-size: $font_md;
   # border-radius: $padding_md;
   # color: $color_text;
@@ -556,6 +581,7 @@ defmodule Galeria.Themes.Light.BuenavistaGaleriaHydrator do
   # flex-direction: column;
   #   """
   # style :nav_list, :direction, :horizontal, ~CSS""" 
+  # 
   # gap: $padding_sm;
   # flex-direction: row;
   # 
@@ -569,6 +595,7 @@ defmodule Galeria.Themes.Light.BuenavistaGaleriaHydrator do
   # ---------------------------------------------------------------------
 
   # style :table, :base_class, ~CSS""" 
+  # 
   # border-collapse: collapse;
   # width: 100%;
   # 
@@ -651,6 +678,7 @@ defmodule Galeria.Themes.Light.BuenavistaGaleriaHydrator do
   # display: flex;
   #   """
   # style :sidebar_subtitle, :subtitle_class, ~CSS""" 
+  # 
   # position: relative;
   # font-weight: $weight_light;
   # font-size: $font_md;

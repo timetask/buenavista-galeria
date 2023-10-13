@@ -193,7 +193,7 @@ defmodule Galeria.LiveComponents.ComponentPage do
 
   defp editor(assigns) do
     ~H"""
-    <Input.codearea id={@id} value={@value}/>
+    <Input.codearea id={@id} value={@value} border={:top} />
     """
   end
 

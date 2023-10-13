@@ -45,12 +45,13 @@ defmodule Galeria.Components.Input do
   attr :id, :string, default: nil
   attr :value, :string, default: nil
   variant :state, [:default, :disabled], :default
+  variant :border, [:top, :all, :none], :all
 
   component codearea(assigns) do
     ~H"""
-    <textarea id={@id} class={[@base_class, @variant_classes]} disabled={@state == :disabled}>
-      <%= unless is_nil(@value) do %><%= @value %><% end %>
-    </textarea>
+    <div class={[@base_class, @variant_classes]}>
+      <prism-code-editor lang="css" id={@id}><%= @value %></prism-code-editor>
+    </div>
     """
   end
 

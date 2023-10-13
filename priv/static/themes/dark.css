@@ -39,15 +39,15 @@
     }
   }
   .button-icon {
-    aspect-ratio: 1 / 1;
-    .button-sm & {
-      height: 1.25rem;
-    }
     .button-md & {
       height: 1.5rem;
     }
     .button-lg & {
       height: 1.75rem;
+    }
+    aspect-ratio: 1 / 1;
+    .button-sm & {
+      height: 1.25rem;
     }
   }
   &.button-sm {
@@ -117,10 +117,6 @@
     }
   }
   &.button-link {
-    text-decoration: underline;
-    &.button-success {
-      color: #22c55e;
-    }
     &.button-primary {
       color: #a855f7;
     }
@@ -130,13 +126,16 @@
     &.button-ctrl {
       color: #e5e7eb;
     }
-  }
-  &.button-transparent {
-    background: transparent;
+    text-decoration: underline;
     &.button-success {
       color: #22c55e;
     }
+  }
+  &.button-transparent {
     &.button-primary {
+      .button-icon {
+        fill: #a855f7;
+      }
       color: #a855f7;
       &:hover {
         background: #a855f7;
@@ -144,14 +143,14 @@
           fill: white;
         }
       }
-      .button-icon {
-        fill: #a855f7;
-      }
     }
     &.button-danger {
       color: #22c55e;
     }
     &.button-ctrl {
+      .button-icon {
+        fill: #9ca3af;
+      }
       color: #e5e7eb;
       &:hover {
         background: #e5e7eb;
@@ -159,9 +158,10 @@
           fill: #1f2937;
         }
       }
-      .button-icon {
-        fill: #9ca3af;
-      }
+    }
+    background: transparent;
+    &.button-success {
+      color: #22c55e;
     }
   }
   &.button-border-thin {
@@ -208,13 +208,22 @@
   }
 }
 .codearea {
-  background: transparent;
-  border-radius: 0.25rem;
-  border: 1px solid #4b5563;
-  color: #e5e7eb;
-  padding: 0.5rem;
   width: 100%;
+  pre {
+    padding: 0.5rem !important;
+    margin: 0 !important;
+  }
+  code {
+    width: 100%;
+    display: inline-block;
+  }
   &.codearea-disabled {
+  }
+  &.codearea-border-top {
+    border-top: 1px solid #4b5563;
+  }
+  &.codearea-border-all {
+    border: 1px solid #4b5563;
   }
 }
 .select {
@@ -251,17 +260,17 @@
     grid-template-columns: 20rem 1fr;
   }
   &.sidebar-layout-closed {
-    grid-template-columns: 1rem 1fr;
-    &:hover {
-      .sidebar-layout-sidebar {
-        background: #4b5563;
-      }
-    }
     .sidebar-layout-sidebar {
       cursor: pointer;
       padding: 0;
       * {
         display: none;
+      }
+    }
+    grid-template-columns: 1rem 1fr;
+    &:hover {
+      .sidebar-layout-sidebar {
+        background: #4b5563;
       }
     }
   }
