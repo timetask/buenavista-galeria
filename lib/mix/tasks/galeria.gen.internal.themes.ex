@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.Galeria.Gen.Internal.Config do
+defmodule Mix.Tasks.Galeria.Gen.Internal.Themes do
   @moduledoc """
     **Intendend for internal use only.**
 
@@ -13,9 +13,9 @@ defmodule Mix.Tasks.Galeria.Gen.Internal.Config do
   def run(opts) do
     {parsed_opts, _, _} = OptionParser.parse(opts, strict: [theme: :keep])
 
-    themes = Galeria.GaleriaConfig.get_themes() |> filter_by_name(parsed_opts)
-
-    BuenaVista.Generator.generate_theme_files(themes)
+    Galeria.GaleriaConfig.get_themes()
+    |> filter_by_name(parsed_opts)
+    |> BuenaVista.Generator.generate_theme_files()
   end
 
   defp filter_by_name(themes, parsed_opts) do

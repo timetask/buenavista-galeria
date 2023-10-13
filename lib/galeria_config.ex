@@ -31,6 +31,9 @@ defmodule Galeria.GaleriaConfig do
   end
 
   def get_default_theme() do
-    nil
+    case Enum.find(@themes, fn theme -> theme.default? end) do
+      %BuenaVista.Theme{} = theme -> {:ok, theme}
+      _ -> {:error, :not_found}
+    end
   end
 end

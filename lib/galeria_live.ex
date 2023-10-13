@@ -11,8 +11,6 @@ defmodule Galeria.GaleriaLive do
   alias Galeria.Components.Nav
   alias Galeria.Components.Typography
 
-  @apps Application.compile_env(:buenavista, :apps)
-
   @impl true
   def render(assigns) do
     ~H"""
@@ -88,10 +86,10 @@ defmodule Galeria.GaleriaLive do
      socket
      |> assign(:base_url, base_url)
      |> assign_sidebar_status()
-     |> assign_modules()
      |> assign_galeria_theme(session)
      |> assign_project_themes()
-     |> assign_current_project_theme()}
+     |> assign_current_project_theme()
+     |> assign_modules()}
   end
 
   @impl true
@@ -124,11 +122,6 @@ defmodule Galeria.GaleriaLive do
     assign(socket, :sidebar_open?, true)
   end
 
-  defp assign_modules(socket) do
-    modules = Helpers.find_component_modules(@apps)
-    assign(socket, :modules, modules)
-  end
-
   defp assign_galeria_theme(socket, session) do
     theme_name =
       with theme_name when is_binary(theme_name) <- Map.get(session, "galeria_theme_name"),
@@ -146,7 +139,7 @@ defmodule Galeria.GaleriaLive do
   defp assign_project_themes(socket) do
     themes =
       BuenaVista.Themes.get_themes()
-      |> Enum.reject(fn theme -> theme.output == false end)
+      |> Enum.reject(fn theme -> theme.gen_css? == false end)
 
     assign(socket, :project_themes, themes)
   end
@@ -158,6 +151,11 @@ defmodule Galeria.GaleriaLive do
         else: Enum.find(socket.assigns.project_themes, &(&1.name == theme_name))
 
     assign(socket, :current_project_theme, theme)
+  end
+
+  defp assign_modules(socket) do
+    modules = Helpers.find_component_modules(socket.assigns.current_project_theme.apps)
+    assign(socket, :modules, modules)
   end
 
   # ----------------------------------------
@@ -189,6 +187,8 @@ defmodule Galeria.GaleriaLive do
   defp components_to_nav_items(base_url, components, params) do
     for {_, component} <- components, do: component_to_nav_item(base_url, component, params)
   end
+
+  defp component_to_nav_item(_base_url, nil, _params), do: nil
 
   defp component_to_nav_item(base_url, %Component{} = component, params) do
     component_url = component_url(base_url, component) |> URI.parse()

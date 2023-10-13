@@ -3,6 +3,7 @@ defmodule Galeria.LiveComponents.ComponentPage do
   require Phoenix.LiveView.TagEngine
 
   alias BuenaVista.Component
+  alias BuenaVista.Theme
 
   alias Galeria.Components.Box
   alias Galeria.Components.Input
@@ -192,29 +193,7 @@ defmodule Galeria.LiveComponents.ComponentPage do
 
   defp editor(assigns) do
     ~H"""
-    <LiveMonacoEditor.code_editor
-      id={@id}
-      path={"#{@id}.sass"}
-      value={@value}
-      opts={
-        Map.merge(
-          LiveMonacoEditor.default_opts(),
-          %{
-            "fontFamily" => "Inconsolata",
-            "fontSize" => "16",
-            "language" => nil,
-            "wordWrap" => "on",
-            "glyphMargin" => false,
-            "folding" => false,
-            "showFoldingControls" => "never",
-            "lineNumbers" => "off",
-            "lineDecorationsWidth" => 0,
-            "lineNumbersMinChars" => 0,
-            "theme" => "vs-dark"
-          }
-        )
-      }
-    />
+    <Input.textarea id={@id} value={@value}/>
     """
   end
 
@@ -239,10 +218,10 @@ defmodule Galeria.LiveComponents.ComponentPage do
   end
 
   defp assign_variables(socket) do
-    hydrator = socket.assigns.current_theme.hydrator.module_name
+    %Theme.Hydrator{} = hydrator = get_current_hydrator(socket)
 
     variables =
-      hydrator.get_variables()
+      hydrator.module.get_variables()
       |> Enum.map(fn {_key, var} -> var end)
       |> Enum.reverse()
 
@@ -260,8 +239,8 @@ defmodule Galeria.LiveComponents.ComponentPage do
   end
 
   defp assign_hydrators(socket) do
-    hydrator = socket.assigns.current_theme.hydrator
-    hydrators = get_hydrators(hydrator.module_name)
+    %Theme.Hydrator{} = hydrator = get_current_hydrator(socket)
+    hydrators = get_hydrators(hydrator.module)
     assign(socket, :hydrators, hydrators)
   end
 
@@ -321,8 +300,19 @@ defmodule Galeria.LiveComponents.ComponentPage do
     end
   end
 
+  defp get_current_theme_app(socket) do
+    Enum.find(socket.assigns.current_theme.apps, fn %Theme.App{} = app ->
+      app.name == socket.assigns.current_component.app
+    end)
+  end
+
+  defp get_current_hydrator(socket) do
+    theme_app = get_current_theme_app(socket)
+    theme_app.hydrator
+  end
+
   def get_hydrators(hydrator_module, acc \\ [])
-  def get_hydrators(BuenaVista.Template.EmptyHydrator, acc), do: acc
+  def get_hydrators(BuenaVista.Themes.EmptyHydrator, acc), do: acc
   def get_hydrators(nil, acc), do: acc
 
   def get_hydrators(hydrator_module, acc) do
