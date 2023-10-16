@@ -40,7 +40,7 @@ defmodule Galeria.LiveComponents.ComponentPage do
           <Box.box>
             <.component_preview
               component={@current_component}
-              theme={@current_theme}
+              theme_app={@current_theme_app}
               args={@preview_args}
             />
           </Box.box>
@@ -56,7 +56,7 @@ defmodule Galeria.LiveComponents.ComponentPage do
                   <Input.label>
                     <%= variant.name %>: <%= option %>
                   </Input.label>
-                  <.editor
+                  <Input.codearea
                     id={editor_id(hydrator, @current_component, variant, option)}
                     value={editor_code(hydrator, @current_component, variant, option)}
                   />
@@ -88,12 +88,15 @@ defmodule Galeria.LiveComponents.ComponentPage do
   end
 
   attr :component, Component, required: true
-  attr :theme, BuenaVista.Theme, required: true
+  attr :theme_app, BuenaVista.Theme.App, required: true
   attr :args, :any, required: true
 
   defp component_preview(assigns) do
     ~H"""
-    <div>
+    <div id="galeria-preview">
+      <style>
+        <%= preview_css(@theme_app, @component, "#galeria-preview") %>
+      </style>
       <%= Phoenix.LiveView.TagEngine.component(
         Function.capture(@component.module, @component.name, 1),
         @args,
@@ -188,15 +191,6 @@ defmodule Galeria.LiveComponents.ComponentPage do
     """
   end
 
-  attr :id, :string, required: true
-  attr :value, :string, required: true
-
-  defp editor(assigns) do
-    ~H"""
-    <Input.codearea id={@id} value={@value} border={:top} />
-    """
-  end
-
   # ----------------------------------------
   # Life Cycle
   # ----------------------------------------
@@ -206,8 +200,19 @@ defmodule Galeria.LiveComponents.ComponentPage do
      |> assign(assigns)
      |> assign_current_nav()
      |> assign_preview_args()
+     |> assign_current_theme_app()
      |> assign_variables()
      |> assign_hydrators()}
+  end
+
+  defp assign_current_theme_app(socket) do
+    %Theme.App{} =
+      app =
+      Enum.find(socket.assigns.current_theme.apps, fn %Theme.App{} = app ->
+        app.name == socket.assigns.current_component.app
+      end)
+
+    assign(socket, :current_theme_app, app)
   end
 
   defp assign_preview_args(socket) do
@@ -218,7 +223,7 @@ defmodule Galeria.LiveComponents.ComponentPage do
   end
 
   defp assign_variables(socket) do
-    %Theme.Hydrator{} = hydrator = get_current_hydrator(socket)
+    %Theme.Hydrator{} = hydrator = socket.assigns.current_theme_app.hydrator
 
     variables =
       hydrator.module.get_variables()
@@ -239,7 +244,7 @@ defmodule Galeria.LiveComponents.ComponentPage do
   end
 
   defp assign_hydrators(socket) do
-    %Theme.Hydrator{} = hydrator = get_current_hydrator(socket)
+    %Theme.Hydrator{} = hydrator = socket.assigns.current_theme_app.hydrator
     hydrators = get_hydrators(hydrator.module)
     assign(socket, :hydrators, hydrators)
   end
@@ -300,17 +305,6 @@ defmodule Galeria.LiveComponents.ComponentPage do
     end
   end
 
-  defp get_current_theme_app(socket) do
-    Enum.find(socket.assigns.current_theme.apps, fn %Theme.App{} = app ->
-      app.name == socket.assigns.current_component.app
-    end)
-  end
-
-  defp get_current_hydrator(socket) do
-    theme_app = get_current_theme_app(socket)
-    theme_app.hydrator
-  end
-
   def get_hydrators(hydrator_module, acc \\ [])
   def get_hydrators(BuenaVista.Themes.EmptyHydrator, acc), do: acc
   def get_hydrators(nil, acc), do: acc
@@ -328,6 +322,15 @@ defmodule Galeria.LiveComponents.ComponentPage do
       4 -> :four
       5 -> :five
     end
+  end
+
+  defp preview_css(theme_app, component, prefix) do
+    BuenaVista.Generator.generate_app_components_raw_css(
+      theme_app,
+      [{component.name, component}],
+      prefix
+    )
+    |> Phoenix.HTML.raw()
   end
 
   # ----------------------------------------
