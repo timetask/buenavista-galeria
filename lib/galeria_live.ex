@@ -66,7 +66,7 @@ defmodule Galeria.GaleriaLive do
           id={"component-#{@current_component.name}"}
           module={Galeria.LiveComponents.ComponentPage}
           themes={@project_themes}
-          current_theme={@current_project_theme}
+          current_project_theme={@current_project_theme}
           current_component={@current_component}
           params={@params}
         />
@@ -144,12 +144,8 @@ defmodule Galeria.GaleriaLive do
     assign(socket, :project_themes, themes)
   end
 
-  defp assign_current_project_theme(socket, theme_name \\ nil) do
-    theme =
-      if is_nil(theme_name),
-        do: List.first(socket.assigns.project_themes),
-        else: Enum.find(socket.assigns.project_themes, &(&1.name == theme_name))
-
+  defp assign_current_project_theme(socket) do
+    theme = List.first(socket.assigns.project_themes)
     assign(socket, :current_project_theme, theme)
   end
 
@@ -161,6 +157,11 @@ defmodule Galeria.GaleriaLive do
   # ----------------------------------------
   # Events
   # ----------------------------------------
+  @impl true
+  def handle_event("theme-change", %{"theme" => theme_name}, socket) do
+    theme = Enum.find(socket.assigns.project_themes, &(&1.name == theme_name))
+    {:noreply, assign(socket, :current_project_theme, theme)}
+  end
 
   # ----------------------------------------
   # Helpers

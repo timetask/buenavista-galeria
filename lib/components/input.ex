@@ -1,5 +1,6 @@
 defmodule Galeria.Components.Input do
   use BuenaVista.Component
+  alias Phoenix.HTML.FormField
 
   slot :inner_block
 
@@ -19,13 +20,18 @@ defmodule Galeria.Components.Input do
   end
 
   attr :for, :string, default: nil
+  attr :field, FormField, default: nil
   slot :inner_block
 
   component label(assigns) do
     ~H"""
-    <label for={@for} class={@base_class}><%= render_slot(@inner_block) %></label>
+    <label for={label_for(@field, @for)} class={@base_class}><%= render_slot(@inner_block) %></label>
     """
   end
+
+  defp label_for(%FormField{} = field, _for), do: field.id
+  defp label_for(_field, for) when is_binary(for), do: for
+  defp label_for(_field, nil), do: nil
 
   attr :id, :string
   attr :value, :string
@@ -55,16 +61,17 @@ defmodule Galeria.Components.Input do
     """
   end
 
-  slot :inner_block
-
-  attr :id, :string, default: nil
+  attr :field, FormField, required: true
   attr :options, :list, default: []
+  attr :rest, :global
+
+  slot :inner_block
 
   component select(assigns) do
     ~H"""
-    <select class={@base_class} id={@id}>
+    <select class={@base_class} id={@field.id} name={@field.name} {@rest}>
       <%= for {value, text} <- @options do %>
-        <option value={value}><%= text %></option>
+        <option value={value} selected={@field.value == value}><%= text %></option>
       <% end %>
     </select>
     """
